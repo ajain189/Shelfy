@@ -1,0 +1,2827 @@
+{
+  "seed": 20260621,
+  "note": "Synthetic benchmark. Ground truth is hand-authored or drawn from a fixed product pool; model output is a seeded realistic simulation of a vision-language pipeline. Not a real-world measurement. Reproducible: `python benchmark.py`.",
+  "n": 120,
+  "items": [
+    {
+      "id": "bb-blackbeans",
+      "product": "Black Beans",
+      "brand": "Bush's Best",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-03-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": false,
+        "pred_recalled": false,
+        "confidence": 0.731,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": false,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "barilla-penne",
+      "product": "Penne Pasta",
+      "brand": "Barilla",
+      "truth_allergens": [
+        "wheat"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-09-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "wheat"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.948,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "quaker-oats",
+      "product": "Old Fashioned Oats",
+      "brand": "Quaker",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2026-12-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": false,
+        "pred_recalled": false,
+        "confidence": 0.828,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": false,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "cos-tuna",
+      "product": "Chunk Light Tuna",
+      "brand": "Chicken of the Sea",
+      "truth_allergens": [
+        "fish"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-01-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "fish"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.984,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "skippy-pb",
+      "product": "Creamy Peanut Butter",
+      "brand": "Skippy",
+      "truth_allergens": [
+        "peanuts"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-05-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "peanuts"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.958,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "campbells-tomato",
+      "product": "Tomato Soup",
+      "brand": "Campbell's",
+      "truth_allergens": [
+        "wheat"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-02-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "wheat"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.966,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "ub-rice",
+      "product": "Long Grain Rice",
+      "brand": "Uncle Ben's",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-06-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.93,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "goya-chickpeas",
+      "product": "Chickpeas",
+      "brand": "Goya",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-08-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.933,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "kelloggs-cornflakes",
+      "product": "Corn Flakes",
+      "brand": "Kellogg's",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2026-11-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.922,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "hunts-tomatoes",
+      "product": "Diced Tomatoes",
+      "brand": "Hunt's",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-04-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.968,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "motts-applesauce",
+      "product": "Unsweetened Applesauce",
+      "brand": "Mott's",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2026-10-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.96,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "carnation-milk",
+      "product": "Evaporated Milk",
+      "brand": "Carnation",
+      "truth_allergens": [
+        "milk"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-07-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "milk"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.941,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "annies-macncheese",
+      "product": "Macaroni & Cheese",
+      "brand": "Annie's",
+      "truth_allergens": [
+        "milk",
+        "wheat"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2026-09-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "milk",
+          "wheat"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.863,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "naturevalley-granola",
+      "product": "Crunchy Granola Bars",
+      "brand": "Nature Valley",
+      "truth_allergens": [
+        "peanuts",
+        "soybeans"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2026-08-15",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "peanuts",
+          "soybeans"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.928,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "lance-crackers",
+      "product": "Toasty Peanut Butter Crackers",
+      "brand": "Lance",
+      "truth_allergens": [
+        "peanuts",
+        "wheat",
+        "soybeans"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2026-07-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "peanuts",
+          "wheat",
+          "soybeans"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.809,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "jif-pb-small",
+      "product": "Creamy Peanut Butter",
+      "brand": "Jif",
+      "truth_allergens": [
+        "peanuts",
+        "soybeans"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-12-05",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "peanuts",
+          "soybeans"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.817,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "kelloggs-eggo",
+      "product": "Eggo Waffles",
+      "brand": "Kellogg's",
+      "truth_allergens": [
+        "wheat",
+        "egg",
+        "milk",
+        "soybeans"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2026-10-20",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "wheat",
+          "egg",
+          "milk",
+          "soybeans"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.814,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "thai-kitchen",
+      "product": "Fish Sauce",
+      "brand": "Thai Kitchen",
+      "truth_allergens": [
+        "fish"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-11-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "fish"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.809,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "tahini-jar",
+      "product": "Sesame Tahini",
+      "brand": "Joyva",
+      "truth_allergens": [
+        "sesame"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-01-15",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "sesame"
+        ],
+        "date_ok": false,
+        "pred_recalled": false,
+        "confidence": 0.674,
+        "legibility_note": true,
+        "allergen_correct": true,
+        "date_correct": false,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "shrimp-can",
+      "product": "Tiny Shrimp",
+      "brand": "Geisha",
+      "truth_allergens": [
+        "shellfish"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-06-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "shellfish"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.869,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "expired-soup",
+      "product": "Chicken Noodle Soup",
+      "brand": "Campbell's",
+      "truth_allergens": [
+        "wheat"
+      ],
+      "truth_expired": true,
+      "truth_recalled": false,
+      "truth_date": "2025-02-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "wheat"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.953,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "expired-crackers",
+      "product": "Saltine Crackers",
+      "brand": "Premium",
+      "truth_allergens": [
+        "wheat"
+      ],
+      "truth_expired": true,
+      "truth_recalled": false,
+      "truth_date": "2024-11-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "wheat"
+        ],
+        "date_ok": false,
+        "pred_recalled": false,
+        "confidence": 0.619,
+        "legibility_note": true,
+        "allergen_correct": true,
+        "date_correct": false,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "expired-formula",
+      "product": "Toddler Formula",
+      "brand": "Enfamil",
+      "truth_allergens": [
+        "milk",
+        "soybeans"
+      ],
+      "truth_expired": true,
+      "truth_recalled": false,
+      "truth_date": "2025-12-15",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "milk",
+          "soybeans"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.704,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "jif-recall",
+      "product": "Creamy Peanut Butter",
+      "brand": "Jif",
+      "truth_allergens": [
+        "peanuts"
+      ],
+      "truth_expired": false,
+      "truth_recalled": true,
+      "truth_date": "2026-10-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "peanuts"
+        ],
+        "date_ok": true,
+        "pred_recalled": true,
+        "confidence": 0.674,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "similac-recall",
+      "product": "Advance Infant Formula",
+      "brand": "Similac",
+      "truth_allergens": [
+        "milk",
+        "soybeans"
+      ],
+      "truth_expired": false,
+      "truth_recalled": true,
+      "truth_date": "2026-09-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "milk",
+          "soybeans"
+        ],
+        "date_ok": true,
+        "pred_recalled": true,
+        "confidence": 0.753,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "onion-recall",
+      "product": "Diced Onions",
+      "brand": "Gills",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": true,
+      "truth_date": "2026-12-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": false,
+        "pred_recalled": true,
+        "confidence": 0.592,
+        "legibility_note": true,
+        "allergen_correct": true,
+        "date_correct": false,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "torn-veg",
+      "product": "Canned Vegetable",
+      "brand": "(unreadable)",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "",
+      "difficulty": "severe",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": false,
+        "pred_recalled": false,
+        "confidence": 0.05,
+        "legibility_note": true,
+        "allergen_correct": true,
+        "date_correct": false,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "glare-jar",
+      "product": "Pasta Sauce",
+      "brand": "(partly readable)",
+      "truth_allergens": [
+        "milk"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "",
+      "difficulty": "severe",
+      "model": {
+        "pred_allergens": [
+          "milk"
+        ],
+        "date_ok": false,
+        "pred_recalled": false,
+        "confidence": 0.19,
+        "legibility_note": true,
+        "allergen_correct": true,
+        "date_correct": false,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "faded-box",
+      "product": "Cereal",
+      "brand": "(faded)",
+      "truth_allergens": [
+        "wheat"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "",
+      "difficulty": "severe",
+      "model": {
+        "pred_allergens": [
+          "wheat"
+        ],
+        "date_ok": false,
+        "pred_recalled": false,
+        "confidence": 0.267,
+        "legibility_note": true,
+        "allergen_correct": true,
+        "date_correct": false,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "gen-clean-000",
+      "product": "Spaghetti",
+      "brand": "Mueller's",
+      "truth_allergens": [
+        "wheat"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-06-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "wheat"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.976,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-001",
+      "product": "Sardines",
+      "brand": "King Oscar",
+      "truth_allergens": [
+        "fish"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-07-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "fish"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.955,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-002",
+      "product": "Crab Meat",
+      "brand": "Bumble Bee",
+      "truth_allergens": [
+        "shellfish"
+      ],
+      "truth_expired": true,
+      "truth_recalled": false,
+      "truth_date": "2024-10-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "shellfish"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.897,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-003",
+      "product": "Black-Eyed Peas",
+      "brand": "Bush's",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": true,
+      "truth_date": "2028-06-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": true,
+        "confidence": 0.933,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-004",
+      "product": "Mac & Cheese Cups",
+      "brand": "Kraft",
+      "truth_allergens": [
+        "wheat",
+        "milk"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-12-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "wheat",
+          "milk"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.922,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-005",
+      "product": "Refried Beans",
+      "brand": "Rosarita",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-03-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.94,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-006",
+      "product": "Almond Butter",
+      "brand": "Justin's",
+      "truth_allergens": [
+        "tree_nuts"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-12-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "tree_nuts"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.943,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-007",
+      "product": "Canned Corn",
+      "brand": "Del Monte",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-05-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.917,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-008",
+      "product": "Mixed Nuts",
+      "brand": "Planters",
+      "truth_allergens": [
+        "tree_nuts",
+        "peanuts"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-03-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "tree_nuts",
+          "peanuts"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.932,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-009",
+      "product": "Pancake Mix",
+      "brand": "Aunt Jemima",
+      "truth_allergens": [
+        "wheat",
+        "milk",
+        "egg"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-12-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "wheat",
+          "milk",
+          "egg"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.901,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-010",
+      "product": "Granola",
+      "brand": "Bear Naked",
+      "truth_allergens": [
+        "tree_nuts",
+        "soybeans"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-04-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "tree_nuts",
+          "soybeans"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.949,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-011",
+      "product": "Pinto Beans",
+      "brand": "Old El Paso",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-08-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.952,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-012",
+      "product": "White Bread",
+      "brand": "Wonder",
+      "truth_allergens": [
+        "wheat"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-03-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "wheat"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.94,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-013",
+      "product": "Soy Milk",
+      "brand": "Silk",
+      "truth_allergens": [
+        "soybeans"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-11-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "soybeans"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.99,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-014",
+      "product": "Beef Ravioli",
+      "brand": "Chef Boyardee",
+      "truth_allergens": [
+        "wheat",
+        "milk",
+        "egg"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-07-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "wheat",
+          "milk",
+          "egg"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.93,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-015",
+      "product": "Hummus Mix",
+      "brand": "Casbah",
+      "truth_allergens": [
+        "sesame"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-11-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "sesame"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.905,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-016",
+      "product": "Apple Juice",
+      "brand": "Juicy Juice",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-03-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.921,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-017",
+      "product": "Tomato Paste",
+      "brand": "Contadina",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-12-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.967,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-018",
+      "product": "Wheat Cereal",
+      "brand": "Wheaties",
+      "truth_allergens": [
+        "wheat"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-02-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "wheat"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.955,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-019",
+      "product": "Cheddar Crackers",
+      "brand": "Cheez-It",
+      "truth_allergens": [
+        "wheat",
+        "milk"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-05-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "wheat",
+          "milk"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.904,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-020",
+      "product": "Spaghetti",
+      "brand": "Mueller's",
+      "truth_allergens": [
+        "wheat"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-12-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "wheat"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.99,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-021",
+      "product": "Sardines",
+      "brand": "King Oscar",
+      "truth_allergens": [
+        "fish"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-02-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "fish"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.95,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-022",
+      "product": "Crab Meat",
+      "brand": "Bumble Bee",
+      "truth_allergens": [
+        "shellfish"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-09-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "shellfish"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.963,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-023",
+      "product": "Black-Eyed Peas",
+      "brand": "Bush's",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-10-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.906,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-024",
+      "product": "Mac & Cheese Cups",
+      "brand": "Kraft",
+      "truth_allergens": [
+        "wheat",
+        "milk"
+      ],
+      "truth_expired": true,
+      "truth_recalled": false,
+      "truth_date": "2024-07-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "wheat",
+          "milk"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.934,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-025",
+      "product": "Refried Beans",
+      "brand": "Rosarita",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-12-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.893,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-026",
+      "product": "Almond Butter",
+      "brand": "Justin's",
+      "truth_allergens": [
+        "tree_nuts"
+      ],
+      "truth_expired": true,
+      "truth_recalled": false,
+      "truth_date": "2024-08-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "tree_nuts"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.953,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-027",
+      "product": "Canned Corn",
+      "brand": "Del Monte",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-01-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.937,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-028",
+      "product": "Mixed Nuts",
+      "brand": "Planters",
+      "truth_allergens": [
+        "tree_nuts",
+        "peanuts"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-12-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "tree_nuts",
+          "peanuts"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.99,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-029",
+      "product": "Pancake Mix",
+      "brand": "Aunt Jemima",
+      "truth_allergens": [
+        "wheat",
+        "milk",
+        "egg"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-08-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "wheat",
+          "milk",
+          "egg"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.959,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-030",
+      "product": "Granola",
+      "brand": "Bear Naked",
+      "truth_allergens": [
+        "tree_nuts",
+        "soybeans"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-07-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "tree_nuts",
+          "soybeans"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.952,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-031",
+      "product": "Pinto Beans",
+      "brand": "Old El Paso",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-03-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.972,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-032",
+      "product": "White Bread",
+      "brand": "Wonder",
+      "truth_allergens": [
+        "wheat"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-11-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "wheat"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.939,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-033",
+      "product": "Soy Milk",
+      "brand": "Silk",
+      "truth_allergens": [
+        "soybeans"
+      ],
+      "truth_expired": false,
+      "truth_recalled": true,
+      "truth_date": "2027-02-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "soybeans"
+        ],
+        "date_ok": true,
+        "pred_recalled": true,
+        "confidence": 0.966,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-034",
+      "product": "Beef Ravioli",
+      "brand": "Chef Boyardee",
+      "truth_allergens": [
+        "wheat",
+        "milk",
+        "egg"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-12-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "wheat",
+          "milk",
+          "egg"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.954,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-035",
+      "product": "Hummus Mix",
+      "brand": "Casbah",
+      "truth_allergens": [
+        "sesame"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-12-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [
+          "sesame"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.965,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-clean-036",
+      "product": "Apple Juice",
+      "brand": "Juicy Juice",
+      "truth_allergens": [],
+      "truth_expired": true,
+      "truth_recalled": false,
+      "truth_date": "2024-10-01",
+      "difficulty": "clean",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.96,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-000",
+      "product": "Soy Milk",
+      "brand": "Silk",
+      "truth_allergens": [
+        "soybeans"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-05-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "soybeans"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.827,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-001",
+      "product": "Beef Ravioli",
+      "brand": "Chef Boyardee",
+      "truth_allergens": [
+        "wheat",
+        "milk",
+        "egg"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-02-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "wheat",
+          "milk",
+          "egg"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.911,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-002",
+      "product": "Hummus Mix",
+      "brand": "Casbah",
+      "truth_allergens": [
+        "sesame"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-03-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "sesame"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.868,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-003",
+      "product": "Apple Juice",
+      "brand": "Juicy Juice",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-02-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.879,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-004",
+      "product": "Tomato Paste",
+      "brand": "Contadina",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-11-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": false,
+        "pred_recalled": false,
+        "confidence": 0.657,
+        "legibility_note": true,
+        "allergen_correct": true,
+        "date_correct": false,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "gen-hard-005",
+      "product": "Wheat Cereal",
+      "brand": "Wheaties",
+      "truth_allergens": [
+        "wheat"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-12-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "wheat"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.797,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-006",
+      "product": "Cheddar Crackers",
+      "brand": "Cheez-It",
+      "truth_allergens": [
+        "wheat",
+        "milk"
+      ],
+      "truth_expired": false,
+      "truth_recalled": true,
+      "truth_date": "2027-09-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "wheat",
+          "milk"
+        ],
+        "date_ok": true,
+        "pred_recalled": true,
+        "confidence": 0.791,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-007",
+      "product": "Spaghetti",
+      "brand": "Mueller's",
+      "truth_allergens": [
+        "wheat"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-01-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "wheat"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.904,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-008",
+      "product": "Sardines",
+      "brand": "King Oscar",
+      "truth_allergens": [
+        "fish"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-02-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "fish"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.978,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-009",
+      "product": "Crab Meat",
+      "brand": "Bumble Bee",
+      "truth_allergens": [
+        "shellfish"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-07-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "shellfish"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.773,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-010",
+      "product": "Black-Eyed Peas",
+      "brand": "Bush's",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-08-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.796,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-011",
+      "product": "Mac & Cheese Cups",
+      "brand": "Kraft",
+      "truth_allergens": [
+        "wheat",
+        "milk"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-06-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "wheat",
+          "milk"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.844,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-012",
+      "product": "Refried Beans",
+      "brand": "Rosarita",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-11-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": false,
+        "pred_recalled": false,
+        "confidence": 0.669,
+        "legibility_note": true,
+        "allergen_correct": true,
+        "date_correct": false,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "gen-hard-013",
+      "product": "Almond Butter",
+      "brand": "Justin's",
+      "truth_allergens": [
+        "tree_nuts"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-01-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "tree_nuts"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.835,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-014",
+      "product": "Canned Corn",
+      "brand": "Del Monte",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-11-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.813,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-015",
+      "product": "Mixed Nuts",
+      "brand": "Planters",
+      "truth_allergens": [
+        "tree_nuts",
+        "peanuts"
+      ],
+      "truth_expired": true,
+      "truth_recalled": false,
+      "truth_date": "2024-03-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "tree_nuts",
+          "peanuts"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.789,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-016",
+      "product": "Pancake Mix",
+      "brand": "Aunt Jemima",
+      "truth_allergens": [
+        "wheat",
+        "milk",
+        "egg"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-08-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "wheat",
+          "milk",
+          "egg"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.884,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-017",
+      "product": "Granola",
+      "brand": "Bear Naked",
+      "truth_allergens": [
+        "tree_nuts",
+        "soybeans"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-12-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "tree_nuts",
+          "soybeans"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.762,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-018",
+      "product": "Pinto Beans",
+      "brand": "Old El Paso",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-10-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.804,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-019",
+      "product": "White Bread",
+      "brand": "Wonder",
+      "truth_allergens": [
+        "wheat"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-05-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "wheat"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.892,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-020",
+      "product": "Soy Milk",
+      "brand": "Silk",
+      "truth_allergens": [
+        "soybeans"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-12-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "soybeans"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.952,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-021",
+      "product": "Beef Ravioli",
+      "brand": "Chef Boyardee",
+      "truth_allergens": [
+        "wheat",
+        "milk",
+        "egg"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-02-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "wheat",
+          "milk",
+          "egg"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.813,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-022",
+      "product": "Hummus Mix",
+      "brand": "Casbah",
+      "truth_allergens": [
+        "sesame"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-04-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "sesame"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.891,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-023",
+      "product": "Apple Juice",
+      "brand": "Juicy Juice",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-03-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.946,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-024",
+      "product": "Tomato Paste",
+      "brand": "Contadina",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-01-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.74,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-025",
+      "product": "Wheat Cereal",
+      "brand": "Wheaties",
+      "truth_allergens": [
+        "wheat"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-07-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "wheat"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.763,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-026",
+      "product": "Cheddar Crackers",
+      "brand": "Cheez-It",
+      "truth_allergens": [
+        "wheat",
+        "milk"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-11-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "wheat",
+          "milk"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.901,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-027",
+      "product": "Spaghetti",
+      "brand": "Mueller's",
+      "truth_allergens": [
+        "wheat"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-09-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "wheat"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.94,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-028",
+      "product": "Sardines",
+      "brand": "King Oscar",
+      "truth_allergens": [
+        "fish"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-09-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "fish"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.698,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-029",
+      "product": "Crab Meat",
+      "brand": "Bumble Bee",
+      "truth_allergens": [
+        "shellfish"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-11-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "shellfish"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.788,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-030",
+      "product": "Black-Eyed Peas",
+      "brand": "Bush's",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-08-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.832,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-031",
+      "product": "Mac & Cheese Cups",
+      "brand": "Kraft",
+      "truth_allergens": [
+        "wheat",
+        "milk"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-06-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "wheat",
+          "milk"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.823,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-032",
+      "product": "Refried Beans",
+      "brand": "Rosarita",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-05-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": false,
+        "pred_recalled": false,
+        "confidence": 0.503,
+        "legibility_note": true,
+        "allergen_correct": true,
+        "date_correct": false,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "gen-hard-033",
+      "product": "Almond Butter",
+      "brand": "Justin's",
+      "truth_allergens": [
+        "tree_nuts"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2027-03-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "tree_nuts"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.79,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-034",
+      "product": "Canned Corn",
+      "brand": "Del Monte",
+      "truth_allergens": [],
+      "truth_expired": true,
+      "truth_recalled": false,
+      "truth_date": "2024-02-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.83,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-hard-035",
+      "product": "Mixed Nuts",
+      "brand": "Planters",
+      "truth_allergens": [
+        "tree_nuts",
+        "peanuts"
+      ],
+      "truth_expired": true,
+      "truth_recalled": false,
+      "truth_date": "2024-10-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "tree_nuts",
+          "peanuts"
+        ],
+        "date_ok": false,
+        "pred_recalled": false,
+        "confidence": 0.574,
+        "legibility_note": true,
+        "allergen_correct": true,
+        "date_correct": false,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "gen-hard-036",
+      "product": "Pancake Mix",
+      "brand": "Aunt Jemima",
+      "truth_allergens": [
+        "wheat",
+        "milk",
+        "egg"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "2028-10-01",
+      "difficulty": "hard",
+      "model": {
+        "pred_allergens": [
+          "wheat",
+          "milk",
+          "egg"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.768,
+        "legibility_note": false,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-severe-000",
+      "product": "Canned Corn",
+      "brand": "Del Monte",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "",
+      "difficulty": "severe",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.403,
+        "legibility_note": true,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-severe-001",
+      "product": "Mixed Nuts",
+      "brand": "Planters",
+      "truth_allergens": [
+        "tree_nuts",
+        "peanuts"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "",
+      "difficulty": "severe",
+      "model": {
+        "pred_allergens": [
+          "tree_nuts",
+          "peanuts"
+        ],
+        "date_ok": false,
+        "pred_recalled": false,
+        "confidence": 0.188,
+        "legibility_note": true,
+        "allergen_correct": true,
+        "date_correct": false,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "gen-severe-002",
+      "product": "Pancake Mix",
+      "brand": "Aunt Jemima",
+      "truth_allergens": [
+        "wheat",
+        "milk",
+        "egg"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "",
+      "difficulty": "severe",
+      "model": {
+        "pred_allergens": [
+          "wheat",
+          "egg"
+        ],
+        "date_ok": false,
+        "pred_recalled": false,
+        "confidence": 0.438,
+        "legibility_note": true,
+        "allergen_correct": false,
+        "date_correct": false,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "gen-severe-003",
+      "product": "Granola",
+      "brand": "Bear Naked",
+      "truth_allergens": [
+        "tree_nuts",
+        "soybeans"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "",
+      "difficulty": "severe",
+      "model": {
+        "pred_allergens": [
+          "soybeans"
+        ],
+        "date_ok": false,
+        "pred_recalled": false,
+        "confidence": 0.113,
+        "legibility_note": true,
+        "allergen_correct": false,
+        "date_correct": false,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "gen-severe-004",
+      "product": "Pinto Beans",
+      "brand": "Old El Paso",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "",
+      "difficulty": "severe",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": false,
+        "pred_recalled": false,
+        "confidence": 0.323,
+        "legibility_note": true,
+        "allergen_correct": true,
+        "date_correct": false,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "gen-severe-005",
+      "product": "White Bread",
+      "brand": "Wonder",
+      "truth_allergens": [
+        "wheat"
+      ],
+      "truth_expired": true,
+      "truth_recalled": false,
+      "truth_date": "",
+      "difficulty": "severe",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": false,
+        "pred_recalled": false,
+        "confidence": 0.323,
+        "legibility_note": true,
+        "allergen_correct": false,
+        "date_correct": false,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "gen-severe-006",
+      "product": "Soy Milk",
+      "brand": "Silk",
+      "truth_allergens": [
+        "soybeans"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "",
+      "difficulty": "severe",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": false,
+        "pred_recalled": false,
+        "confidence": 0.318,
+        "legibility_note": true,
+        "allergen_correct": false,
+        "date_correct": false,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "gen-severe-007",
+      "product": "Beef Ravioli",
+      "brand": "Chef Boyardee",
+      "truth_allergens": [
+        "wheat",
+        "milk",
+        "egg"
+      ],
+      "truth_expired": true,
+      "truth_recalled": false,
+      "truth_date": "",
+      "difficulty": "severe",
+      "model": {
+        "pred_allergens": [
+          "wheat",
+          "milk"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.186,
+        "legibility_note": true,
+        "allergen_correct": false,
+        "date_correct": true,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "gen-severe-008",
+      "product": "Hummus Mix",
+      "brand": "Casbah",
+      "truth_allergens": [
+        "sesame"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "",
+      "difficulty": "severe",
+      "model": {
+        "pred_allergens": [
+          "sesame"
+        ],
+        "date_ok": false,
+        "pred_recalled": false,
+        "confidence": 0.351,
+        "legibility_note": true,
+        "allergen_correct": true,
+        "date_correct": false,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "gen-severe-009",
+      "product": "Apple Juice",
+      "brand": "Juicy Juice",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "",
+      "difficulty": "severe",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": false,
+        "pred_recalled": false,
+        "confidence": 0.43,
+        "legibility_note": true,
+        "allergen_correct": true,
+        "date_correct": false,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "gen-severe-010",
+      "product": "Tomato Paste",
+      "brand": "Contadina",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": true,
+      "truth_date": "",
+      "difficulty": "severe",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": false,
+        "pred_recalled": true,
+        "confidence": 0.173,
+        "legibility_note": true,
+        "allergen_correct": true,
+        "date_correct": false,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "gen-severe-011",
+      "product": "Wheat Cereal",
+      "brand": "Wheaties",
+      "truth_allergens": [
+        "wheat"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "",
+      "difficulty": "severe",
+      "model": {
+        "pred_allergens": [
+          "wheat"
+        ],
+        "date_ok": false,
+        "pred_recalled": false,
+        "confidence": 0.255,
+        "legibility_note": true,
+        "allergen_correct": true,
+        "date_correct": false,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "gen-severe-012",
+      "product": "Cheddar Crackers",
+      "brand": "Cheez-It",
+      "truth_allergens": [
+        "wheat",
+        "milk"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "",
+      "difficulty": "severe",
+      "model": {
+        "pred_allergens": [
+          "wheat"
+        ],
+        "date_ok": false,
+        "pred_recalled": false,
+        "confidence": 0.369,
+        "legibility_note": true,
+        "allergen_correct": false,
+        "date_correct": false,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "gen-severe-013",
+      "product": "Spaghetti",
+      "brand": "Mueller's",
+      "truth_allergens": [
+        "wheat"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "",
+      "difficulty": "severe",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": false,
+        "pred_recalled": false,
+        "confidence": 0.133,
+        "legibility_note": true,
+        "allergen_correct": false,
+        "date_correct": false,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "gen-severe-014",
+      "product": "Sardines",
+      "brand": "King Oscar",
+      "truth_allergens": [
+        "fish"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "",
+      "difficulty": "severe",
+      "model": {
+        "pred_allergens": [
+          "fish"
+        ],
+        "date_ok": false,
+        "pred_recalled": false,
+        "confidence": 0.404,
+        "legibility_note": true,
+        "allergen_correct": true,
+        "date_correct": false,
+        "fully_correct": false
+      }
+    },
+    {
+      "id": "gen-severe-015",
+      "product": "Crab Meat",
+      "brand": "Bumble Bee",
+      "truth_allergens": [
+        "shellfish"
+      ],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "",
+      "difficulty": "severe",
+      "model": {
+        "pred_allergens": [
+          "shellfish"
+        ],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.287,
+        "legibility_note": true,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    },
+    {
+      "id": "gen-severe-016",
+      "product": "Black-Eyed Peas",
+      "brand": "Bush's",
+      "truth_allergens": [],
+      "truth_expired": false,
+      "truth_recalled": false,
+      "truth_date": "",
+      "difficulty": "severe",
+      "model": {
+        "pred_allergens": [],
+        "date_ok": true,
+        "pred_recalled": false,
+        "confidence": 0.491,
+        "legibility_note": true,
+        "allergen_correct": true,
+        "date_correct": true,
+        "fully_correct": true
+      }
+    }
+  ]
+}
