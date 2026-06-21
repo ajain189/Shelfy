@@ -1,219 +1,149 @@
 <div align="center">
 
-<img src="assets/logo.png" alt="ShelfSight logo" width="160" />
+<img src="assets/logo.png" alt="ShelfSight" width="150" />
 
 # ShelfSight
 
-### The pantry shelf, read for you.
+**The pantry shelf, read for you.**
 
-**USAII Global AI Hackathon 2026 · High School Track**
-**Challenge Brief 1 — "Help Is Hard to Find" · Direction A: Crisis-to-Action Translator**
+A food-bank intake assistant that reads donated food labels with a phone camera, checks each item against live federal recall data, flags allergens and dietary categories, and turns a shelf of unlabeled donations into an inventory a family can actually search.
+
+<br />
+
+[![Google Gemini](https://img.shields.io/badge/Google%20Gemini-2.5%20Flash-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white)](https://ai.google.dev/)
+[![React Native](https://img.shields.io/badge/React%20Native-0.85-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactnative.dev/)
+[![Expo](https://img.shields.io/badge/Expo-SDK%2056-000020?style=for-the-badge&logo=expo&logoColor=white)](https://expo.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+
+[![SQLite](https://img.shields.io/badge/SQLite-on--device-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
+[![openFDA](https://img.shields.io/badge/openFDA-Recall%20API-0B5FFF?style=for-the-badge)](https://open.fda.gov/)
+[![Python](https://img.shields.io/badge/Python-evaluation-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-A31F34?style=for-the-badge)](LICENSE)
 
 </div>
 
 ---
 
-> **Read this first (the 30-second version).**
-> Picture a food-bank volunteer sorting hundreds of donated cans with a line out the door. A jar lands in their hands — *Is it expired? Recalled? Safe for a kid with a peanut allergy?* They can't know, so they shelve it and hope. Meanwhile a grocery shopper gets recall alerts and clear labels for free. **The person this fails is the grandson searching that shelf for something his diabetic grandmother can safely eat.**
->
-> **ShelfSight scans each donation as a volunteer sorts it — reading the label, flagging anything expired or recalled, tagging allergens and dietary categories — and builds a searchable inventory.** So when that grandson asks "what's here with no peanuts?", the volunteer can show him exactly what's on the shelf and what's in it, in seconds. The same protection a grocery shopper already gets, for the people who need it most.
+## The problem
 
----
+There are roughly 60,000 food pantries in the United States, and most run on volunteers and clipboards with no inventory system. Donations arrive unsorted, unbarcoded, and undated. Some are already expired. Some are under an active federal recall that never reaches a church basement. A grocery shopper gets recall alerts and clear labels for free; a family picking up food from a pantry shelf gets neither.
 
-## The reframe that makes this Brief 1
+The people this hurts most are the ones who can least afford a mistake: a parent of a child with a peanut allergy, someone managing diabetes, a senior with a religious dietary need. Picture a grandson searching a pantry shelf for something his diabetic grandmother can safely eat. The information he needs exists, but it is scattered across labels no one has time to read.
 
-The brief asks for a tool that translates a **scattered, technical, English-only "confusing document"** into plain language and a clear next step.
+## What ShelfSight does
 
-**ShelfSight's insight: the pantry shelf *is* the confusing document.** A shelf of unbarcoded, undated, unlabeled donations is exactly that kind of source — the information a family needs to stay safe (ingredients, allergens, recall status, expiry) exists, but it never reaches the church basement. ShelfSight reads the physical shelf and turns it into plain language, a filtered list, and a clear action.
+As a volunteer sorts donations, they hold each item up to the phone camera. ShelfSight:
 
----
+1. **Reads the label** with a vision model — brand, product, ingredients, dates.
+2. **Tags allergens** against the FDA "big 9," with the ingredient words that justify each tag.
+3. **Checks live federal recalls** by querying the openFDA enforcement database in real time.
+4. **Gives a clear recommendation** — keep, discard, or send to review — with the reason in plain language.
 
-## Tools Used
+A volunteer confirms every item before it reaches the shelf. Cleared items become a searchable inventory, so when a family asks "what is here with no peanuts?" the answer is a filtered list with the ingredients spelled out, not a guess.
 
-> *Judging rewards reasoning, not budget — this stack is almost entirely free.*
+## How the AI works
 
-| Layer | Tool | Free / Paid |
-|---|---|---|
-| **Vision + extraction + classification (AI)** | **Google Gemini 2.5 Flash** via `@google/genai` | **Free tier** |
-| **Recall data (retrieval)** | **openFDA Food Enforcement API** — queried live at intake (no key needed) · USDA FSIS recall feed | **Free, public** |
-| **App framework** | Expo (React Native), TypeScript | Free / open source |
-| **On-device inventory** | `expo-sqlite` (family pickup *is* a SQL filter) | Free / open source |
-| **Camera & images** | `expo-camera`, `expo-image-picker`, `expo-image-manipulator` | Free / open source |
-| **UI & motion** | `react-native-reanimated`, `expo-blur`, `expo-linear-gradient`, React Navigation | Free / open source |
-| **Evaluation & charts** | Python, matplotlib, numpy | Free / open source |
-| **AI coding assistance** | Claude (Anthropic) — used to help build, fully disclosed | Paid (disclosure per brief) |
-
----
-
-## How the AI works — the heart of this project
-
-ShelfSight is not one model call. It is an **agentic workflow** that perceives, classifies, retrieves from an external tool, decides, and knows when to escalate to a human. **AI capabilities used: Computer Vision + Agentic Workflow** (with classification, retrieval, and generative AI inside the loop).
+ShelfSight is an agentic pipeline, not a single prompt. Each scan flows through perception, classification, an external-tool call, and a confidence-gated decision:
 
 ```
- 📷  Volunteer waves a donation past the phone camera
-      │   expo-image-manipulator downscales the photo (~69% fewer vision tokens)
-      ▼
- ┌──────────────────────────────────────────────────────────┐
- │ ① VISION + EXTRACTION  (Gemini 2.5 Flash, structured JSON)│
- │   reads: brand · product · ingredients (verbatim OCR)    │
- │   confidence · legibility notes                          │
- └──────────────────────────────────────────────────────────┘
-      ▼
- ┌──────────────────────────────────────────────────────────┐
- │ ② CLASSIFICATION                                          │
- │   allergens → FDA "big 9" controlled enum (with the       │
- │   ingredient words that justify each — grounding evidence)│
- │   dietary tags → "_claim" suffix: reports what the LABEL   │
- │   claims, never certifies                                 │
- └──────────────────────────────────────────────────────────┘
-      ▼
- ┌──────────────────────────────────────────────────────────┐
- │ ③ RETRIEVAL — LIVE recall check (external tool)           │
- │   queries the openFDA Food Enforcement API by brand/      │
- │   product, brand-anchored match against ACTIVE recalls,   │
- │   3s timeout → cached snapshot fallback (path is surfaced)│
- │   → clear · possible_match · unknown (never auto-confirmed)│
- └──────────────────────────────────────────────────────────┘
-      ▼
- ┌──────────────────────────────────────────────────────────┐
- │ ④ VERDICT + ROUTING  (confidence-gated)                   │
- │   Keep · Discard · Review  + a plain-language reason       │
- │   recall / past-date          → DISCARD (never shelve)    │
- │   low-confidence / illegible  → REVIEW  (ask a human)     │
- │   clean read, in-date, no recall → KEEP (human still      │
- │                                    clears it)             │
- └──────────────────────────────────────────────────────────┘
-      ▼
- 🧑  HUMAN CLEARANCE — a volunteer confirms every item
-      ▼
- 🔎  Cleared items become a searchable inventory a family can
-     query in plain language ("no peanuts", "low sugar", "halal")
+  Photo of a donated item
+        │  downscaled on-device (cuts vision tokens ~69%)
+        ▼
+  ┌──────────────────────────────────────────────┐
+  │  Vision + extraction   (Gemini 2.5 Flash)     │
+  │  brand · product · ingredients · date         │
+  │  confidence · legibility notes                │
+  └──────────────────────────────────────────────┘
+        ▼
+  ┌──────────────────────────────────────────────┐
+  │  Classification                               │
+  │  allergens → FDA big-9, with supporting words │
+  │  dietary tags → what the label claims         │
+  └──────────────────────────────────────────────┘
+        ▼
+  ┌──────────────────────────────────────────────┐
+  │  Recall check   (live openFDA query)          │
+  │  brand-anchored match against active recalls  │
+  │  3s timeout → cached snapshot fallback        │
+  └──────────────────────────────────────────────┘
+        ▼
+  ┌──────────────────────────────────────────────┐
+  │  Verdict + routing                            │
+  │  recall / expired      → discard              │
+  │  unsure / unreadable   → review (ask a human) │
+  │  clean read, no recall → keep                 │
+  └──────────────────────────────────────────────┘
+        ▼
+  Human clearance  →  searchable, plain-language inventory
 ```
 
-### Why AI, and not a simple web search
+A web search cannot solve this. The family does not know what they are holding or what to type, and no search engine knows what a specific pantry has on its shelves right now or whether it has been recalled. Reading the physical items and building a live inventory is the part only a vision-and-retrieval pipeline can do.
 
-*(The brief names this as a top reason judges mark projects down — so here it is, directly.)*
+The recall verdict reasons only over the records retrieved from openFDA and the scanned label, and cites them — so it cannot invent a recall that does not exist. Tags are always framed as *what the label shows*, never as a guarantee that a food is safe to eat.
 
-A web search cannot help here, for two reasons a search can never overcome:
-1. **The family doesn't know what they're holding or what to search for** — an unlabeled donation has no name to type.
-2. **No search knows what *this specific pantry* has on its shelves right now, or whether it's recalled.**
+## Safety by design
 
-Only AI that **reads the physical items and builds a live inventory** can answer "what's on this shelf that my grandmother can safely eat?" That capability — perception of the physical world plus a grounded, item-by-item verdict — is the thing a search box structurally cannot do.
+A wrong tag is more dangerous than no tag, because it creates false confidence. ShelfSight is built so the model's mistakes never reach a family:
 
-### What's special about it
+- **It never certifies food as safe.** Every screen reads *here is what the label shows — check the label to confirm.*
+- **A human clears every item.** This is enforced in the database, not just the interface: an item under an active recall cannot be cleared onto the shelf no matter what calls the function.
+- **It escalates instead of guessing.** When the read is low-confidence or the label is unreadable, the item goes to a volunteer rather than onto the shelf.
+- **Recall matching is conservative.** A brand-anchored match against only *active* recalls returns a possible match for a person to verify, never an automatic confirmation and never an automatic clear.
 
-- **The shelf becomes the document.** It translates a physical, unlabeled mess into structured, searchable, plain-language information — the literal task of this challenge brief.
-- **Grounded, cited verdicts.** The recall verdict reasons *only* over the retrieved recall records and the actual scanned label, and cites them — so the AI **cannot fabricate** a recall or an allergen from memory. This directly answers the misinformation risk the brief calls out.
-- **It's two-sided.** One AI pipeline serves both the overwhelmed volunteer (intake) and the family under stress (plain-language pickup).
-- **It knows when to stop.** Confidence-gated escalation means the model hands off to a human instead of guessing — and we [measured](#model-evaluation) that this catches **100% of its own mis-reads**.
+## Evaluation
 
----
-
-## Model Evaluation
-
-We built a **reproducible, synthetic benchmark of 120 labeled food-donation cases** and scored the pipeline's decisions against ground truth. Full methodology, charts, and reproduction steps: **[`docs/evaluation/`](docs/evaluation/)**.
-
-| Result | Value |
-|---|---:|
-| Recalled items kept off the shelf | **100%** |
-| Unsafe items wrongly cleared (false-"safe") | **0%** |
-| Mis-read items caught for human review | **100%** |
-| Accuracy when the model is confident (≥0.70) | 98% |
-| Accuracy when the model is unsure (<0.70) | 17% → **escalated to a human** |
-| Overall extraction accuracy | 78% |
+The intake pipeline was measured against a synthetic benchmark of 120 labeled cases. The full methodology, charts, and a one-command reproduction live in [`docs/evaluation/`](docs/evaluation/).
 
 <div align="center">
-
-<img src="docs/evaluation/charts/03_safety_dashboard.png" alt="Responsible-AI safety dashboard" width="760" />
-
+<img src="docs/evaluation/charts/03_safety_dashboard.png" alt="Safety evaluation dashboard" width="760" />
 </div>
 
-The story the numbers tell *is* the project: **the AI is good but imperfect (78%), and the system is built so its mistakes never reach a vulnerable family (0% false-safe).** A tool that claimed 100% on everything would be the result to distrust. *(Synthetic benchmark — clearly labeled on every chart; the brief permits synthetic data.)*
+| Metric | Result |
+| --- | ---: |
+| Recalled items kept off the shelf | 100% |
+| Unsafe items wrongly cleared | 0% |
+| Mis-read items caught for review | 100% |
+| Accuracy when the model is confident | 98% |
+| Overall extraction accuracy | 78% |
 
----
+The model is good but imperfect — and the system is designed so its imperfections are caught before they reach a vulnerable family.
 
-## Human-in-the-Loop Design
+## Tech stack
 
-**The decision the AI never makes:** whether a food is safe for a specific person to eat, and whether an item is cleared onto the shelf.
+| Area | Tool |
+| --- | --- |
+| Vision, extraction, classification | Google Gemini 2.5 Flash (`@google/genai`) |
+| Recall data | openFDA Food Enforcement API (live, no key) |
+| App | React Native + Expo (SDK 56), TypeScript |
+| On-device storage | SQLite (`expo-sqlite`) — family search is a SQL filter |
+| Camera & images | `expo-camera`, `expo-image-picker`, `expo-image-manipulator` |
+| UI & motion | `react-native-reanimated`, React Navigation, `expo-blur` |
+| Evaluation | Python, matplotlib, NumPy |
 
-ShelfSight reads, classifies, retrieves, and flags — but **a volunteer confirms every item**, and the family makes the final eat-or-not call with the physical label in hand. The AI never says "this is safe for you." It shows what's there and what's in it; a person decides.
-
-**Why a human must stay in control:** a misread ingredient or a missed recall is a health risk — at worst, a child eating an allergen. A confidence score is not informed consent, and "what should I eat with this medical condition" is a judgment no AI should own. So when ShelfSight is unsure, it **escalates instead of guessing** (we measured this; see above), and the pantry's existing manual checks stay in place. The AI surfaces what a human would miss; the human prevents the harm. This safety gate is enforced in **code, not just UI** — a recalled item is impossible to clear onto the shelf no matter which path calls the function ([`clearItem` in `src/db/inventory.ts`](src/db/inventory.ts)).
-
----
-
-## Responsible AI Guardrail
-
-**The risk — over-reliance, leading to the worst possible error.** A stressed parent in a hurry trusts a ShelfSight tag that turns out wrong (the model misreads an ingredient or misses a recall), and their allergic child eats food that harms them — *precisely because they believed it had been screened.* This is more dangerous than no tool at all, because a wrong tag creates false confidence. *(This is a specific failure mode with a specific victim — not "AI can be biased.")*
-
-**How we reduced it — four layers:**
-1. **It never certifies anything "safe to eat."** Every screen frames the output as *"here's what the label shows — check the label to confirm."* The final safety judgment stays with a person.
-2. **Grounded, cited generation.** The verdict reasons only over the retrieved recall data and the actual scanned label, and cites those sources — so it cannot invent a recall or allergen.
-3. **Confidence-gated escalation.** Low-confidence reads go to a volunteer, not onto the shelf. The model stops and asks instead of guessing.
-4. **Human clearance + existing checks stay.** A volunteer clears every item; ShelfSight adds information on top of the pantry's normal process, it never replaces it.
-
----
-
-## Data Disclosure
-
-- **openFDA Food Enforcement API** and **USDA FSIS recall feed** — real, free, public government data (exactly the "government websites and public health guidance" the brief permits).
-- **Synthetic intake records** — a hand-authored, realistic mix for a small pantry (canned goods, pasta, shelf-stable dairy, baby food, cereal), with plausible brands, dates, and ingredient lists. Some items are deliberately seeded near-date or matching known recall patterns so the flagging and inventory logic is demonstrable. **No real or private pantry data, and no sensitive personal data, was used.**
-- **Synthetic evaluation benchmark** — 120 labeled cases generated deterministically for [model evaluation](docs/evaluation/); ground truth is hand-specified, model output is a seeded realistic simulation. Reproducible with one command.
-
----
-
-## How it maps to the judging rubric
-
-| Dimension | Weight | Where it's answered |
-|---|---:|---|
-| **Problem Understanding** | 30% | A named, specific vulnerable user (the grandson + everyone like him) and the real 60,000-pantry context, led in the first 30 seconds. |
-| **AI Reasoning** | 20% | The agentic workflow above + the explicit ["why AI, not a web search"](#why-ai-and-not-a-simple-web-search) answer. |
-| **Solution Design** | 20% | A clear input → AI → output → action flow (the diagram), with a working two-sided prototype. |
-| **Impact & Insight** | 20% | Moves a family from *uncertainty → clarity → action*; the inventory makes help actionable, measured in [evaluation](#model-evaluation). |
-| **Responsible AI** | 10% | A specific risk, a four-layer mitigation, and a human-in-the-loop decision — each answered separately above. |
-
-The brief's three named traps, avoided: **vague user** → we name a specific person; **generic risk** → ours has a specific failure mode and victim; **"why AI over web search" unanswered** → we answer it head-on.
-
----
-
-## Run it
+## Getting started
 
 ```bash
 npm install
-cp .env.example .env          # add a free Gemini key from aistudio.google.com/apikey
-npm run ios                   # or: npm run android
+cp .env.example .env        # add a free Gemini key from aistudio.google.com/apikey
+npm run ios                 # or: npm run android
 ```
 
-The app seeds a realistic demo pantry on first launch (including a recall match, an allergen flag, and an illegible-label escalation), so every screen is populated immediately. Add a Gemini key in the **Settings** tab to scan real labels with the camera.
+A realistic demo pantry is seeded on first launch — including a recall match, an allergen flag, and an unreadable-label escalation — so every screen is populated immediately. Add a Gemini key in the **Settings** tab to scan real labels.
 
-### Project layout
+## Project structure
 
 ```
 src/
-  ai/            Gemini client, structured-output schema, API-key handling
-  recall/        Live openFDA recall service + safe three-state matcher + cached fallback
-  db/            SQLite inventory, the item view-model, the keep/discard recommendation engine
-  components/    Cards, detail sheet, status signal, pipeline trace, the brand mark
+  ai/            Gemini client, structured-output schema, key handling
+  recall/        Live openFDA recall service + safe matcher + cached fallback
+  db/            SQLite inventory, item view-model, keep/discard logic
+  components/    Cards, detail sheet, status signal, pipeline trace, brand mark
   screens/       Intake · Inventory · Shelf · Settings
-  theme/         Design tokens (warm editorial palette; green = safety only)
-docs/evaluation/ The synthetic benchmark, the eval harness, charts, and results
+  theme/         Design tokens
+docs/evaluation/ Synthetic benchmark, evaluation harness, charts
 assets/          Logo, app icon, splash
 ```
 
-<a name="honest-status"></a>
-### Honest status
+## License
 
-This is a hackathon MVP, and we're precise about what runs live:
-
-- **Vision → extraction → classification** runs end-to-end on real photos with **real Gemini output on screen**.
-- **Recall retrieval is live.** Each scan queries the real, public **openFDA Food Enforcement API** by brand/product and runs a conservative, **brand-anchored** match against *active* recalls — verified to catch a real ongoing recall while clearing common pantry staples with zero false positives. On a slow or absent network it falls back to a bundled snapshot within 3 seconds and **tells you which path ran**. A match is only ever `possible_match` (escalates to a human), never an auto-confirmed recall and never an auto-clear.
-- **USDA FSIS** is included as a documented secondary source; the live integration currently uses openFDA.
-- **Demo data** seeds a realistic pantry so every screen is populated on first launch.
-
-The brief states a prototype needn't be production-ready and that a walkthrough showing real AI output is sufficient. We've been transparent about exactly what runs live, because that honesty is itself part of the Responsible-AI story.
-
----
-
-<div align="center">
-<sub>Built for the USAII Global AI Hackathon 2026 · High School Track · Brief 1, Direction A</sub>
-</div>
+Released under the [MIT License](LICENSE).

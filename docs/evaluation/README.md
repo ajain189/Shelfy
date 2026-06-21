@@ -1,21 +1,21 @@
 # ShelfSight — Model Evaluation
 
-> **What this is, plainly.** A reproducible evaluation of ShelfSight's intake pipeline against a **synthetic, labeled benchmark** of 120 food-donation cases. The hackathon brief explicitly permits synthetic data; every chart is labeled as such and **none of these are real-world measurements.** The point is to test the part that matters most — the **safety logic** — against known-hard cases (recalls, illegible labels, allergen traps) in a way a judge can regenerate with one command.
+A reproducible evaluation of the ShelfSight intake pipeline against a synthetic, labeled benchmark of 120 food-donation cases. The data is synthetic and every chart is labeled as such — these are not real-world measurements. The goal is to stress the part that matters most, the safety logic, against known-hard cases (recalls, illegible labels, allergen traps), in a way anyone can regenerate with one command.
 
-## TL;DR — the headline numbers
+## Headline numbers
 
 | Metric | Result | Why it matters |
 |---|---:|---|
 | **Recall items kept off the shelf** | **100%** | The highest-stakes job. A recalled item must never reach a family. |
 | **Unsafe items wrongly cleared** ("false-safe") | **0%** | The system never says "keep" for a recalled or expired item. |
 | **Mis-read items caught for review** | **100%** | When the model reads a label wrong, the system escalates instead of trusting it. |
-| Overall extraction accuracy | 78% | Honest — the model makes real mistakes. The safety layer catches them. |
+| Overall extraction accuracy | 78% | The model makes real mistakes; the safety layer catches them. |
 | Allergen-extraction accuracy | 94% | The allergen tags families rely on. |
 | Accuracy **when confident** (≥0.70) | 98% | Confident reads are almost always right. |
 | Accuracy **when unsure** (<0.70) | 17% | Unsure reads are usually wrong — so the system sends them to a human. |
 | Share of items escalated to a human | 24% | The model knows when to stop and ask. |
 
-The story these numbers tell is the whole thesis of the project: **the AI is good but imperfect, and the system is designed so its imperfections never reach a vulnerable family.** A model that scored 100% on everything would be the suspicious result; a model that's 78% accurate but **0% false-safe** is the trustworthy one.
+These numbers reflect the core design goal: the model is good but imperfect, and the system is built so its imperfections do not reach a vulnerable family. A 78% extraction accuracy paired with a 0% false-safe rate is the intended outcome — the safety layer absorbs the model's errors.
 
 ## The four charts
 
@@ -54,7 +54,7 @@ evaluate.py    → scores the pipeline's routing decisions against ground truth,
 - **Recall matching** is modeled as exact, because in the real app it's an app-side retrieval step (lot code vs. live FDA/USDA feeds), not a vision guess — so it doesn't fail on label legibility.
 
 ### Why simulate instead of only calling Gemini live?
-A live run needs an API key and is non-deterministic, so a judge couldn't reproduce it. This benchmark is **seeded and deterministic** — same command, same numbers, every time — and lets us stress the safety logic against a controlled set of hard cases. The live pipeline is shown working on real photos in the demo video; this evaluation complements that by measuring the decision logic at scale.
+A live run needs an API key and is non-deterministic, so it can't be reproduced exactly. This benchmark is seeded and deterministic — same command, same numbers, every time — and stresses the safety logic against a controlled set of hard cases. The live pipeline runs on real photos in the app; this evaluation complements that by measuring the decision logic at scale.
 
 ## Reproduce it
 
