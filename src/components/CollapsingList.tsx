@@ -68,6 +68,6 @@ export function CollapsingList<T>({
 
 const styles = StyleSheet.create({
   fill: { flex: 1, backgroundColor: colors.paper },
-  content: { paddingHorizontal: GUTTER, paddingBottom: TAB_BAR_SPACE, gap: space.sm + 2 },
+  content: { paddingHorizontal: GUTTER, paddingBottom: TAB_BAR_SPACE, gap: space.md },
   controls: { gap: space.sm, paddingTop: space.xs, paddingBottom: space.sm },
 });

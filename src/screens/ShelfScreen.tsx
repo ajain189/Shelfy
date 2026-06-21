@@ -110,7 +110,7 @@ export function ShelfScreen() {
         keyExtractor={(r) => String(r.id)}
         controls={controls}
         renderItem={(item) => (
-          <ItemCard row={item} showIngredients onPress={() => setSelected(item)} onReject={onReject} />
+          <ItemCard row={item} onPress={() => setSelected(item)} onReject={onReject} />
         )}
         ListEmptyComponent={
           <Text style={styles.empty}>
@@ -147,16 +147,19 @@ const styles = StyleSheet.create({
     backgroundColor: colors.paperDeep,
     borderRadius: radius.md,
     paddingHorizontal: space.md,
+    minHeight: 50,
     paddingVertical: space.sm + 2,
   },
   panel: { gap: space.sm, paddingTop: space.xs },
   filterLabel: { color: colors.inkFaint, marginTop: space.xs },
-  chipWrap: { flexDirection: "row", flexWrap: "wrap", gap: space.sm - 2 },
+  chipWrap: { flexDirection: "row", flexWrap: "wrap", gap: space.sm },
   chip: {
     backgroundColor: colors.paperDeep,
     borderRadius: radius.pill,
-    paddingHorizontal: space.md - 2,
-    paddingVertical: space.xs + 3,
+    paddingHorizontal: space.md,
+    minHeight: 44,
+    justifyContent: "center",
+    paddingVertical: space.sm,
   },
   chipActive: { backgroundColor: colors.clay },
   empty: { ...type.body, color: colors.inkFaint, textAlign: "center", marginTop: space.xl },
