@@ -30,6 +30,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   backgroundColor: "#F5F1E8",
   ios: {
     supportsTablet: true,
+    bundleIdentifier: "com.ajain189.shelfsight",
     infoPlist: {
       NSCameraUsageDescription:
         "ShelfSight uses the camera to read food-donation labels during intake.",
