@@ -15,7 +15,7 @@ import { loadApiKey } from "./apiKeyStore";
  * The Gemini client and Call 1 (vision intake).
  *
  * KEY HANDLING (demo): the key is read from `expo-constants` (injected at bundle
- * time from a gitignored .env — see app.config.ts) and the SDK runs in-app so
+ * time from a gitignored .env, see app.config.ts) and the SDK runs in-app so
  * Expo Go can call Gemini directly. Production would proxy through a backend so
  * the key never ships to a device.
  *
@@ -38,7 +38,7 @@ function friendlyApiError(e: any): string {
 
   if (/RESOURCE_EXHAUSTED|"?code"?:\s*429|quota/i.test(msg)) {
     const wait = retry ? ` Try again in about ${Math.ceil(Number(retry))} seconds.` : "";
-    return `Gemini's free limit was hit for now.${wait} The free tier allows a few scans per minute — wait a moment and try again.`;
+    return `Gemini's free limit was hit for now.${wait} The free tier allows a few scans per minute, wait a moment and try again.`;
   }
   if (/API key not valid|API_KEY_INVALID|"?code"?:\s*400.*key/i.test(msg)) {
     return "That Gemini API key isn't valid. Check it in the Settings tab (get a free key at aistudio.google.com/apikey).";
@@ -57,7 +57,7 @@ const SYSTEM_PROMPT = `You are ShelfSight's intake reader for a food bank. A vol
 
 Rules:
 - Transcribe what the label actually shows. Do not infer, complete, or invent text that is not visible.
-- List an allergen ONLY when the ingredients or an allergen statement on the label support it, and record the supporting words in allergen_basis. When in doubt, leave it out and note the uncertainty in legibility_notes — a human will review.
+- List an allergen ONLY when the ingredients or an allergen statement on the label support it, and record the supporting words in allergen_basis. When in doubt, leave it out and note the uncertainty in legibility_notes, a human will review.
 - Dietary tags describe what the LABEL CLAIMS (hence the _claim suffix). Only include a tag if the label explicitly makes that claim.
 - Be honest about legibility. If the date, ingredients, or brand are blurry, cut off, or obscured, say so specifically in legibility_notes and lower your confidence. Honest uncertainty routes the item to a human; a confident wrong reading could harm someone.
 - You never decide whether a food is safe to eat. You report what the label shows.`;
@@ -77,7 +77,7 @@ export interface IntakeResult {
 const filterEnum = <T extends string>(vals: unknown, allowed: readonly T[]): T[] => {
   if (!Array.isArray(vals)) return [];
   const set = new Set<string>(allowed);
-  // De-dupe too — the model occasionally repeats an allergen.
+  // De-dupe too, the model occasionally repeats an allergen.
   const seen = new Set<string>();
   return vals.filter((v): v is T => {
     if (typeof v !== "string" || !set.has(v) || seen.has(v)) return false;
@@ -89,7 +89,7 @@ const filterEnum = <T extends string>(vals: unknown, allowed: readonly T[]): T[]
 /** Trim, collapse runs of whitespace, and drop empty placeholders the model emits. */
 const cleanText = (v: unknown): string => {
   const s = String(v ?? "").replace(/\s+/g, " ").trim();
-  // The model sometimes fills unknowns with literal "N/A"/"none"/"unknown" —
+  // The model sometimes fills unknowns with literal "N/A"/"none"/"unknown",
   // those aren't data, so normalize them to empty so the UI shows the right
   // "not on label" state instead of the word "N/A".
   if (/^(n\/?a|none|unknown|not visible|not legible|--?)$/i.test(s)) return "";
@@ -106,7 +106,7 @@ const cleanIsoDate = (v: unknown): string => {
  * Coerce/validate the model JSON into a clean IntakeExtraction. This is the
  * "format everything that goes in" gate: every field is trimmed, enums are
  * filtered to the controlled lists, dates are validated, and junk placeholders
- * are dropped — so the inventory never stores raw model noise.
+ * are dropped, so the inventory never stores raw model noise.
  */
 const normalize = (obj: Record<string, unknown>): IntakeExtraction => ({
   brand: cleanText(obj.brand),
@@ -123,10 +123,10 @@ const normalize = (obj: Record<string, unknown>): IntakeExtraction => ({
 });
 
 /**
- * CALL 1 — vision intake. Sends one or more downscaled JPEGs (base64) of the
+ * CALL 1, vision intake. Sends one or more downscaled JPEGs (base64) of the
  * SAME item and gets back a single schema-validated record. Multiple photos let
  * the volunteer capture different faces (front, ingredients panel, date/lot
- * code) — useful for big or curved labels that won't fit one shot. Gemini reads
+ * code), useful for big or curved labels that won't fit one shot. Gemini reads
  * across all of them to build one combined reading.
  *
  * @param base64Jpegs one or more base64-encoded JPEGs (no data: prefix)

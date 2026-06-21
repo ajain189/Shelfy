@@ -7,7 +7,7 @@ import type { RecallResult } from "../recall/recallService";
 
 /**
  * Shows the live recall-check result on the intake screen. A possible match is
- * the loud case (amber escalation — a human must verify the lot code); a clear
+ * the loud case (amber escalation, a human must verify the lot code); a clear
  * result is a quiet confirmation. Either way it reports WHICH data path ran
  * (live FDA query vs. cached snapshot), because a system that's honest about its
  * own degraded state is part of the Responsible-AI story.
@@ -20,7 +20,7 @@ export function RecallNotice({ recall }: { recall: RecallResult }) {
     recall.path === "live"
       ? "Live FDA query"
       : recall.path === "cached"
-        ? "Offline — used cached recall snapshot"
+        ? "Offline, used cached recall snapshot"
         : "No recall data reached";
 
   if (flagged) {
@@ -58,7 +58,7 @@ export function RecallNotice({ recall }: { recall: RecallResult }) {
       </View>
       <Text style={[type.body, { color: colors.inkSoft }]}>
         {unknown
-          ? "Not enough was read from the label to check recalls — this item will be escalated to a human."
+          ? "Not enough was read from the label to check recalls, this item will be escalated to a human."
           : "Checked the FDA recall data we have; no match for this item. A volunteer still clears every item."}
       </Text>
       <PathBadge label={pathLabel} checked={recall.candidates_checked} tone={colors.inkFaint} />

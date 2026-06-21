@@ -15,7 +15,7 @@ import { Feather } from "@expo/vector-icons";
 import { type } from "../theme";
 
 /**
- * Full-screen photo viewer — opened by tapping a photo in the detail sheet.
+ * Full-screen photo viewer, opened by tapping a photo in the detail sheet.
  * View-only (the user asked to see the uploaded picture), on a dark backdrop so
  * the label fills the screen. Multiple photos scroll horizontally, paged.
  */
@@ -68,14 +68,14 @@ export function ImageViewer({
 }
 
 const styles = StyleSheet.create({
-  backdrop: { flex: 1, backgroundColor: "rgba(15,14,12,0.97)" },
+  backdrop: { flex: 1, backgroundColor: "rgba(15, 14, 12, 0.97)" },
   page: { flex: 1, alignItems: "center", justifyContent: "center" },
   image: { width: "100%", height: "100%" },
   close: { position: "absolute", right: 18, width: 40, height: 40, alignItems: "center", justifyContent: "center" },
   counter: {
     position: "absolute",
     alignSelf: "center",
-    backgroundColor: "rgba(0,0,0,0.45)",
+    backgroundColor: "rgba(0, 0, 0, 0.45)",
     borderRadius: 999,
     paddingHorizontal: 12,
     paddingVertical: 5,

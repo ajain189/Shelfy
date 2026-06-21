@@ -14,7 +14,7 @@ import type { RecallResult } from "../recall/recallService";
 /**
  * Derive the recommendation + the agentic-pipeline trace from a fresh scan,
  * including the LIVE recall verdict. A possible recall match always escalates
- * (discard); otherwise the verdict turns on date + read confidence — always
+ * (discard); otherwise the verdict turns on date + read confidence, always
  * erring toward REVIEW when the AI is unsure, never a guess.
  */
 function deriveIntake(
@@ -31,7 +31,7 @@ function deriveIntake(
     ? {
         verdict: "discard",
         label: "Discard",
-        reason: "Matches an active FDA recall — escalated, do not shelve.",
+        reason: "Matches an active FDA recall, escalated, do not shelve.",
         factors: [
           recall?.citations[0]
             ? `Matched ${recall.citations[0].source} record ${recall.citations[0].record_id}.`
@@ -43,7 +43,7 @@ function deriveIntake(
       ? {
           verdict: "review",
           label: "Review",
-          reason: "The AI wasn't sure — a volunteer should check before shelving.",
+          reason: "The AI wasn't sure, a volunteer should check before shelving.",
           factors: [
             illegible ? `Label hard to read: ${e.legibility_notes}` : "",
             lowConfidence ? `Read confidence ${conf}% is below 70%.` : "",
@@ -83,17 +83,17 @@ function deriveIntake(
       detail: recallFlagged
         ? `Matched an active FDA recall (${recall?.citations[0]?.record_id ?? "record"}).`
         : recall
-          ? `${recall.path === "cached" ? "Offline — checked cached snapshot" : "Queried live FDA records"}; no match (${recall.candidates_checked} compared).`
+          ? `${recall.path === "cached" ? "Offline, checked cached snapshot" : "Queried live FDA records"}; no match (${recall.candidates_checked} compared).`
           : "Querying live FDA recall records…",
     },
     {
       icon: recallFlagged ? "x-octagon" : needsReview ? "help-circle" : "check-circle",
       label: "Reached a verdict",
       detail: recallFlagged
-        ? "Recall match — escalated to a human, not shelved."
+        ? "Recall match, escalated to a human, not shelved."
         : needsReview
-          ? `Unsure (confidence ${conf}%) — routed to a human.`
-          : `Read clearly (confidence ${conf}%) — recommends keeping.`,
+          ? `Unsure (confidence ${conf}%), routed to a human.`
+          : `Read clearly (confidence ${conf}%), recommends keeping.`,
     },
   ];
 
@@ -104,7 +104,7 @@ function deriveIntake(
  * Renders the real Call-1 structured output plus the live recall verdict. The
  * agentic-pipeline trace (scan → read → classify → recall-check → verdict)
  * reflects this scan's actual outcome. Confidence + legibility + the recall
- * match drive the status — never an automatic clear.
+ * match drive the status, never an automatic clear.
  */
 export function IntakeResultCard({
   extraction,
@@ -133,13 +133,13 @@ export function IntakeResultCard({
         )}
       </View>
 
-      {/* One state, big — then the AI's plain reason */}
+      {/* One state, big, then the AI's plain reason */}
       <View style={styles.recRow}>
         <StatusDot state={dotState} phrase={dotPhrase} large />
         <Text style={[type.body, { color: colors.inkSoft }]}>{rec.reason}</Text>
       </View>
 
-      {/* Plain essentials — what the label says, in plain words */}
+      {/* Plain essentials, what the label says, in plain words */}
       <View style={styles.facts}>
         {extraction.allergens.length > 0 && (
           <Text style={[type.bodyMedium, { color: colors.ink }]}>
@@ -158,7 +158,7 @@ export function IntakeResultCard({
         </Text>
       </View>
 
-      {/* The agentic pipeline, made visible — the AI showcase for the demo */}
+      {/* The agentic pipeline, made visible, the AI showcase for the demo */}
       <PipelineTrace steps={steps} />
 
       {/* Everything technical, tucked away but one tap from reach */}
@@ -187,7 +187,7 @@ export function IntakeResultCard({
       )}
 
       <Text style={[type.caption, styles.disclaimer]}>
-        Here's what the label shows — check the physical label to confirm.
+        Here's what the label shows, check the physical label to confirm.
       </Text>
     </Card>
   );

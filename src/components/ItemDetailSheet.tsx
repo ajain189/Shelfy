@@ -23,7 +23,7 @@ import { recommendFor } from "../db/recommendation";
 const PHOTO_SIZE = 200;
 
 /**
- * Full item detail with the AI's grounding evidence — the volunteer's review
+ * Full item detail with the AI's grounding evidence, the volunteer's review
  * surface. Federal recalls show the big red banner + full explanation; allergens
  * and dietary claims use the same uniform neutral chips as the cards.
  */
@@ -57,7 +57,7 @@ export function ItemDetailSheet({
         <View style={styles.sheet}>
           <View style={styles.grabber} />
           <ScrollView contentContainerStyle={{ gap: space.lg, paddingBottom: space.xl }}>
-            {/* Lead: photo + name + status — the identity, big and calm */}
+            {/* Lead: photo + name + status, the identity, big and calm */}
             <Pressable
               onPress={() => photos.length > 0 && setViewerOpen(true)}
               disabled={photos.length === 0}
@@ -82,7 +82,7 @@ export function ItemDetailSheet({
               {!!d.brand && <Text style={[type.body, { color: colors.inkSoft }]}>{d.brand}</Text>}
             </View>
 
-            {/* The ONE state, big — then the AI's plain reason and its evidence */}
+            {/* The ONE state, big, then the AI's plain reason and its evidence */}
             <View style={styles.recCard}>
               <StatusDot state={state} phrase={phrase} large />
               <Text style={[type.body, { color: colors.ink }]}>{rec.reason}</Text>
@@ -97,11 +97,11 @@ export function ItemDetailSheet({
                 </View>
               )}
               <Text style={[type.caption, { color: colors.inkFaint, fontStyle: "italic" }]}>
-                The AI's read — a volunteer makes the final call.
+                The AI's read, a volunteer makes the final call.
               </Text>
             </View>
 
-            {/* Federal recall — the loud case, with full explanation */}
+            {/* Federal recall, the loud case, with full explanation */}
             {recalled && (
               <FederalRecallBanner
                 recallClass={d.recall_class}
@@ -110,7 +110,7 @@ export function ItemDetailSheet({
               />
             )}
 
-            {/* Plain essentials — the few things that matter, in plain words */}
+            {/* Plain essentials, the few things that matter, in plain words */}
             <View style={styles.facts}>
               {allergens.length > 0 && (
                 <Text style={[type.bodyMedium, { color: colors.ink }]}>{allergenLine(allergens)}</Text>
@@ -150,7 +150,7 @@ export function ItemDetailSheet({
             )}
 
             <Text style={[type.caption, styles.disclaimer]}>
-              Here's what the label shows — check the physical label to confirm.
+              Here's what the label shows, check the physical label to confirm.
             </Text>
 
             {canReview && (
@@ -187,7 +187,7 @@ function LabelRow({ label, value }: { label: string; value: string }) {
 }
 
 const styles = StyleSheet.create({
-  backdrop: { flex: 1, backgroundColor: "rgba(26,29,26,0.4)", justifyContent: "flex-end" },
+  backdrop: { flex: 1, backgroundColor: "rgba(26, 29, 26, 0.4)", justifyContent: "flex-end" },
   sheet: {
     backgroundColor: colors.paper,
     borderTopLeftRadius: radius.lg,
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 8,
     right: 8,
-    backgroundColor: "rgba(0,0,0,0.55)",
+    backgroundColor: "rgba(0, 0, 0, 0.55)",
     borderRadius: 999,
     paddingHorizontal: 10,
     paddingVertical: 4,

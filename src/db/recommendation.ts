@@ -5,17 +5,17 @@ import { parseDetail, isRecalled, isExpired } from "./itemView";
  * The AI's KEEP / DISCARD / REVIEW recommendation for an item.
  *
  * This is ADVICE to the volunteer, never a safety certification. A human still
- * clears every item onto the shelf — the recommendation just tells them what the
+ * clears every item onto the shelf, the recommendation just tells them what the
  * AI would do and why, so they don't have to open the item to find out. It's
  * computed from the same signals the agentic pipeline already produced (recall
  * match, expiry date, read confidence, legibility), so seeded demo items and
  * freshly-scanned items get an identical, consistent verdict.
  *
- *   discard — a hard reason not to shelve it: active recall, or past its date.
- *   review  — the AI isn't sure (low confidence or an unreadable label); a human
+ *   discard, a hard reason not to shelve it: active recall, or past its date.
+ *   review, the AI isn't sure (low confidence or an unreadable label); a human
  *             should look before it goes out. Never a guess.
- *   keep    — nothing blocking; the AI would shelve it. The volunteer still must
- *             click "Clear to shelf" — keep ≠ "safe to eat."
+ *   keep, nothing blocking; the AI would shelve it. The volunteer still must
+ *             click "Clear to shelf", keep ≠ "safe to eat."
  */
 export type Verdict = "keep" | "discard" | "review";
 
@@ -32,19 +32,19 @@ export interface Recommendation {
 /** Confidence floor below which we ask a human rather than recommend keeping. */
 const CONFIDENCE_FLOOR = 0.7;
 
-/** Compute the AI recommendation for a row. Pure — same input, same output. */
+/** Compute the AI recommendation for a row. Pure, same input, same output. */
 export function recommendFor(row: InventoryRow, today: Date = new Date()): Recommendation {
   const d = parseDetail(row);
   const factors: string[] = [];
 
-  // 1) Active recall — the hardest stop. (possible_match also discards: an
+  // 1) Active recall, the hardest stop. (possible_match also discards: an
   //    unverified recall is never shelved.)
   if (isRecalled(row)) {
     const cls = d.recall_class ? ` (${d.recall_class})` : "";
     return {
       verdict: "discard",
       label: "Discard",
-      reason: `Matches an active federal recall${cls} — do not shelve.`,
+      reason: `Matches an active federal recall${cls}, do not shelve.`,
       factors: [
         `Lot/product matched a recall in ${d.recall_citations?.[0]?.source ?? "FDA/USDA"} data`,
         d.recall_explanation || d.recall_citations?.[0]?.quoted_text || "Flagged by the recall check.",
@@ -57,12 +57,12 @@ export function recommendFor(row: InventoryRow, today: Date = new Date()): Recom
     return {
       verdict: "discard",
       label: "Discard",
-      reason: `Past its date (${row.expiry_date}) — do not shelve.`,
+      reason: `Past its date (${row.expiry_date}), do not shelve.`,
       factors: [`Best/use-by date ${row.expiry_date} is in the past.`],
     };
   }
 
-  // 3) The AI isn't confident enough to vouch for the reading — or the pipeline
+  // 3) The AI isn't confident enough to vouch for the reading, or the pipeline
   //    itself routed the item for human review (e.g. an allergen tag it wants a
   //    person to confirm). Respect that routing so the tag never contradicts the
   //    pipeline's own decision.
@@ -84,12 +84,12 @@ export function recommendFor(row: InventoryRow, today: Date = new Date()): Recom
     return {
       verdict: "review",
       label: "Review",
-      reason: "The AI wasn't sure — a volunteer should check before shelving.",
+      reason: "The AI wasn't sure, a volunteer should check before shelving.",
       factors,
     };
   }
 
-  // 4) Nothing blocking — the AI would shelve it (a human still confirms).
+  // 4) Nothing blocking, the AI would shelve it (a human still confirms).
   const allergens = d.allergens ?? [];
   return {
     verdict: "keep",

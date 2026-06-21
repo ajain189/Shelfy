@@ -42,9 +42,9 @@ export function parseDetail(row: InventoryRow): ItemDetail {
   }
 }
 
-/** Comma-wrapped tag string (",a,b,") → ["a","b"]. */
+/** Comma-wrapped tag string (", a, b, ") → ["a", "b"]. */
 export const unwrapTags = (s: string): string[] =>
-  s.replace(/^,|,$/g, "").split(",").filter(Boolean);
+  s.replace(/^, |, $/g, "").split(", ").filter(Boolean);
 
 /** True when this item is under an active federal recall (the one loud case). */
 export const isRecalled = (row: InventoryRow): boolean =>
@@ -53,7 +53,7 @@ export const isRecalled = (row: InventoryRow): boolean =>
 /**
  * Is the printed best/use-by date in the past? Only decides when the date is a
  * real ISO date; a missing/unparseable date is "no date" (handled elsewhere by
- * lowering confidence). Compares on the calendar day — an item expiring "today"
+ * lowering confidence). Compares on the calendar day, an item expiring "today"
  * is still fine.
  */
 export function isExpired(row: InventoryRow, today: Date = new Date()): boolean {
@@ -70,22 +70,22 @@ export const prettyTag = (s: string): string =>
   s.replace(/_claim$/, "").replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
 /**
- * ONE state per item for the cards — the workflow status and the AI verdict
+ * ONE state per item for the cards, the workflow status and the AI verdict
  * merged into a single colored dot + short phrase, so a card never shows two
  * competing signals. Calm shows one thing at a time; so do we. The full AI
  * reasoning still lives in the detail sheet for anyone who taps in.
  *
- *   danger (red)   — active federal recall: the one loud case.
- *   caution (amber) — needs a volunteer's review before it can go out.
- *   safe (green)   — on the shelf, or read clean and ready to be cleared.
+ *   danger (red), active federal recall: the one loud case.
+ *   caution (amber), needs a volunteer's review before it can go out.
+ *   safe (green), on the shelf, or read clean and ready to be cleared.
  */
 export type ItemState = "danger" | "caution" | "safe";
 
 export function itemState(row: InventoryRow): { state: ItemState; phrase: string } {
-  if (isRecalled(row)) return { state: "danger", phrase: "Recalled — remove" };
-  // Past-date items never read green, even if a volunteer already shelved one —
-  // this keeps the card's state in step with the AI's "discard (expired)" call.
-  if (isExpired(row)) return { state: "danger", phrase: "Past date — remove" };
+  if (isRecalled(row)) return { state: "danger", phrase: "Recalled: remove" };
+  // Past-date items never read green, even if a volunteer already shelved one.
+  // This keeps the card's state in step with the AI's "discard (expired)" call.
+  if (isExpired(row)) return { state: "danger", phrase: "Past date: remove" };
   if (row.cleared === 1) return { state: "safe", phrase: "On the shelf" };
   const needsReview = row.routing === "flag" || row.routing === "escalate";
   if (needsReview) return { state: "caution", phrase: "Needs review" };
@@ -111,7 +111,7 @@ export function categoryIcon(category?: string): string {
   return "package";
 }
 
-/** Plain-English "Contains X, Y" line for a card — no chips, no raw enums. */
+/** Plain-English "Contains X, Y" line for a card, no chips, no raw enums. */
 export function allergenLine(allergens: string[]): string {
   if (allergens.length === 0) return "";
   return `Contains ${allergens.map(prettyTag).join(", ")}`;
@@ -149,7 +149,7 @@ export const hasDietary = (row: InventoryRow, tag: string): boolean =>
 const ALLERGEN_TRUST_CONFIDENCE = 0.8;
 
 /**
- * Whether we can TRUST the absence of an allergen on this item — i.e. the AI
+ * Whether we can TRUST the absence of an allergen on this item, i.e. the AI
  * read the label well enough to assert "this allergen is not present."
  *
  * Absence of an allergen tag is NOT the same as confirmed-absent: the model is
@@ -157,7 +157,7 @@ const ALLERGEN_TRUST_CONFIDENCE = 0.8;
  * also looks "absent." We only treat absence as a real "free from" signal when
  * the reading is high-confidence, had no legibility problems, and actually saw
  * an ingredient list. Otherwise the item is excluded from "free from" results
- * (fail safe — never falsely promise an allergen isn't there).
+ * (fail safe, never falsely promise an allergen isn't there).
  */
 export function allergenDataTrustworthy(row: InventoryRow): boolean {
   const d = parseDetail(row);

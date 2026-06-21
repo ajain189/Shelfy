@@ -42,7 +42,7 @@ export function useImageSource() {
     }
   }, []);
 
-  // Library picker with multi-select — returns every chosen photo's URI.
+  // Library picker with multi-select, returns every chosen photo's URI.
   const pickPhotos = useCallback(async (): Promise<string[]> => {
     const perm = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (!perm.granted) {

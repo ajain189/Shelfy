@@ -33,7 +33,7 @@ export function FederalRecallBanner({
       {!!recallClass && (
         <Text style={[type.heading, styles.class]}>
           {recallClass}
-          {recallClass === "Class I" ? " — most serious" : ""}
+          {recallClass === "Class I" ? ", most serious" : ""}
         </Text>
       )}
 

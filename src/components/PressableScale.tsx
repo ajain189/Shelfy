@@ -12,7 +12,7 @@ import { motion } from "../theme";
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 /**
- * A Pressable that springs down to a slightly smaller scale while held — the
+ * A Pressable that springs down to a slightly smaller scale while held, the
  * tactile press feedback recipe (Emil). Production spring, no bounce. Honors
  * reduced-motion by skipping the scale entirely.
  */

@@ -2,7 +2,7 @@ import { RECALL_SNAPSHOT, type RecallRecord } from "./recallSnapshot";
 import type { RecallState } from "../db/inventory";
 
 /**
- * LIVE recall retrieval — the agentic pipeline's external-tool step.
+ * LIVE recall retrieval, the agentic pipeline's external-tool step.
  *
  * After the vision model reads a label, this queries the free, public openFDA
  * Food Enforcement API for recalls matching the scanned brand/product, then a
@@ -17,9 +17,9 @@ import type { RecallState } from "../db/inventory";
  *     clear an item the data can't vouch for.
  *   - DEGRADE HONESTLY: live call with a short timeout; on failure, fall back to
  *     a bundled snapshot and report which path ran. A failed network never
- *     silently skips the check — worst case it escalates.
+ *     silently skips the check, worst case it escalates.
  *
- * This is a conservative token-overlap matcher, not a precise fuzzy algorithm —
+ * This is a conservative token-overlap matcher, not a precise fuzzy algorithm,
  * by design. A safe three-state judge that errs toward escalation protects
  * families better than a clever matcher that might confidently clear the wrong
  * jar.
@@ -33,13 +33,13 @@ export type RecallPath = "live" | "cached" | "none";
 export interface RecallCitation {
   source: string; // "openFDA"
   record_id: string; // recall_number
-  quoted_text: string; // reason_for_recall (grounding — never invented)
+  quoted_text: string; // reason_for_recall (grounding, never invented)
   field: string; // "reason_for_recall"
 }
 
 export interface RecallResult {
   recall_state: RecallState; // clear | possible_match | unknown (never auto-confirmed)
-  path: RecallPath; // which data path ran — surfaced to the user
+  path: RecallPath; // which data path ran, surfaced to the user
   citations: RecallCitation[]; // the records we matched against
   recall_class?: string; // "Class I" | "Class II" | "Class III"
   recall_explanation?: string; // plain-language, drawn from the record
@@ -49,7 +49,7 @@ export interface RecallResult {
 /**
  * Words too generic to be a useful match signal. Includes packaging/quantity
  * words ("oz", "jar"), generic descriptors ("original", "natural"), AND common
- * brand/firm filler ("best", "family", "foods", "co") — the last group matters
+ * brand/firm filler ("best", "family", "foods", "co"), the last group matters
  * because the matcher anchors on brand tokens, and a word like "best" would
  * otherwise match unrelated firms ("Best Express Foods") and flag everything.
  */
@@ -59,7 +59,7 @@ const STOP = new Set([
   // generic descriptors
   "food", "foods", "brand", "original", "classic", "natural", "fresh", "can", "canned",
   "jar", "box", "bag", "bottle", "pouch", "creamy", "crunchy", "organic", "premium", "value",
-  // common brand/firm filler — too generic to anchor a recall match
+  // common brand/firm filler, too generic to anchor a recall match
   "best", "family", "farm", "farms", "company", "inc", "llc", "corp", "express",
   "great", "good", "quality", "select", "choice", "market", "kitchen", "homestyle",
 ]);
@@ -96,7 +96,7 @@ async function fetchLive(brand: string, product: string): Promise<RecallRecord[]
   try {
     const res = await fetch(url, { signal: controller.signal });
     // openFDA returns 404 with a {"error":{"code":"NOT_FOUND"}} body when there
-    // are zero matches — that's a legitimate "no recalls found", not a failure.
+    // are zero matches, that's a legitimate "no recalls found", not a failure.
     if (res.status === 404) return [];
     if (!res.ok) return null;
     const json = await res.json();
@@ -110,7 +110,7 @@ async function fetchLive(brand: string, product: string): Promise<RecallRecord[]
 }
 
 /**
- * Search the bundled snapshot the same way the live query would — broadly, so
+ * Search the bundled snapshot the same way the live query would, broadly, so
  * `judge` (which does the brand-anchored matching) sees the same candidate shape
  * whether the data came live or cached.
  */
@@ -127,7 +127,7 @@ function searchSnapshot(brand: string, product: string): RecallRecord[] {
 /**
  * The SAFE three-state matcher. Given the scanned brand/product and the
  * retrieved records, decide a state. Only ACTIVE ("Ongoing") recalls can flag.
- * We never return `confirmed_match` automatically — a true confirmation needs a
+ * We never return `confirmed_match` automatically, a true confirmation needs a
  * human checking the lot code, so the strongest automatic state is
  * `possible_match`, which escalates.
  */
@@ -148,7 +148,7 @@ function judge(
     if (!/ongoing/i.test(r.status)) continue; // only active recalls
     const hay = new Set([...tokens(r.product_description), ...tokens(r.recalling_firm)]);
 
-    // A match must be ANCHORED on the brand — the broad openFDA query returns
+    // A match must be ANCHORED on the brand, the broad openFDA query returns
     // ~20 loosely-related records, and a lone common product word ("beans",
     // "soup") would otherwise trigger a flag on an unrelated recall. We require a
     // brand-token hit, then count product-token overlap as supporting evidence.
@@ -165,7 +165,7 @@ function judge(
     }
   }
 
-  // A brand-anchored hit on an active recall escalates to a human — deliberately
+  // A brand-anchored hit on an active recall escalates to a human, deliberately
   // conservative on precision (brand-anchored) but still safety-first: a possible
   // match always goes to a person, never auto-cleared or auto-confirmed.
   if (best) return { state: "possible_match", match: best };

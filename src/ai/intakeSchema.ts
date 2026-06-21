@@ -8,10 +8,10 @@
  * GEMINI SCHEMA DIALECT NOTES (differs from plain JSON Schema):
  *   - `type` is the `Type` enum (Type.STRING, Type.ARRAY, …), not "string".
  *   - To restrict to a fixed set, set `format: "enum"` AND list the values in
- *     `enum` — Gemini requires both.
+ *     `enum`, Gemini requires both.
  *   - `propertyOrdering` controls field order in the output (we list every
  *     property so the model emits them deterministically).
- *   - There is NO `additionalProperties` keyword — `required` + a closed
+ *   - There is NO `additionalProperties` keyword, `required` + a closed
  *     `properties` set is how we constrain the object.
  *   - No numeric bounds keyword we rely on → `confidence` is clamped 0..1 in
  *     CODE, not in the schema.
@@ -63,18 +63,18 @@ export interface IntakeExtraction {
   /** Verbatim OCR of the ingredient list ("" if none visible). */
   ingredients_text: string;
   allergens: Allergen[];
-  /** Which ingredient words triggered each allergen — grounding evidence. */
+  /** Which ingredient words triggered each allergen, grounding evidence. */
   allergen_basis: string;
   dietary_tags: DietaryTag[];
   /** ISO date (YYYY-MM-DD), or "" if no legible date. */
   expiry_date: string;
   /** Verbatim printed date text, however it appeared. */
   expiry_text_raw: string;
-  /** Lot/batch code if visible ("" otherwise) — used for recall matching. */
+  /** Lot/batch code if visible ("" otherwise), used for recall matching. */
   lot_code: string;
   /** Model's self-rated extraction confidence, 0..1. Validated in code. */
   confidence: number;
-  /** What was blurry, occluded, or unreadable — drives escalation. */
+  /** What was blurry, occluded, or unreadable, drives escalation. */
   legibility_notes: string;
 }
 
@@ -142,7 +142,7 @@ export const INTAKE_SCHEMA: Schema = {
     legibility_notes: {
       type: Type.STRING,
       description:
-        "What on the label was blurry, cut off, glare-obscured, or unreadable. Empty string if the label was fully legible. Be specific — this decides whether a human reviews the item.",
+        "What on the label was blurry, cut off, glare-obscured, or unreadable. Empty string if the label was fully legible. Be specific, this decides whether a human reviews the item.",
     },
   },
   propertyOrdering: [...INTAKE_FIELD_ORDER],

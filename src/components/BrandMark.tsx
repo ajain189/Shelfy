@@ -6,7 +6,7 @@ import { colors, space, type, fonts } from "../theme";
 const LOGO = require("../../assets/brandmark.png");
 
 /**
- * The ShelfSight logo — a pantry shelf with a watching eye and a check. Used for
+ * The ShelfSight logo, a pantry shelf with a watching eye and a check. Used for
  * in-app branding (the Settings header, the intake start screen). `showWordmark`
  * pairs it with the name; omit for the mark alone.
  */

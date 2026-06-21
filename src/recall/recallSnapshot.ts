@@ -3,7 +3,7 @@
  *
  * WHY THIS EXISTS: a food bank's wifi is unreliable ("works when the church-
  * basement wifi doesn't"). When the live openFDA call times out or fails, the
- * recall service falls back to this snapshot so the safety check still runs —
+ * recall service falls back to this snapshot so the safety check still runs,
  * degraded, but never silently skipped. The service logs which path ran (live vs
  * cached) and surfaces it, because a system that knows its own degraded state is
  * itself a Responsible-AI signal.

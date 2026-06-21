@@ -11,7 +11,7 @@ import { getShelfItems, rejectItem, type InventoryRow } from "../db/inventory";
 import { DIETARY_FILTERS, ALLERGEN_FREE_FILTERS, hasDietary, isFreeOf } from "../db/itemView";
 
 /**
- * Shelf — cleared items only, what families can get. Filter by dietary claim
+ * Shelf, cleared items only, what families can get. Filter by dietary claim
  * (only when the label claims it) or by "free from" common allergens. Each card
  * reveals its ingredients.
  */

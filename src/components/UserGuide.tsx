@@ -28,7 +28,7 @@ const STEPS: { icon: keyof typeof Feather.glyphMap; title: string; body: string 
   {
     icon: "alert-octagon",
     title: "Watch for federal recalls",
-    body: "If an item matches an FDA recall, you'll see a big red FEDERAL RECALL notice with its class and reason. Never shelve a recalled item — remove it.",
+    body: "If an item matches an FDA recall, you'll see a big red FEDERAL RECALL notice with its class and reason. Never shelve a recalled item, remove it.",
   },
   {
     icon: "grid",

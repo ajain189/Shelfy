@@ -19,7 +19,7 @@ const FILTERS: { key: Filter; label: string }[] = [
 ];
 
 /**
- * Inventory — the volunteer workspace. Every item, searchable + filterable, with
+ * Inventory, the volunteer workspace. Every item, searchable + filterable, with
  * inline Clear/Remove on the items the AI flagged for review.
  */
 export function InventoryScreen() {

@@ -11,7 +11,7 @@ import { clearAll, countItems } from "../db/inventory";
 import { seedAll } from "../db/seed";
 
 /**
- * Settings — enter a Gemini API key in-app (no file editing) and reset the demo
+ * Settings, enter a Gemini API key in-app (no file editing) and reset the demo
  * inventory.
  */
 export function SettingsScreen() {

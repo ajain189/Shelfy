@@ -21,7 +21,7 @@ type Phase = "idle" | "processing" | "reading" | "checking" | "result" | "error"
 
 /**
  * Volunteer intake: collect one OR MORE photos of an item (front, ingredients,
- * date — useful for big or curved labels) → Gemini reads across all of them →
+ * date, useful for big or curved labels) → Gemini reads across all of them →
  * one structured record → add to the pantry.
  */
 export function IntakeScreen() {
@@ -78,7 +78,7 @@ export function IntakeScreen() {
       const intake = await runIntake(images);
       setResult(intake);
 
-      // Live recall retrieval — the agentic external-tool step. Never throws; the
+      // Live recall retrieval, the agentic external-tool step. Never throws; the
       // worst case escalates. Runs after the read so it can query by brand/product.
       setPhase("checking");
       setStatusText("Checking FDA recalls…");
@@ -96,7 +96,7 @@ export function IntakeScreen() {
     if (!result) return;
     try {
       // Fold the recall verdict into raw_json so the detail sheet shows the
-      // citation, class, and explanation — and into the queryable columns so the
+      // citation, class, and explanation, and into the queryable columns so the
       // shelf/clearance guards see the recall state.
       const recall_state = recall?.recall_state ?? "unknown";
       const raw = {
@@ -154,8 +154,8 @@ export function IntakeScreen() {
           <BrandMark size={48} />
           <Text style={type.heading}>Scan a donation</Text>
           <Text style={[type.body, { color: colors.inkSoft }]}>
-            Add a photo of the label. For big or curved labels, add a few — front, ingredients, and
-            the date — and ShelfSight reads across all of them.
+            Add a photo of the label. For big or curved labels, add a few, front, ingredients, and
+            the date, and ShelfSight reads across all of them.
           </Text>
 
           {photos.length > 0 && (

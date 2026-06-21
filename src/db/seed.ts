@@ -92,7 +92,7 @@ const SEED: SeedSpec[] = [
     routing: "release",
     cleared: true,
     plain_language_summary:
-      "Rolled oats. No major allergens listed. (Oats can carry gluten from processing — label makes no gluten-free claim.)",
+      "Rolled oats. No major allergens listed. (Oats can carry gluten from processing, label makes no gluten-free claim.)",
   },
   {
     brand: "Chicken of the Sea",
@@ -301,10 +301,10 @@ const SEED: SeedSpec[] = [
     cleared: false,
     allergen_basis: "peanuts: roasted peanuts",
     plain_language_summary:
-      "Creamy peanut butter. This jar's lot code matches an active federal recall. Do NOT shelve — remove it from the pantry.",
+      "Creamy peanut butter. This jar's lot code matches an active federal recall. Do NOT shelve, remove it from the pantry.",
     recall_reason: "Recalled for potential Salmonella contamination.",
     recall_explanation:
-      "This jar's lot code matches an active FDA recall for possible Salmonella contamination. Salmonella can cause serious and sometimes fatal infections. This item must not be given to any family — remove it from the pantry and follow your pantry's recall-disposal procedure.",
+      "This jar's lot code matches an active FDA recall for possible Salmonella contamination. Salmonella can cause serious and sometimes fatal infections. This item must not be given to any family, remove it from the pantry and follow your pantry's recall-disposal procedure.",
     recall_class: "Class I",
     recall_source: "openFDA",
     recall_id: "F-0859-2022",
@@ -327,7 +327,7 @@ const SEED: SeedSpec[] = [
     cleared: false,
     allergen_basis: "peanuts: peanut butter; wheat: enriched wheat flour; soybeans: soy lecithin",
     plain_language_summary:
-      "Peanut butter crackers. Contains PEANUTS, WHEAT, and SOY. Flagged for a volunteer to confirm the allergen tags before shelving — a missed peanut tag is the highest-risk error.",
+      "Peanut butter crackers. Contains PEANUTS, WHEAT, and SOY. Flagged for a volunteer to confirm the allergen tags before shelving, a missed peanut tag is the highest-risk error.",
   },
 
   // --- 1 item matching a real-style FDA recall (never auto-cleared) ---
@@ -346,7 +346,7 @@ const SEED: SeedSpec[] = [
     cleared: false,
     allergen_basis: "milk: nonfat milk, whey; soybeans: soy oil",
     plain_language_summary:
-      "Powdered infant formula. The lot code on this can falls within a recalled range reported to the FDA. NOT cleared — escalated to a human. Do not give to a family until the lot code is verified against the recall notice.",
+      "Powdered infant formula. The lot code on this can falls within a recalled range reported to the FDA. NOT cleared, escalated to a human. Do not give to a family until the lot code is verified against the recall notice.",
     recall_reason:
       "Powdered infant formula recalled over potential Cronobacter sakazakii contamination; check lot codes.",
     recall_explanation:
@@ -359,7 +359,7 @@ const SEED: SeedSpec[] = [
   // --- 1 low-confidence / illegible escalation ---
   {
     brand: "(unreadable)",
-    product: "Canned vegetable — label damaged",
+    product: "Canned vegetable, label damaged",
     category: "Canned goods",
     allergens: [],
     dietary: [],
@@ -373,7 +373,7 @@ const SEED: SeedSpec[] = [
     legibility_notes:
       "Front label torn; brand and product name not readable. No ingredient panel visible. Date and lot code missing.",
     plain_language_summary:
-      "Could not read this label confidently — brand, ingredients, and date were not legible. Escalated to a human rather than guessing.",
+      "Could not read this label confidently, brand, ingredients, and date were not legible. Escalated to a human rather than guessing.",
   },
 ];
 

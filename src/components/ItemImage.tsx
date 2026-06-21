@@ -14,8 +14,8 @@ import { colors, radius } from "../theme";
 /**
  * The photo a volunteer took at intake, shown on cards (thumbnail) and in the
  * detail sheet (full). When there's no photo (seeded items, library uploads, or
- * a purged cache URI), it falls back to a soft category-colored icon tile —
- * never a gray broken-image box — so every card still reads visually and a
+ * a purged cache URI), it falls back to a soft category-colored icon tile,
+ * never a gray broken-image box, so every card still reads visually and a
  * missing photo is never alarming.
  */
 export function ItemImage({

@@ -4,13 +4,13 @@ import { View, Text, StyleSheet, StyleProp, ViewStyle } from "react-native";
 import { colors, space, radius, type, shadow, safetyTone, SafetyTone } from "../theme";
 import { PressableScale } from "./PressableScale";
 
-/** A soft card surface — depth via layered shadow, no hard border. */
+/** A soft card surface, depth via layered shadow, no hard border. */
 export function Card({ children, style }: { children: React.ReactNode; style?: StyleProp<ViewStyle> }) {
   return <View style={[styles.card, style]}>{children}</View>;
 }
 
 /**
- * A safety badge. Color is meaning, never decoration — `tone` maps to the
+ * A safety badge. Color is meaning, never decoration, `tone` maps to the
  * traffic-light system (safe/caution/danger/review).
  */
 export function SafetyBadge({ tone, label }: { tone: SafetyTone; label: string }) {
@@ -23,7 +23,7 @@ export function SafetyBadge({ tone, label }: { tone: SafetyTone; label: string }
   );
 }
 
-/** Primary action button — clay fill (or ghost), with spring press-scale. */
+/** Primary action button, clay fill (or ghost), with spring press-scale. */
 export function Button({
   label,
   onPress,
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   dot: { width: 8, height: 8, borderRadius: 4 },
   button: {
     borderRadius: radius.md,
-    // Tall, finger-obvious target — ~56pt, comfortably above the 44pt minimum
+    // Tall, finger-obvious target, ~56pt, comfortably above the 44pt minimum
     // for the gloved/tired hands this is built for.
     minHeight: 56,
     paddingVertical: space.md + 3,

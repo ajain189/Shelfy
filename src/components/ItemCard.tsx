@@ -12,7 +12,7 @@ import { unwrapTags, parseDetail, isRecalled, categoryIcon, allergenLine, itemSt
 const THUMB = 64;
 
 /**
- * A calm, scannable pantry card — one photo, one name, one line, ONE state, one
+ * A calm, scannable pantry card, one photo, one name, one line, ONE state, one
  * action. No competing pills or tags. Everything else (the AI's reasoning, the
  * label detail) lives one tap away in the detail sheet.
  */

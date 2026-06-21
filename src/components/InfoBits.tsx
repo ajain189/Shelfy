@@ -10,7 +10,7 @@ if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental
 }
 
 /**
- * A generic collapsible section — used to tuck the technical "label details"
+ * A generic collapsible section, used to tuck the technical "label details"
  * (verbatim ingredients, allergen basis, lot code, legibility notes) out of the
  * way so cards and the detail sheet stay calm, while keeping that grounding
  * evidence one tap away for a volunteer or judge who wants it.

@@ -5,7 +5,7 @@ import { Feather } from "@expo/vector-icons";
 import { colors, space, radius, type } from "../theme";
 
 /**
- * The agentic workflow, made visible. ShelfSight isn't one model call — it's a
+ * The agentic workflow, made visible. ShelfSight isn't one model call, it's a
  * pipeline that perceives, classifies, calls an external tool, and decides. This
  * trace shows that on the intake result so a judge (and a volunteer) can see the
  * reasoning steps that produced the verdict, not just the answer.

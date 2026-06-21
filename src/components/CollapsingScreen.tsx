@@ -10,7 +10,7 @@ import { colors, space, GUTTER, TAB_BAR_SPACE } from "../theme";
 import { BigTitle, SlimBar } from "./CollapsingHeader";
 
 /**
- * The ScrollView counterpart of CollapsingList — same collapsing header, for
+ * The ScrollView counterpart of CollapsingList, same collapsing header, for
  * screens whose body is arbitrary content (Intake, Settings) rather than a list.
  */
 export function CollapsingScreen({

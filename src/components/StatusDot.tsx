@@ -5,7 +5,7 @@ import { colors, space, type } from "../theme";
 import type { ItemState } from "../db/itemView";
 
 /**
- * The ONE state signal on a card — a single colored dot + short phrase. Replaces
+ * The ONE state signal on a card, a single colored dot + short phrase. Replaces
  * the old status-pill-plus-AI-tag pile-up so a card reads at a glance. Color is
  * meaning only: red = recall, amber = needs a human, green = good to go.
  */

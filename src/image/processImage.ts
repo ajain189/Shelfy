@@ -5,7 +5,7 @@ import { ImageManipulator, SaveFormat } from "expo-image-manipulator";
  *
  * WHY: full-resolution photos can cost ~4-5K vision tokens each. Resizing the
  * long edge to ~1280px and recompressing as JPEG ~0.7 cuts that 3-4x with no
- * loss of OCR accuracy at label-reading distance — directly lowering cost and
+ * loss of OCR accuracy at label-reading distance, directly lowering cost and
  * latency per intake.
  *
  * @param uri  local file URI from the camera or image picker

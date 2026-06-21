@@ -25,12 +25,12 @@ const H_MARGIN = 16;
 const BAR_PADDING = 6;
 
 /**
- * A floating, glass (blurred) tab bar — a rounded "cylinder" that hovers above
+ * A floating, glass (blurred) tab bar, a rounded "cylinder" that hovers above
  * the content. An active-pill indicator springs horizontally between tabs
  * (production spring, no bounce); reduced-motion users get an instant move.
  *
  * Motion rationale: tab switching is occasional (not 100s/day) and benefits
- * from continuity — the sliding pill ties the previous and next states
+ * from continuity, the sliding pill ties the previous and next states
  * together so the change reads as one object moving, not two flashes.
  */
 export function GlassTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
@@ -131,12 +131,12 @@ const styles = StyleSheet.create({
     height: BAR_HEIGHT,
     borderRadius: radius.pill,
     overflow: "hidden",
-    backgroundColor: "rgba(28,29,25,0.55)", // fallback tint under the blur
+    backgroundColor: "rgba(28, 29, 25, 0.55)", // fallback tint under the blur
   },
   // Warm dark tint layered over the blur so the glass reads as one object.
   tint: {
     ...StyleSheet.absoluteFill,
-    backgroundColor: "rgba(32,33,29,0.62)",
+    backgroundColor: "rgba(32, 33, 29, 0.62)",
   },
   inner: {
     flex: 1,

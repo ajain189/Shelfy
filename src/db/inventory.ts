@@ -14,8 +14,8 @@ import type { IntakeExtraction } from "../ai/intakeSchema";
  * to migrate when later sprints read more fields.
  *
  * Allergens/dietary tags are stored as comma-delimited strings wrapped in
- * commas (",peanuts,milk,") so a `LIKE '%,peanuts,%'` match is exact at the
- * token level — simpler than a join table and fine at pantry scale.
+ * commas (", peanuts, milk, ") so a `LIKE '%, peanuts, %'` match is exact at the
+ * token level, simpler than a join table and fine at pantry scale.
  */
 
 export type RecallState = "clear" | "possible_match" | "confirmed_match" | "unknown";
@@ -25,8 +25,8 @@ export interface InventoryRow {
   id: number;
   brand: string;
   product_name: string;
-  allergens: string; // ",peanuts,milk," form
-  dietary_tags: string; // ",vegan_claim," form
+  allergens: string; // ", peanuts, milk, " form
+  dietary_tags: string; // ", vegan_claim, " form
   expiry_date: string;
   confidence: number;
   recall_state: RecallState;
@@ -39,11 +39,11 @@ export interface InventoryRow {
 
 /** Split the stored comma-joined image URIs into an array. "" → []. */
 export const unwrapImageUris = (s: string): string[] =>
-  s ? s.split(",").filter(Boolean) : [];
+  s ? s.split(", ").filter(Boolean) : [];
 
-/** Wrap a tag list as ",a,b,c," for exact LIKE matching. "" → "". */
+/** Wrap a tag list as ", a, b, c, " for exact LIKE matching. "" → "". */
 export const wrapTags = (tags: string[]): string =>
-  tags.length ? `,${tags.join(",")},` : "";
+  tags.length ? `, ${tags.join(", ")}, ` : "";
 
 let dbPromise: Promise<SQLite.SQLiteDatabase> | null = null;
 
@@ -94,7 +94,7 @@ export interface AddIntakeInput {
 
 /**
  * Write a new intake row. In Sprint 1 there is no recall step yet, so callers
- * default recall_state to "unknown" and routing to "escalate" — i.e. nothing is
+ * default recall_state to "unknown" and routing to "escalate", i.e. nothing is
  * cleared automatically; a human decides later.
  */
 export async function addIntake(input: AddIntakeInput): Promise<number> {
@@ -118,19 +118,19 @@ export async function addIntake(input: AddIntakeInput): Promise<number> {
     routing,
     new Date().toISOString(),
     raw_json,
-    (input.image_uris ?? []).join(","),
+    (input.image_uris ?? []).join(", "),
   );
   return result.lastInsertRowId;
 }
 
-/** All rows, newest first (the Inventory screen — every item). */
+/** All rows, newest first (the Inventory screen, every item). */
 export async function getAllItems(): Promise<InventoryRow[]> {
   const db = await getDb();
   return db.getAllAsync<InventoryRow>(`SELECT * FROM inventory ORDER BY id DESC`);
 }
 
 /**
- * Cleared items only (the Shelf screen — what's actually available to families).
+ * Cleared items only (the Shelf screen, what's actually available to families).
  * A volunteer must have cleared each one; nothing reaches here automatically.
  */
 export async function getShelfItems(): Promise<InventoryRow[]> {
@@ -183,7 +183,7 @@ export async function clearItem(id: number): Promise<boolean> {
   return result.changes > 0;
 }
 
-/** A volunteer rejects an item — it's removed from the pantry entirely. */
+/** A volunteer rejects an item, it's removed from the pantry entirely. */
 export async function rejectItem(id: number): Promise<void> {
   const db = await getDb();
   await db.runAsync(`DELETE FROM inventory WHERE id = ?`, id);
