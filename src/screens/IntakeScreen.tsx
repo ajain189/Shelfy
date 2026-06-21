@@ -85,6 +85,7 @@ export function IntakeScreen() {
       const id = await addIntake({
         extraction: result.extraction,
         raw_json: JSON.stringify(result.extraction),
+        image_uris: photos, // keep the photos so the card/detail can show them
       });
       setSavedId(id);
       setCount(await countItems());
@@ -92,7 +93,7 @@ export function IntakeScreen() {
       setError(`Save failed: ${e?.message ?? String(e)}`);
       setPhase("error");
     }
-  }, [result]);
+  }, [result, photos]);
 
   const reset = useCallback(() => {
     setPhase("idle");

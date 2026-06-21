@@ -34,7 +34,12 @@ export interface InventoryRow {
   cleared: number; // 0 until a volunteer clears it onto the shelf
   created_at: string;
   raw_json: string; // full AI record(s) for detail views
+  image_uris: string; // comma-joined local file URIs of the photos taken at intake
 }
+
+/** Split the stored comma-joined image URIs into an array. "" → []. */
+export const unwrapImageUris = (s: string): string[] =>
+  s ? s.split(",").filter(Boolean) : [];
 
 /** Wrap a tag list as ",a,b,c," for exact LIKE matching. "" → "". */
 export const wrapTags = (tags: string[]): string =>
@@ -66,9 +71,17 @@ export async function initDb(): Promise<void> {
       routing       TEXT NOT NULL DEFAULT 'escalate',
       cleared       INTEGER NOT NULL DEFAULT 0,
       created_at    TEXT NOT NULL DEFAULT '',
-      raw_json      TEXT NOT NULL DEFAULT '{}'
+      raw_json      TEXT NOT NULL DEFAULT '{}',
+      image_uris    TEXT NOT NULL DEFAULT ''
     );
   `);
+  // Migration for installs created before image_uris existed: add the column if
+  // it's missing. (ADD COLUMN ... IF NOT EXISTS isn't supported in SQLite, so we
+  // check the table_info and add conditionally.)
+  const cols = await db.getAllAsync<{ name: string }>(`PRAGMA table_info(inventory)`);
+  if (!cols.some((c) => c.name === "image_uris")) {
+    await db.execAsync(`ALTER TABLE inventory ADD COLUMN image_uris TEXT NOT NULL DEFAULT ''`);
+  }
 }
 
 export interface AddIntakeInput {
@@ -76,6 +89,7 @@ export interface AddIntakeInput {
   recall_state?: RecallState;
   routing?: Routing;
   raw_json: string;
+  image_uris?: string[]; // local file URIs of the intake photos (shown on the card)
 }
 
 /**
@@ -92,8 +106,8 @@ export async function addIntake(input: AddIntakeInput): Promise<number> {
   const result = await db.runAsync(
     `INSERT INTO inventory
        (brand, product_name, allergens, dietary_tags, expiry_date, confidence,
-        recall_state, routing, cleared, created_at, raw_json)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, ?, ?)`,
+        recall_state, routing, cleared, created_at, raw_json, image_uris)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, ?, ?, ?)`,
     extraction.brand,
     extraction.product_name,
     wrapTags(extraction.allergens),
@@ -104,6 +118,7 @@ export async function addIntake(input: AddIntakeInput): Promise<number> {
     routing,
     new Date().toISOString(),
     raw_json,
+    (input.image_uris ?? []).join(","),
   );
   return result.lastInsertRowId;
 }
