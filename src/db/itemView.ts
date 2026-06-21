@@ -51,23 +51,71 @@ export const isRecalled = (row: InventoryRow): boolean =>
   row.recall_state === "confirmed_match" || row.recall_state === "possible_match";
 
 /**
- * A calm, uniform status label. Everyday statuses share ONE muted neutral
- * treatment (no rainbow of colors) — the only thing that ever shouts is an
- * active federal recall, handled separately with big red text.
+ * Is the printed best/use-by date in the past? Only decides when the date is a
+ * real ISO date; a missing/unparseable date is "no date" (handled elsewhere by
+ * lowering confidence). Compares on the calendar day — an item expiring "today"
+ * is still fine.
  */
-export type StatusKind = "recall" | "review" | "cleared" | "pending";
-
-export function statusFor(row: InventoryRow): { kind: StatusKind; label: string } {
-  if (isRecalled(row)) return { kind: "recall", label: "Federal recall" };
-  if (row.cleared) return { kind: "cleared", label: "On the shelf" };
-  if (row.routing === "escalate") return { kind: "review", label: "Needs review" };
-  if (row.routing === "flag") return { kind: "review", label: "Pending review" };
-  return { kind: "pending", label: "Awaiting clearance" };
+export function isExpired(row: InventoryRow, today: Date = new Date()): boolean {
+  const iso = (row.expiry_date || "").trim();
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(iso)) return false;
+  const date = new Date(`${iso}T00:00:00`);
+  if (Number.isNaN(date.getTime())) return false;
+  const t = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  return date < t;
 }
 
 /** Human label for an allergen/dietary enum value. */
 export const prettyTag = (s: string): string =>
   s.replace(/_claim$/, "").replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+
+/**
+ * ONE state per item for the cards — the workflow status and the AI verdict
+ * merged into a single colored dot + short phrase, so a card never shows two
+ * competing signals. Calm shows one thing at a time; so do we. The full AI
+ * reasoning still lives in the detail sheet for anyone who taps in.
+ *
+ *   danger (red)   — active federal recall: the one loud case.
+ *   caution (amber) — needs a volunteer's review before it can go out.
+ *   safe (green)   — on the shelf, or read clean and ready to be cleared.
+ */
+export type ItemState = "danger" | "caution" | "safe";
+
+export function itemState(row: InventoryRow): { state: ItemState; phrase: string } {
+  if (isRecalled(row)) return { state: "danger", phrase: "Recalled — remove" };
+  // Past-date items never read green, even if a volunteer already shelved one —
+  // this keeps the card's state in step with the AI's "discard (expired)" call.
+  if (isExpired(row)) return { state: "danger", phrase: "Past date — remove" };
+  if (row.cleared === 1) return { state: "safe", phrase: "On the shelf" };
+  const needsReview = row.routing === "flag" || row.routing === "escalate";
+  if (needsReview) return { state: "caution", phrase: "Needs review" };
+  return { state: "safe", phrase: "Ready to shelf" };
+}
+
+/**
+ * A Feather icon for a food category, so an item with no photo still reads
+ * visually (a soft icon tile, never a gray broken-image box). Falls back to a
+ * generic package icon for anything unmapped.
+ */
+export function categoryIcon(category?: string): string {
+  const c = (category || "").toLowerCase();
+  if (c.includes("pasta") || c.includes("grain") || c.includes("cereal") || c.includes("rice")) return "align-justify";
+  if (c.includes("can")) return "archive";
+  if (c.includes("dairy") || c.includes("milk")) return "droplet";
+  if (c.includes("spread") || c.includes("sauce")) return "circle";
+  if (c.includes("fruit") || c.includes("veg")) return "feather";
+  if (c.includes("snack")) return "grid";
+  if (c.includes("baby")) return "smile";
+  if (c.includes("protein") || c.includes("meat") || c.includes("fish")) return "anchor";
+  if (c.includes("box") || c.includes("meal")) return "box";
+  return "package";
+}
+
+/** Plain-English "Contains X, Y" line for a card — no chips, no raw enums. */
+export function allergenLine(allergens: string[]): string {
+  if (allergens.length === 0) return "";
+  return `Contains ${allergens.map(prettyTag).join(", ")}`;
+}
 
 // --- Shelf filtering (families / volunteers narrowing what's available) ---
 

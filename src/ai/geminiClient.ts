@@ -77,22 +77,49 @@ export interface IntakeResult {
 const filterEnum = <T extends string>(vals: unknown, allowed: readonly T[]): T[] => {
   if (!Array.isArray(vals)) return [];
   const set = new Set<string>(allowed);
-  return vals.filter((v): v is T => typeof v === "string" && set.has(v));
+  // De-dupe too — the model occasionally repeats an allergen.
+  const seen = new Set<string>();
+  return vals.filter((v): v is T => {
+    if (typeof v !== "string" || !set.has(v) || seen.has(v)) return false;
+    seen.add(v);
+    return true;
+  });
 };
 
-/** Coerce/validate the model JSON into a clean IntakeExtraction. */
+/** Trim, collapse runs of whitespace, and drop empty placeholders the model emits. */
+const cleanText = (v: unknown): string => {
+  const s = String(v ?? "").replace(/\s+/g, " ").trim();
+  // The model sometimes fills unknowns with literal "N/A"/"none"/"unknown" —
+  // those aren't data, so normalize them to empty so the UI shows the right
+  // "not on label" state instead of the word "N/A".
+  if (/^(n\/?a|none|unknown|not visible|not legible|--?)$/i.test(s)) return "";
+  return s;
+};
+
+/** A printed date is only stored in expiry_date if it's a real ISO date. */
+const cleanIsoDate = (v: unknown): string => {
+  const s = cleanText(v);
+  return /^\d{4}-\d{2}-\d{2}$/.test(s) ? s : "";
+};
+
+/**
+ * Coerce/validate the model JSON into a clean IntakeExtraction. This is the
+ * "format everything that goes in" gate: every field is trimmed, enums are
+ * filtered to the controlled lists, dates are validated, and junk placeholders
+ * are dropped — so the inventory never stores raw model noise.
+ */
 const normalize = (obj: Record<string, unknown>): IntakeExtraction => ({
-  brand: String(obj.brand ?? ""),
-  product_name: String(obj.product_name ?? ""),
-  ingredients_text: String(obj.ingredients_text ?? ""),
+  brand: cleanText(obj.brand),
+  product_name: cleanText(obj.product_name),
+  ingredients_text: cleanText(obj.ingredients_text),
   allergens: filterEnum<Allergen>(obj.allergens, ALLERGEN_ENUM),
-  allergen_basis: String(obj.allergen_basis ?? ""),
+  allergen_basis: cleanText(obj.allergen_basis),
   dietary_tags: filterEnum<DietaryTag>(obj.dietary_tags, DIETARY_TAG_ENUM),
-  expiry_date: String(obj.expiry_date ?? ""),
-  expiry_text_raw: String(obj.expiry_text_raw ?? ""),
-  lot_code: String(obj.lot_code ?? ""),
+  expiry_date: cleanIsoDate(obj.expiry_date),
+  expiry_text_raw: cleanText(obj.expiry_text_raw),
+  lot_code: cleanText(obj.lot_code),
   confidence: clampConfidence(Number(obj.confidence)),
-  legibility_notes: String(obj.legibility_notes ?? ""),
+  legibility_notes: cleanText(obj.legibility_notes),
 });
 
 /**
