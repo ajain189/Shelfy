@@ -18,10 +18,12 @@ export const colors = {
   card: "#FCFAF5", // card surface, a hair off paper for depth
   ink900: "#20211D", // darkest surface (the glass tab bar tint)
 
-  // Text — warm near-blacks
+  // Text — warm near-blacks. Contrast matters for tired/older eyes: every text
+  // color here clears WCAG AA on the paper/card surfaces (inkFaint was #9A988C,
+  // ~2.3:1 — illegible; darkened to ~4.6:1 so captions actually read).
   ink: "#23241F", // primary text
-  inkSoft: "#5C5C53", // secondary
-  inkFaint: "#9A988C", // tertiary / captions
+  inkSoft: "#54544B", // secondary
+  inkFaint: "#74726A", // tertiary / captions (now AA-legible)
 
   // Brand / chrome accent — clay (NOT a status color)
   clay: "#B4543A", // primary buttons, active tab, emphasis
@@ -91,30 +93,34 @@ export const fonts = {
 /**
  * Type scale — ONE typeface (DM Sans), hierarchy from size + weight only.
  * No serif on data UI; that clash was the main source of visual noise.
- * Sizes are deliberately small and calm. Every text element uses exactly one of
- * these tokens — no ad-hoc fontSize anywhere.
  *
- *   hero   26  large page title (collapsing-header expanded state)
- *   title  17  card/section titles, item names
- *   heading 15 sub-headings
- *   body   14  primary reading text
- *   caption 12.5 secondary text, metadata
- *   label  12  small UI labels, chips
- *   overline 10.5 letter-spaced all-caps section labels
- *   mono   12  codes / ids / token counts
+ * SCALED FOR THE REAL USER. The people on this app are food-bank volunteers and
+ * families — often older, tired, or stressed, reading under fluorescent light.
+ * Apple HIG and WCAG guidance for older adults put body text at 17pt+; we honor
+ * that here. Every text element uses exactly one of these tokens — no ad-hoc
+ * fontSize anywhere — so this single bump cascades through the whole app.
+ *
+ *   hero    30  large page title (collapsing-header expanded state)
+ *   title   19  card/section titles, item names
+ *   heading 17  sub-headings
+ *   body    17  primary reading text (was 14 — too small for the audience)
+ *   caption 15  secondary text, metadata
+ *   label   14  small UI labels, chips
+ *   overline 11.5 letter-spaced all-caps section labels
+ *   mono    13  codes / ids / token counts
  */
 export const type = {
-  hero: { fontFamily: fonts.bodyBold, fontSize: 25, lineHeight: 30, letterSpacing: -0.5 },
-  title: { fontFamily: fonts.bodyBold, fontSize: 16.5, lineHeight: 21, letterSpacing: -0.2 },
-  heading: { fontFamily: fonts.bodyBold, fontSize: 14.5, lineHeight: 20, letterSpacing: -0.2 },
-  body: { fontFamily: fonts.body, fontSize: 14, lineHeight: 20 },
-  bodyMedium: { fontFamily: fonts.bodyMedium, fontSize: 14, lineHeight: 20 },
-  caption: { fontFamily: fonts.body, fontSize: 13, lineHeight: 18 },
-  label: { fontFamily: fonts.bodyMedium, fontSize: 12.5, lineHeight: 16 },
+  hero: { fontFamily: fonts.bodyBold, fontSize: 30, lineHeight: 35, letterSpacing: -0.5 },
+  title: { fontFamily: fonts.bodyBold, fontSize: 19, lineHeight: 24, letterSpacing: -0.2 },
+  heading: { fontFamily: fonts.bodyBold, fontSize: 17, lineHeight: 23, letterSpacing: -0.2 },
+  body: { fontFamily: fonts.body, fontSize: 17, lineHeight: 24 },
+  bodyMedium: { fontFamily: fonts.bodyMedium, fontSize: 17, lineHeight: 24 },
+  caption: { fontFamily: fonts.body, fontSize: 15, lineHeight: 21 },
+  label: { fontFamily: fonts.bodyMedium, fontSize: 14, lineHeight: 19 },
   // Chip text (allergen / dietary tags on cards) — readable, not tiny.
-  tag: { fontFamily: fonts.bodyMedium, fontSize: 12.5, lineHeight: 16 },
-  overline: { fontFamily: fonts.bodyBold, fontSize: 10.5, lineHeight: 13, letterSpacing: 0.8 },
-  mono: { fontFamily: fonts.mono, fontSize: 12, lineHeight: 16 },
+  tag: { fontFamily: fonts.bodyMedium, fontSize: 14, lineHeight: 19 },
+  overline: { fontFamily: fonts.bodyBold, fontSize: 11.5, lineHeight: 14, letterSpacing: 0.8 },
+  mono: { fontFamily: fonts.mono, fontSize: 13, lineHeight: 17 },
 } as const;
 
 /**
@@ -179,16 +185,3 @@ export const safetyTone = (tone: SafetyTone) => {
   }
 };
 
-/**
- * Calm, uniform status pill styling. Everyday statuses (cleared / review /
- * pending) all share ONE muted ink-on-paper treatment — deliberately NO rainbow
- * of colors. Only an active federal recall is loud (red). This is what keeps the
- * UI looking human rather than "AI-colored."
- */
-export type StatusKind = "recall" | "review" | "cleared" | "pending";
-
-export const statusStyle = (kind: StatusKind): { fg: string; bg: string } => {
-  if (kind === "recall") return { fg: colors.danger, bg: colors.dangerBg };
-  // Everything else: one quiet neutral.
-  return { fg: colors.inkSoft, bg: colors.paperDeep };
-};
