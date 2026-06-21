@@ -6,6 +6,7 @@ import { Feather } from "@expo/vector-icons";
 import { colors, space, type, fonts, radius } from "../theme";
 import { CollapsingScreen } from "../components/CollapsingScreen";
 import { Button, Card, SafetyBadge } from "../components/ui";
+import { BrandMark } from "../components/BrandMark";
 import { PressableScale } from "../components/PressableScale";
 import { IntakeResultCard } from "../components/IntakeResultCard";
 import { useImageSource } from "../image/useImageSource";
@@ -122,6 +123,7 @@ export function IntakeScreen() {
 
       {phase === "idle" && (
         <Card style={{ gap: space.md }}>
+          <BrandMark size={48} />
           <Text style={type.heading}>Scan a donation</Text>
           <Text style={[type.body, { color: colors.inkSoft }]}>
             Add a photo of the label. For big or curved labels, add a few — front, ingredients, and

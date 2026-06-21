@@ -4,6 +4,7 @@ import { Text, StyleSheet, TextInput, Alert } from "react-native";
 import { colors, space, type, radius, fonts } from "../theme";
 import { CollapsingScreen } from "../components/CollapsingScreen";
 import { Card, Button, SafetyBadge } from "../components/ui";
+import { BrandMark } from "../components/BrandMark";
 import { UserGuide } from "../components/UserGuide";
 import { loadApiKey, setApiKey, hasBundledKey, maskKey } from "../ai/apiKeyStore";
 import { clearAll, countItems } from "../db/inventory";
@@ -59,6 +60,8 @@ export function SettingsScreen() {
 
   return (
     <CollapsingScreen title="Settings">
+      <BrandMark />
+
       <UserGuide />
 
       <Card style={{ gap: space.md }}>
