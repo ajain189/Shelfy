@@ -43,3 +43,8 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# evaluation tooling
+.evalvenv/
+__pycache__/
+*.pyc
