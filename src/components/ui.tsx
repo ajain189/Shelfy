@@ -9,15 +9,6 @@ export function Card({ children, style }: { children: React.ReactNode; style?: S
   return <View style={[styles.card, style]}>{children}</View>;
 }
 
-/** A small neutral chip — used for allergens, dietary claims, codes. */
-export function Tag({ label, mono }: { label: string; mono?: boolean }) {
-  return (
-    <View style={styles.tag}>
-      <Text style={[mono ? type.mono : type.tag, { color: colors.inkSoft }]}>{label}</Text>
-    </View>
-  );
-}
-
 /**
  * A safety badge. Color is meaning, never decoration — `tone` maps to the
  * traffic-light system (safe/caution/danger/review).
@@ -28,16 +19,6 @@ export function SafetyBadge({ tone, label }: { tone: SafetyTone; label: string }
     <View style={[styles.badge, { backgroundColor: bg }]}>
       <View style={[styles.dot, { backgroundColor: fg }]} />
       <Text style={[type.label, { color: fg }]}>{label}</Text>
-    </View>
-  );
-}
-
-/** A labelled field row used in detail/result views. */
-export function Field({ label, value }: { label: string; value: string }) {
-  return (
-    <View style={styles.field}>
-      <Text style={[type.overline, styles.fieldLabel]}>{label.toUpperCase()}</Text>
-      <Text style={[type.body, { color: colors.ink }]}>{value || "—"}</Text>
     </View>
   );
 }
@@ -77,12 +58,6 @@ const styles = StyleSheet.create({
     padding: space.md + 2,
     ...shadow.card,
   },
-  tag: {
-    backgroundColor: colors.paperDeep,
-    borderRadius: radius.pill,
-    paddingHorizontal: space.sm + 2,
-    paddingVertical: space.xs + 1,
-  },
   badge: {
     flexDirection: "row",
     alignItems: "center",
@@ -93,11 +68,12 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
   },
   dot: { width: 8, height: 8, borderRadius: 4 },
-  field: { gap: space.xs },
-  fieldLabel: { color: colors.inkFaint },
   button: {
     borderRadius: radius.md,
-    paddingVertical: space.md + 1,
+    // Tall, finger-obvious target — ~56pt, comfortably above the 44pt minimum
+    // for the gloved/tired hands this is built for.
+    minHeight: 56,
+    paddingVertical: space.md + 3,
     paddingHorizontal: space.lg,
     alignItems: "center",
     justifyContent: "center",
