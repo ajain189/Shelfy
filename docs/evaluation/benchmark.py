@@ -1,5 +1,5 @@
 """
-ShelfSight evaluation, synthetic benchmark generator.
+Shelfy evaluation, synthetic benchmark generator.
 
 WHAT THIS IS (read first):
   This builds a SYNTHETIC, labeled benchmark of food-donation intake cases, the

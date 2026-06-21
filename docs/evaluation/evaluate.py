@@ -1,5 +1,5 @@
 """
-ShelfSight evaluation harness.
+Shelfy evaluation harness.
 
 Scores the intake pipeline's decisions against the synthetic benchmark and
 writes (1) results.json with every metric and (2) the charts in charts/.

@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="assets/logo-mark.png" alt="ShelfSight" width="140" />
+<img src="assets/logo-mark.png" alt="Shelfy" width="140" />
 
-# ShelfSight
+# Shelfy
 
 **The pantry shelf, read for you.**
 
@@ -30,9 +30,9 @@ There are roughly 60,000 food pantries in the United States, and most run on vol
 
 The people this hurts most are the ones who can least afford a mistake: a parent of a child with a peanut allergy, someone managing diabetes, a senior with a religious dietary need. Picture a grandson searching a pantry shelf for something his diabetic grandmother can safely eat. The information he needs exists, but it is scattered across labels no one has time to read.
 
-## What ShelfSight does
+## What Shelfy does
 
-As a volunteer sorts donations, they hold each item up to the phone camera. ShelfSight:
+As a volunteer sorts donations, they hold each item up to the phone camera. Shelfy:
 
 1. **Reads the label** with a vision model, pulling brand, product, ingredients, and dates.
 2. **Tags allergens** against the FDA "big 9," with the ingredient words that justify each tag.
@@ -45,7 +45,7 @@ A volunteer confirms every item before it reaches the shelf. Cleared items becom
 
 Sorting donations by hand is slow and error-prone. To do it properly a volunteer would have to read every ingredient list, decode every date code, and cross-check every brand against the federal recall database, for hundreds of items, with a line out the door. In practice that check never happens, so expired and recalled food reaches the shelf.
 
-ShelfSight does that work automatically in a few seconds per item:
+Shelfy does that work automatically in a few seconds per item:
 
 - **It cuts the time to triage a donation from roughly a minute of manual reading and lookup to a few seconds.** A volunteer reviews the result instead of doing the research.
 - **It surfaces recalls a pantry would otherwise never see.** Every scan queries the live FDA recall feed, so a recalled jar is flagged before it goes out, not after someone gets sick.
@@ -55,7 +55,7 @@ The result is a pantry that moves faster and sends out safer food, with a volunt
 
 ## How the AI works
 
-ShelfSight is an agentic pipeline, not a single prompt. Each scan flows through perception, classification, an external tool call, and a confidence-gated decision:
+Shelfy is an agentic pipeline, not a single prompt. Each scan flows through perception, classification, an external tool call, and a confidence-gated decision:
 
 ```
   Photo of a donated item
@@ -95,7 +95,7 @@ The recall verdict reasons only over the records retrieved from openFDA and the 
 
 ## Safety by design
 
-A wrong tag is more dangerous than no tag, because it creates false confidence. ShelfSight is built so the model's mistakes do not reach a family:
+A wrong tag is more dangerous than no tag, because it creates false confidence. Shelfy is built so the model's mistakes do not reach a family:
 
 - **It never certifies food as safe.** Every screen reads *here is what the label shows, check the label to confirm.*
 - **A human clears every item.** This is enforced in the database, not just the interface: an item under an active recall cannot be cleared onto the shelf no matter what calls the function.

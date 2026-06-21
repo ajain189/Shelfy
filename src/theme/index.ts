@@ -1,5 +1,5 @@
 /**
- * ShelfSight design tokens, warm editorial, not "AI teal-on-white."
+ * Shelfy design tokens, warm editorial, not "AI teal-on-white."
  *
  * Direction: a warm-paper base, deep warm ink, and a single sophisticated clay
  * accent for chrome (buttons, the active tab, links). The accent is deliberately
