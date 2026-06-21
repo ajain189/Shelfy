@@ -14,13 +14,13 @@
       "difficulty": "clean",
       "model": {
         "pred_allergens": [],
-        "date_ok": false,
+        "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.731,
+        "confidence": 0.942,
         "legibility_note": false,
         "allergen_correct": true,
-        "date_correct": false,
-        "fully_correct": false
+        "date_correct": true,
+        "fully_correct": true
       }
     },
     {
@@ -40,7 +40,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.948,
+        "confidence": 0.963,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -58,13 +58,13 @@
       "difficulty": "clean",
       "model": {
         "pred_allergens": [],
-        "date_ok": false,
+        "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.828,
+        "confidence": 0.922,
         "legibility_note": false,
         "allergen_correct": true,
-        "date_correct": false,
-        "fully_correct": false
+        "date_correct": true,
+        "fully_correct": true
       }
     },
     {
@@ -84,7 +84,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.984,
+        "confidence": 0.944,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -108,7 +108,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.958,
+        "confidence": 0.951,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -132,7 +132,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.966,
+        "confidence": 0.891,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -152,7 +152,7 @@
         "pred_allergens": [],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.93,
+        "confidence": 0.99,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -172,7 +172,7 @@
         "pred_allergens": [],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.933,
+        "confidence": 0.932,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -192,7 +192,7 @@
         "pred_allergens": [],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.922,
+        "confidence": 0.99,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -212,7 +212,7 @@
         "pred_allergens": [],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.968,
+        "confidence": 0.936,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -232,7 +232,7 @@
         "pred_allergens": [],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.96,
+        "confidence": 0.851,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -256,7 +256,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.941,
+        "confidence": 0.923,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -282,7 +282,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.863,
+        "confidence": 0.892,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -308,7 +308,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.928,
+        "confidence": 0.739,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -336,7 +336,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.809,
+        "confidence": 0.816,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -360,13 +360,13 @@
           "peanuts",
           "soybeans"
         ],
-        "date_ok": true,
+        "date_ok": false,
         "pred_recalled": false,
-        "confidence": 0.817,
-        "legibility_note": false,
+        "confidence": 0.646,
+        "legibility_note": true,
         "allergen_correct": true,
-        "date_correct": true,
-        "fully_correct": true
+        "date_correct": false,
+        "fully_correct": false
       }
     },
     {
@@ -390,13 +390,13 @@
           "milk",
           "soybeans"
         ],
-        "date_ok": true,
+        "date_ok": false,
         "pred_recalled": false,
-        "confidence": 0.814,
-        "legibility_note": false,
+        "confidence": 0.615,
+        "legibility_note": true,
         "allergen_correct": true,
-        "date_correct": true,
-        "fully_correct": true
+        "date_correct": false,
+        "fully_correct": false
       }
     },
     {
@@ -416,7 +416,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.809,
+        "confidence": 0.903,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -438,13 +438,13 @@
         "pred_allergens": [
           "sesame"
         ],
-        "date_ok": false,
+        "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.674,
-        "legibility_note": true,
+        "confidence": 0.782,
+        "legibility_note": false,
         "allergen_correct": true,
-        "date_correct": false,
-        "fully_correct": false
+        "date_correct": true,
+        "fully_correct": true
       }
     },
     {
@@ -464,7 +464,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.869,
+        "confidence": 0.807,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -488,7 +488,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.953,
+        "confidence": 0.99,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -510,13 +510,13 @@
         "pred_allergens": [
           "wheat"
         ],
-        "date_ok": false,
+        "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.619,
-        "legibility_note": true,
+        "confidence": 0.768,
+        "legibility_note": false,
         "allergen_correct": true,
-        "date_correct": false,
-        "fully_correct": false
+        "date_correct": true,
+        "fully_correct": true
       }
     },
     {
@@ -536,13 +536,13 @@
           "milk",
           "soybeans"
         ],
-        "date_ok": true,
+        "date_ok": false,
         "pred_recalled": false,
-        "confidence": 0.704,
-        "legibility_note": false,
+        "confidence": 0.743,
+        "legibility_note": true,
         "allergen_correct": true,
-        "date_correct": true,
-        "fully_correct": true
+        "date_correct": false,
+        "fully_correct": false
       }
     },
     {
@@ -562,7 +562,7 @@
         ],
         "date_ok": true,
         "pred_recalled": true,
-        "confidence": 0.674,
+        "confidence": 0.854,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -588,7 +588,7 @@
         ],
         "date_ok": true,
         "pred_recalled": true,
-        "confidence": 0.753,
+        "confidence": 0.81,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -606,13 +606,13 @@
       "difficulty": "hard",
       "model": {
         "pred_allergens": [],
-        "date_ok": false,
+        "date_ok": true,
         "pred_recalled": true,
-        "confidence": 0.592,
-        "legibility_note": true,
+        "confidence": 0.701,
+        "legibility_note": false,
         "allergen_correct": true,
-        "date_correct": false,
-        "fully_correct": false
+        "date_correct": true,
+        "fully_correct": true
       }
     },
     {
@@ -628,7 +628,7 @@
         "pred_allergens": [],
         "date_ok": false,
         "pred_recalled": false,
-        "confidence": 0.05,
+        "confidence": 0.204,
         "legibility_note": true,
         "allergen_correct": true,
         "date_correct": false,
@@ -652,7 +652,7 @@
         ],
         "date_ok": false,
         "pred_recalled": false,
-        "confidence": 0.19,
+        "confidence": 0.281,
         "legibility_note": true,
         "allergen_correct": true,
         "date_correct": false,
@@ -671,14 +671,12 @@
       "truth_date": "",
       "difficulty": "severe",
       "model": {
-        "pred_allergens": [
-          "wheat"
-        ],
+        "pred_allergens": [],
         "date_ok": false,
         "pred_recalled": false,
-        "confidence": 0.267,
+        "confidence": 0.05,
         "legibility_note": true,
-        "allergen_correct": true,
+        "allergen_correct": false,
         "date_correct": false,
         "fully_correct": false
       }
@@ -700,7 +698,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.976,
+        "confidence": 0.849,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -724,7 +722,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.955,
+        "confidence": 0.917,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -748,7 +746,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.897,
+        "confidence": 0.979,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -760,19 +758,19 @@
       "product": "Black-Eyed Peas",
       "brand": "Bush's",
       "truth_allergens": [],
-      "truth_expired": false,
-      "truth_recalled": true,
-      "truth_date": "2028-06-01",
+      "truth_expired": true,
+      "truth_recalled": false,
+      "truth_date": "2024-10-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [],
-        "date_ok": true,
-        "pred_recalled": true,
-        "confidence": 0.933,
+        "date_ok": false,
+        "pred_recalled": false,
+        "confidence": 0.696,
         "legibility_note": false,
         "allergen_correct": true,
-        "date_correct": true,
-        "fully_correct": true
+        "date_correct": false,
+        "fully_correct": false
       }
     },
     {
@@ -785,7 +783,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2027-12-01",
+      "truth_date": "2028-06-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [
@@ -794,7 +792,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.922,
+        "confidence": 0.88,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -808,13 +806,13 @@
       "truth_allergens": [],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2028-03-01",
+      "truth_date": "2027-12-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.94,
+        "confidence": 0.907,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -829,20 +827,18 @@
         "tree_nuts"
       ],
       "truth_expired": false,
-      "truth_recalled": false,
-      "truth_date": "2027-12-01",
+      "truth_recalled": true,
+      "truth_date": "2028-03-01",
       "difficulty": "clean",
       "model": {
-        "pred_allergens": [
-          "tree_nuts"
-        ],
+        "pred_allergens": [],
         "date_ok": true,
-        "pred_recalled": false,
-        "confidence": 0.943,
+        "pred_recalled": true,
+        "confidence": 0.685,
         "legibility_note": false,
-        "allergen_correct": true,
+        "allergen_correct": false,
         "date_correct": true,
-        "fully_correct": true
+        "fully_correct": false
       }
     },
     {
@@ -852,17 +848,17 @@
       "truth_allergens": [],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2027-05-01",
+      "truth_date": "2027-12-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [],
-        "date_ok": true,
+        "date_ok": false,
         "pred_recalled": false,
-        "confidence": 0.917,
+        "confidence": 0.743,
         "legibility_note": false,
         "allergen_correct": true,
-        "date_correct": true,
-        "fully_correct": true
+        "date_correct": false,
+        "fully_correct": false
       }
     },
     {
@@ -875,7 +871,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2028-03-01",
+      "truth_date": "2027-05-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [
@@ -884,7 +880,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.932,
+        "confidence": 0.928,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -902,7 +898,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2027-12-01",
+      "truth_date": "2028-03-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [
@@ -912,7 +908,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.901,
+        "confidence": 0.924,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -929,7 +925,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2027-04-01",
+      "truth_date": "2027-12-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [
@@ -938,7 +934,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.949,
+        "confidence": 0.953,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -951,14 +947,14 @@
       "brand": "Old El Paso",
       "truth_allergens": [],
       "truth_expired": false,
-      "truth_recalled": false,
-      "truth_date": "2028-08-01",
+      "truth_recalled": true,
+      "truth_date": "2027-04-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [],
         "date_ok": true,
-        "pred_recalled": false,
-        "confidence": 0.952,
+        "pred_recalled": true,
+        "confidence": 0.928,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -973,16 +969,16 @@
         "wheat"
       ],
       "truth_expired": false,
-      "truth_recalled": false,
-      "truth_date": "2027-03-01",
+      "truth_recalled": true,
+      "truth_date": "2028-08-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [
           "wheat"
         ],
         "date_ok": true,
-        "pred_recalled": false,
-        "confidence": 0.94,
+        "pred_recalled": true,
+        "confidence": 0.862,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -998,7 +994,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2027-11-01",
+      "truth_date": "2027-03-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [
@@ -1006,7 +1002,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.99,
+        "confidence": 0.97,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1024,7 +1020,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2028-07-01",
+      "truth_date": "2027-11-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [
@@ -1034,7 +1030,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.93,
+        "confidence": 0.9,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1050,7 +1046,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2027-11-01",
+      "truth_date": "2028-07-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [
@@ -1058,7 +1054,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.905,
+        "confidence": 0.937,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1072,13 +1068,13 @@
       "truth_allergens": [],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2027-03-01",
+      "truth_date": "2027-11-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.921,
+        "confidence": 0.945,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1092,13 +1088,13 @@
       "truth_allergens": [],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2027-12-01",
+      "truth_date": "2027-03-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.967,
+        "confidence": 0.99,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1114,7 +1110,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2027-02-01",
+      "truth_date": "2027-12-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [
@@ -1122,7 +1118,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.955,
+        "confidence": 0.937,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1139,7 +1135,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2027-05-01",
+      "truth_date": "2027-02-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [
@@ -1148,7 +1144,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.904,
+        "confidence": 0.914,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1164,7 +1160,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2028-12-01",
+      "truth_date": "2027-05-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [
@@ -1172,7 +1168,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.99,
+        "confidence": 0.854,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1188,7 +1184,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2027-02-01",
+      "truth_date": "2028-12-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [
@@ -1196,7 +1192,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.95,
+        "confidence": 0.94,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1211,16 +1207,16 @@
         "shellfish"
       ],
       "truth_expired": false,
-      "truth_recalled": false,
-      "truth_date": "2028-09-01",
+      "truth_recalled": true,
+      "truth_date": "2027-02-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [
           "shellfish"
         ],
         "date_ok": true,
-        "pred_recalled": false,
-        "confidence": 0.963,
+        "pred_recalled": true,
+        "confidence": 0.925,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1233,14 +1229,14 @@
       "brand": "Bush's",
       "truth_allergens": [],
       "truth_expired": false,
-      "truth_recalled": false,
-      "truth_date": "2028-10-01",
+      "truth_recalled": true,
+      "truth_date": "2028-09-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [],
         "date_ok": true,
-        "pred_recalled": false,
-        "confidence": 0.906,
+        "pred_recalled": true,
+        "confidence": 0.866,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1255,9 +1251,9 @@
         "wheat",
         "milk"
       ],
-      "truth_expired": true,
-      "truth_recalled": false,
-      "truth_date": "2024-07-01",
+      "truth_expired": false,
+      "truth_recalled": true,
+      "truth_date": "2028-10-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [
@@ -1265,8 +1261,8 @@
           "milk"
         ],
         "date_ok": true,
-        "pred_recalled": false,
-        "confidence": 0.934,
+        "pred_recalled": true,
+        "confidence": 0.99,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1278,15 +1274,15 @@
       "product": "Refried Beans",
       "brand": "Rosarita",
       "truth_allergens": [],
-      "truth_expired": false,
+      "truth_expired": true,
       "truth_recalled": false,
-      "truth_date": "2027-12-01",
+      "truth_date": "2024-07-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.893,
+        "confidence": 0.914,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1300,9 +1296,9 @@
       "truth_allergens": [
         "tree_nuts"
       ],
-      "truth_expired": true,
+      "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2024-08-01",
+      "truth_date": "2027-12-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [
@@ -1310,7 +1306,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.953,
+        "confidence": 0.977,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1322,19 +1318,19 @@
       "product": "Canned Corn",
       "brand": "Del Monte",
       "truth_allergens": [],
-      "truth_expired": false,
+      "truth_expired": true,
       "truth_recalled": false,
-      "truth_date": "2028-01-01",
+      "truth_date": "2024-08-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [],
-        "date_ok": true,
+        "date_ok": false,
         "pred_recalled": false,
-        "confidence": 0.937,
+        "confidence": 0.818,
         "legibility_note": false,
         "allergen_correct": true,
-        "date_correct": true,
-        "fully_correct": true
+        "date_correct": false,
+        "fully_correct": false
       }
     },
     {
@@ -1346,21 +1342,20 @@
         "peanuts"
       ],
       "truth_expired": false,
-      "truth_recalled": false,
-      "truth_date": "2027-12-01",
+      "truth_recalled": true,
+      "truth_date": "2028-01-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [
-          "tree_nuts",
           "peanuts"
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.99,
+        "confidence": 0.726,
         "legibility_note": false,
-        "allergen_correct": true,
+        "allergen_correct": false,
         "date_correct": true,
-        "fully_correct": true
+        "fully_correct": false
       }
     },
     {
@@ -1374,7 +1369,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2027-08-01",
+      "truth_date": "2027-12-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [
@@ -1384,7 +1379,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.959,
+        "confidence": 0.966,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1401,7 +1396,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2027-07-01",
+      "truth_date": "2027-08-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [
@@ -1410,7 +1405,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.952,
+        "confidence": 0.951,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1423,14 +1418,14 @@
       "brand": "Old El Paso",
       "truth_allergens": [],
       "truth_expired": false,
-      "truth_recalled": false,
-      "truth_date": "2027-03-01",
+      "truth_recalled": true,
+      "truth_date": "2027-07-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [],
         "date_ok": true,
-        "pred_recalled": false,
-        "confidence": 0.972,
+        "pred_recalled": true,
+        "confidence": 0.904,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1446,7 +1441,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2027-11-01",
+      "truth_date": "2027-03-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [
@@ -1454,7 +1449,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.939,
+        "confidence": 0.929,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1469,16 +1464,16 @@
         "soybeans"
       ],
       "truth_expired": false,
-      "truth_recalled": true,
-      "truth_date": "2027-02-01",
+      "truth_recalled": false,
+      "truth_date": "2027-11-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [
           "soybeans"
         ],
         "date_ok": true,
-        "pred_recalled": true,
-        "confidence": 0.966,
+        "pred_recalled": false,
+        "confidence": 0.931,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1495,8 +1490,8 @@
         "egg"
       ],
       "truth_expired": false,
-      "truth_recalled": false,
-      "truth_date": "2028-12-01",
+      "truth_recalled": true,
+      "truth_date": "2027-02-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [
@@ -1505,8 +1500,8 @@
           "egg"
         ],
         "date_ok": true,
-        "pred_recalled": false,
-        "confidence": 0.954,
+        "pred_recalled": true,
+        "confidence": 0.945,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1530,7 +1525,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.965,
+        "confidence": 0.881,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1542,15 +1537,15 @@
       "product": "Apple Juice",
       "brand": "Juicy Juice",
       "truth_allergens": [],
-      "truth_expired": true,
+      "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2024-10-01",
+      "truth_date": "2028-12-01",
       "difficulty": "clean",
       "model": {
         "pred_allergens": [],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.96,
+        "confidence": 0.944,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1564,9 +1559,9 @@
       "truth_allergens": [
         "soybeans"
       ],
-      "truth_expired": false,
+      "truth_expired": true,
       "truth_recalled": false,
-      "truth_date": "2027-05-01",
+      "truth_date": "2024-10-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [
@@ -1574,7 +1569,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.827,
+        "confidence": 0.789,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1592,7 +1587,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2028-02-01",
+      "truth_date": "2027-05-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [
@@ -1602,7 +1597,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.911,
+        "confidence": 0.881,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1618,7 +1613,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2027-03-01",
+      "truth_date": "2028-02-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [
@@ -1626,7 +1621,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.868,
+        "confidence": 0.767,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1640,17 +1635,17 @@
       "truth_allergens": [],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2028-02-01",
+      "truth_date": "2027-03-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [],
-        "date_ok": true,
+        "date_ok": false,
         "pred_recalled": false,
-        "confidence": 0.879,
-        "legibility_note": false,
+        "confidence": 0.589,
+        "legibility_note": true,
         "allergen_correct": true,
-        "date_correct": true,
-        "fully_correct": true
+        "date_correct": false,
+        "fully_correct": false
       }
     },
     {
@@ -1659,18 +1654,18 @@
       "brand": "Contadina",
       "truth_allergens": [],
       "truth_expired": false,
-      "truth_recalled": false,
-      "truth_date": "2027-11-01",
+      "truth_recalled": true,
+      "truth_date": "2028-02-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [],
-        "date_ok": false,
-        "pred_recalled": false,
-        "confidence": 0.657,
-        "legibility_note": true,
+        "date_ok": true,
+        "pred_recalled": true,
+        "confidence": 0.674,
+        "legibility_note": false,
         "allergen_correct": true,
-        "date_correct": false,
-        "fully_correct": false
+        "date_correct": true,
+        "fully_correct": true
       }
     },
     {
@@ -1682,7 +1677,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2028-12-01",
+      "truth_date": "2027-11-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [
@@ -1690,7 +1685,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.797,
+        "confidence": 0.842,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1707,7 +1702,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": true,
-      "truth_date": "2027-09-01",
+      "truth_date": "2028-12-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [
@@ -1716,7 +1711,7 @@
         ],
         "date_ok": true,
         "pred_recalled": true,
-        "confidence": 0.791,
+        "confidence": 0.718,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1730,9 +1725,9 @@
       "truth_allergens": [
         "wheat"
       ],
-      "truth_expired": false,
+      "truth_expired": true,
       "truth_recalled": false,
-      "truth_date": "2028-01-01",
+      "truth_date": "2024-02-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [
@@ -1740,7 +1735,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.904,
+        "confidence": 0.76,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1756,7 +1751,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2028-02-01",
+      "truth_date": "2028-09-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [
@@ -1764,7 +1759,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.978,
+        "confidence": 0.732,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1780,7 +1775,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2028-07-01",
+      "truth_date": "2027-10-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [
@@ -1788,7 +1783,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.773,
+        "confidence": 0.809,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1802,13 +1797,13 @@
       "truth_allergens": [],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2027-08-01",
+      "truth_date": "2028-02-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.796,
+        "confidence": 0.883,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1824,8 +1819,8 @@
         "milk"
       ],
       "truth_expired": false,
-      "truth_recalled": false,
-      "truth_date": "2027-06-01",
+      "truth_recalled": true,
+      "truth_date": "2028-07-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [
@@ -1833,8 +1828,8 @@
           "milk"
         ],
         "date_ok": true,
-        "pred_recalled": false,
-        "confidence": 0.844,
+        "pred_recalled": true,
+        "confidence": 0.91,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1848,17 +1843,17 @@
       "truth_allergens": [],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2028-11-01",
+      "truth_date": "2027-08-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [],
-        "date_ok": false,
+        "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.669,
-        "legibility_note": true,
+        "confidence": 0.832,
+        "legibility_note": false,
         "allergen_correct": true,
-        "date_correct": false,
-        "fully_correct": false
+        "date_correct": true,
+        "fully_correct": true
       }
     },
     {
@@ -1870,19 +1865,19 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2028-01-01",
+      "truth_date": "2027-06-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [
           "tree_nuts"
         ],
-        "date_ok": true,
+        "date_ok": false,
         "pred_recalled": false,
-        "confidence": 0.835,
-        "legibility_note": false,
+        "confidence": 0.814,
+        "legibility_note": true,
         "allergen_correct": true,
-        "date_correct": true,
-        "fully_correct": true
+        "date_correct": false,
+        "fully_correct": false
       }
     },
     {
@@ -1898,7 +1893,7 @@
         "pred_allergens": [],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.813,
+        "confidence": 0.897,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1913,9 +1908,9 @@
         "tree_nuts",
         "peanuts"
       ],
-      "truth_expired": true,
+      "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2024-03-01",
+      "truth_date": "2028-01-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [
@@ -1924,7 +1919,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.789,
+        "confidence": 0.884,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1942,7 +1937,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2028-08-01",
+      "truth_date": "2028-11-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [
@@ -1952,7 +1947,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.884,
+        "confidence": 0.842,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1967,9 +1962,9 @@
         "tree_nuts",
         "soybeans"
       ],
-      "truth_expired": false,
+      "truth_expired": true,
       "truth_recalled": false,
-      "truth_date": "2027-12-01",
+      "truth_date": "2024-03-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [
@@ -1978,7 +1973,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.762,
+        "confidence": 0.871,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -1991,18 +1986,18 @@
       "brand": "Old El Paso",
       "truth_allergens": [],
       "truth_expired": false,
-      "truth_recalled": false,
-      "truth_date": "2027-10-01",
+      "truth_recalled": true,
+      "truth_date": "2028-08-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [],
-        "date_ok": true,
-        "pred_recalled": false,
-        "confidence": 0.804,
-        "legibility_note": false,
+        "date_ok": false,
+        "pred_recalled": true,
+        "confidence": 0.612,
+        "legibility_note": true,
         "allergen_correct": true,
-        "date_correct": true,
-        "fully_correct": true
+        "date_correct": false,
+        "fully_correct": false
       }
     },
     {
@@ -2013,16 +2008,16 @@
         "wheat"
       ],
       "truth_expired": false,
-      "truth_recalled": false,
-      "truth_date": "2028-05-01",
+      "truth_recalled": true,
+      "truth_date": "2027-12-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [
           "wheat"
         ],
         "date_ok": true,
-        "pred_recalled": false,
-        "confidence": 0.892,
+        "pred_recalled": true,
+        "confidence": 0.828,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -2038,7 +2033,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2028-12-01",
+      "truth_date": "2027-10-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [
@@ -2046,7 +2041,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.952,
+        "confidence": 0.753,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -2063,8 +2058,8 @@
         "egg"
       ],
       "truth_expired": false,
-      "truth_recalled": false,
-      "truth_date": "2028-02-01",
+      "truth_recalled": true,
+      "truth_date": "2028-05-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [
@@ -2073,8 +2068,8 @@
           "egg"
         ],
         "date_ok": true,
-        "pred_recalled": false,
-        "confidence": 0.813,
+        "pred_recalled": true,
+        "confidence": 0.866,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -2090,19 +2085,17 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2027-04-01",
+      "truth_date": "2028-12-01",
       "difficulty": "hard",
       "model": {
-        "pred_allergens": [
-          "sesame"
-        ],
+        "pred_allergens": [],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.891,
-        "legibility_note": false,
-        "allergen_correct": true,
+        "confidence": 0.677,
+        "legibility_note": true,
+        "allergen_correct": false,
         "date_correct": true,
-        "fully_correct": true
+        "fully_correct": false
       }
     },
     {
@@ -2111,14 +2104,14 @@
       "brand": "Juicy Juice",
       "truth_allergens": [],
       "truth_expired": false,
-      "truth_recalled": false,
-      "truth_date": "2027-03-01",
+      "truth_recalled": true,
+      "truth_date": "2028-02-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [],
         "date_ok": true,
-        "pred_recalled": false,
-        "confidence": 0.946,
+        "pred_recalled": true,
+        "confidence": 0.755,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -2132,13 +2125,13 @@
       "truth_allergens": [],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2028-01-01",
+      "truth_date": "2027-04-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.74,
+        "confidence": 0.824,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -2153,16 +2146,16 @@
         "wheat"
       ],
       "truth_expired": false,
-      "truth_recalled": false,
-      "truth_date": "2027-07-01",
+      "truth_recalled": true,
+      "truth_date": "2027-03-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [
           "wheat"
         ],
         "date_ok": true,
-        "pred_recalled": false,
-        "confidence": 0.763,
+        "pred_recalled": true,
+        "confidence": 0.748,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -2179,7 +2172,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2028-11-01",
+      "truth_date": "2028-01-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [
@@ -2188,7 +2181,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.901,
+        "confidence": 0.874,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -2203,16 +2196,16 @@
         "wheat"
       ],
       "truth_expired": false,
-      "truth_recalled": false,
-      "truth_date": "2027-09-01",
+      "truth_recalled": true,
+      "truth_date": "2027-07-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [
           "wheat"
         ],
         "date_ok": true,
-        "pred_recalled": false,
-        "confidence": 0.94,
+        "pred_recalled": true,
+        "confidence": 0.866,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -2228,7 +2221,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2028-09-01",
+      "truth_date": "2028-11-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [
@@ -2236,7 +2229,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.698,
+        "confidence": 0.956,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -2252,7 +2245,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2027-11-01",
+      "truth_date": "2027-09-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [
@@ -2260,7 +2253,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.788,
+        "confidence": 0.804,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -2274,13 +2267,13 @@
       "truth_allergens": [],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2028-08-01",
+      "truth_date": "2028-09-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.832,
+        "confidence": 0.849,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -2297,7 +2290,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2027-06-01",
+      "truth_date": "2027-11-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [
@@ -2306,7 +2299,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.823,
+        "confidence": 0.821,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -2320,13 +2313,13 @@
       "truth_allergens": [],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2027-05-01",
+      "truth_date": "2028-08-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [],
         "date_ok": false,
         "pred_recalled": false,
-        "confidence": 0.503,
+        "confidence": 0.694,
         "legibility_note": true,
         "allergen_correct": true,
         "date_correct": false,
@@ -2342,7 +2335,7 @@
       ],
       "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2027-03-01",
+      "truth_date": "2027-06-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [
@@ -2350,7 +2343,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.79,
+        "confidence": 0.959,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -2362,15 +2355,15 @@
       "product": "Canned Corn",
       "brand": "Del Monte",
       "truth_allergens": [],
-      "truth_expired": true,
-      "truth_recalled": false,
-      "truth_date": "2024-02-01",
+      "truth_expired": false,
+      "truth_recalled": true,
+      "truth_date": "2027-05-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [],
         "date_ok": true,
-        "pred_recalled": false,
-        "confidence": 0.83,
+        "pred_recalled": true,
+        "confidence": 0.717,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -2385,21 +2378,20 @@
         "tree_nuts",
         "peanuts"
       ],
-      "truth_expired": true,
+      "truth_expired": false,
       "truth_recalled": false,
-      "truth_date": "2024-10-01",
+      "truth_date": "2027-03-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [
-          "tree_nuts",
           "peanuts"
         ],
-        "date_ok": false,
+        "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.574,
+        "confidence": 0.663,
         "legibility_note": true,
-        "allergen_correct": true,
-        "date_correct": false,
+        "allergen_correct": false,
+        "date_correct": true,
         "fully_correct": false
       }
     },
@@ -2412,9 +2404,9 @@
         "milk",
         "egg"
       ],
-      "truth_expired": false,
+      "truth_expired": true,
       "truth_recalled": false,
-      "truth_date": "2028-10-01",
+      "truth_date": "2024-02-01",
       "difficulty": "hard",
       "model": {
         "pred_allergens": [
@@ -2424,7 +2416,7 @@
         ],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.768,
+        "confidence": 0.84,
         "legibility_note": false,
         "allergen_correct": true,
         "date_correct": true,
@@ -2436,19 +2428,19 @@
       "product": "Canned Corn",
       "brand": "Del Monte",
       "truth_allergens": [],
-      "truth_expired": false,
+      "truth_expired": true,
       "truth_recalled": false,
       "truth_date": "",
       "difficulty": "severe",
       "model": {
         "pred_allergens": [],
-        "date_ok": true,
+        "date_ok": false,
         "pred_recalled": false,
-        "confidence": 0.403,
+        "confidence": 0.317,
         "legibility_note": true,
         "allergen_correct": true,
-        "date_correct": true,
-        "fully_correct": true
+        "date_correct": false,
+        "fully_correct": false
       }
     },
     {
@@ -2465,15 +2457,14 @@
       "difficulty": "severe",
       "model": {
         "pred_allergens": [
-          "tree_nuts",
-          "peanuts"
+          "tree_nuts"
         ],
-        "date_ok": false,
+        "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.188,
+        "confidence": 0.422,
         "legibility_note": true,
-        "allergen_correct": true,
-        "date_correct": false,
+        "allergen_correct": false,
+        "date_correct": true,
         "fully_correct": false
       }
     },
@@ -2497,7 +2488,7 @@
         ],
         "date_ok": false,
         "pred_recalled": false,
-        "confidence": 0.438,
+        "confidence": 0.293,
         "legibility_note": true,
         "allergen_correct": false,
         "date_correct": false,
@@ -2522,7 +2513,7 @@
         ],
         "date_ok": false,
         "pred_recalled": false,
-        "confidence": 0.113,
+        "confidence": 0.053,
         "legibility_note": true,
         "allergen_correct": false,
         "date_correct": false,
@@ -2534,7 +2525,7 @@
       "product": "Pinto Beans",
       "brand": "Old El Paso",
       "truth_allergens": [],
-      "truth_expired": false,
+      "truth_expired": true,
       "truth_recalled": false,
       "truth_date": "",
       "difficulty": "severe",
@@ -2542,7 +2533,7 @@
         "pred_allergens": [],
         "date_ok": false,
         "pred_recalled": false,
-        "confidence": 0.323,
+        "confidence": 0.638,
         "legibility_note": true,
         "allergen_correct": true,
         "date_correct": false,
@@ -2556,7 +2547,7 @@
       "truth_allergens": [
         "wheat"
       ],
-      "truth_expired": true,
+      "truth_expired": false,
       "truth_recalled": false,
       "truth_date": "",
       "difficulty": "severe",
@@ -2564,7 +2555,7 @@
         "pred_allergens": [],
         "date_ok": false,
         "pred_recalled": false,
-        "confidence": 0.323,
+        "confidence": 0.385,
         "legibility_note": true,
         "allergen_correct": false,
         "date_correct": false,
@@ -2578,7 +2569,7 @@
       "truth_allergens": [
         "soybeans"
       ],
-      "truth_expired": false,
+      "truth_expired": true,
       "truth_recalled": false,
       "truth_date": "",
       "difficulty": "severe",
@@ -2586,7 +2577,7 @@
         "pred_allergens": [],
         "date_ok": false,
         "pred_recalled": false,
-        "confidence": 0.318,
+        "confidence": 0.247,
         "legibility_note": true,
         "allergen_correct": false,
         "date_correct": false,
@@ -2602,21 +2593,22 @@
         "milk",
         "egg"
       ],
-      "truth_expired": true,
+      "truth_expired": false,
       "truth_recalled": false,
       "truth_date": "",
       "difficulty": "severe",
       "model": {
         "pred_allergens": [
           "wheat",
-          "milk"
+          "milk",
+          "egg"
         ],
-        "date_ok": true,
+        "date_ok": false,
         "pred_recalled": false,
-        "confidence": 0.186,
+        "confidence": 0.273,
         "legibility_note": true,
-        "allergen_correct": false,
-        "date_correct": true,
+        "allergen_correct": true,
+        "date_correct": false,
         "fully_correct": false
       }
     },
@@ -2627,7 +2619,7 @@
       "truth_allergens": [
         "sesame"
       ],
-      "truth_expired": false,
+      "truth_expired": true,
       "truth_recalled": false,
       "truth_date": "",
       "difficulty": "severe",
@@ -2637,7 +2629,7 @@
         ],
         "date_ok": false,
         "pred_recalled": false,
-        "confidence": 0.351,
+        "confidence": 0.324,
         "legibility_note": true,
         "allergen_correct": true,
         "date_correct": false,
@@ -2650,14 +2642,14 @@
       "brand": "Juicy Juice",
       "truth_allergens": [],
       "truth_expired": false,
-      "truth_recalled": false,
+      "truth_recalled": true,
       "truth_date": "",
       "difficulty": "severe",
       "model": {
         "pred_allergens": [],
         "date_ok": false,
-        "pred_recalled": false,
-        "confidence": 0.43,
+        "pred_recalled": true,
+        "confidence": 0.181,
         "legibility_note": true,
         "allergen_correct": true,
         "date_correct": false,
@@ -2669,15 +2661,15 @@
       "product": "Tomato Paste",
       "brand": "Contadina",
       "truth_allergens": [],
-      "truth_expired": false,
-      "truth_recalled": true,
+      "truth_expired": true,
+      "truth_recalled": false,
       "truth_date": "",
       "difficulty": "severe",
       "model": {
         "pred_allergens": [],
         "date_ok": false,
-        "pred_recalled": true,
-        "confidence": 0.173,
+        "pred_recalled": false,
+        "confidence": 0.115,
         "legibility_note": true,
         "allergen_correct": true,
         "date_correct": false,
@@ -2692,7 +2684,7 @@
         "wheat"
       ],
       "truth_expired": false,
-      "truth_recalled": false,
+      "truth_recalled": true,
       "truth_date": "",
       "difficulty": "severe",
       "model": {
@@ -2700,8 +2692,8 @@
           "wheat"
         ],
         "date_ok": false,
-        "pred_recalled": false,
-        "confidence": 0.255,
+        "pred_recalled": true,
+        "confidence": 0.347,
         "legibility_note": true,
         "allergen_correct": true,
         "date_correct": false,
@@ -2722,13 +2714,14 @@
       "difficulty": "severe",
       "model": {
         "pred_allergens": [
-          "wheat"
+          "wheat",
+          "milk"
         ],
         "date_ok": false,
         "pred_recalled": false,
-        "confidence": 0.369,
+        "confidence": 0.186,
         "legibility_note": true,
-        "allergen_correct": false,
+        "allergen_correct": true,
         "date_correct": false,
         "fully_correct": false
       }
@@ -2740,7 +2733,7 @@
       "truth_allergens": [
         "wheat"
       ],
-      "truth_expired": false,
+      "truth_expired": true,
       "truth_recalled": false,
       "truth_date": "",
       "difficulty": "severe",
@@ -2748,7 +2741,7 @@
         "pred_allergens": [],
         "date_ok": false,
         "pred_recalled": false,
-        "confidence": 0.133,
+        "confidence": 0.127,
         "legibility_note": true,
         "allergen_correct": false,
         "date_correct": false,
@@ -2767,14 +2760,12 @@
       "truth_date": "",
       "difficulty": "severe",
       "model": {
-        "pred_allergens": [
-          "fish"
-        ],
+        "pred_allergens": [],
         "date_ok": false,
         "pred_recalled": false,
-        "confidence": 0.404,
+        "confidence": 0.309,
         "legibility_note": true,
-        "allergen_correct": true,
+        "allergen_correct": false,
         "date_correct": false,
         "fully_correct": false
       }
@@ -2794,13 +2785,13 @@
         "pred_allergens": [
           "shellfish"
         ],
-        "date_ok": true,
+        "date_ok": false,
         "pred_recalled": false,
-        "confidence": 0.287,
+        "confidence": 0.285,
         "legibility_note": true,
         "allergen_correct": true,
-        "date_correct": true,
-        "fully_correct": true
+        "date_correct": false,
+        "fully_correct": false
       }
     },
     {
@@ -2816,7 +2807,7 @@
         "pred_allergens": [],
         "date_ok": true,
         "pred_recalled": false,
-        "confidence": 0.491,
+        "confidence": 0.495,
         "legibility_note": true,
         "allergen_correct": true,
         "date_correct": true,

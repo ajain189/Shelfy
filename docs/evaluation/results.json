@@ -5,45 +5,52 @@
     "note": "Synthetic benchmark. Ground truth is hand-authored or drawn from a fixed product pool; model output is a seeded realistic simulation of a vision-language pipeline. Not a real-world measurement. Reproducible: `python benchmark.py`."
   },
   "extraction": {
-    "allergen_acc": {
-      "clean": 100.0,
-      "hard": 100.0,
-      "severe": 65.0
+    "clean": {
+      "allergen": 96.0,
+      "date": 94.0
     },
-    "date_acc": {
-      "clean": 96.0,
-      "hard": 86.0,
-      "severe": 20.0
+    "hard": {
+      "allergen": 96.0,
+      "date": 86.0
+    },
+    "severe": {
+      "allergen": 60.0,
+      "date": 10.0
     }
   },
   "calibration": {
-    "acc_when_confident": 0.978021978021978,
-    "acc_when_unsure": 0.1724137931034483,
-    "share_escalated": 0.24166666666666667
+    "acc_when_confident": 0.9444444444444444,
+    "acc_when_unsure": 0.06666666666666667,
+    "share_escalated": 0.25
   },
-  "safety": {
-    "recall_detection_recall": 1.0,
-    "false_safe_rate": 0.0,
-    "misread_catch_rate": 1.0,
-    "routing": {
-      "review": 27,
-      "keep": 77,
-      "discard": 16
+  "roc": {
+    "auc": 0.9880642361111112
+  },
+  "confusion": {
+    "matrix": {
+      "Recalled": {
+        "discard": 23,
+        "review": 0,
+        "keep": 1
+      },
+      "Expired": {
+        "discard": 8,
+        "review": 9,
+        "keep": 0
+      },
+      "Safe": {
+        "discard": 0,
+        "review": 20,
+        "keep": 59
+      }
     },
-    "n_recalled": 7,
-    "n_unsafe": 19,
-    "n_misread": 26
-  },
-  "efficiency": {
-    "tokens_raw": 4800,
-    "tokens_downscaled": 1500,
-    "token_cut_pct": 68.75,
-    "per_item_cost_usd": 0.001025,
-    "cost_1000_items_usd": 1.0250000000000001
+    "recall_detection": 0.9583333333333334,
+    "false_safe_rate": 0.024390243902439025
   },
   "headline": {
-    "overall_extraction_accuracy": 0.7833333333333333,
-    "allergen_accuracy_all": 0.9416666666666667,
+    "overall_extraction_accuracy": 0.725,
+    "allergen_accuracy_all": 0.9,
+    "misread_catch_rate": 0.9696969696969697,
     "confidence_floor": 0.7
   }
 }
