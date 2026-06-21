@@ -5,7 +5,7 @@ import * as ImagePicker from "expo-image-picker";
 /**
  * Provides two ways to get a label photo:
  *   - takePhoto():  live camera (real device; the "wave the can past the phone" moment)
- *   - pickPhoto():  photo library (works in the iOS simulator, which has no camera)
+ *   - pickPhotos(): photo library, multi-select (works in the simulator, which has no camera)
  *
  * Both return a local file URI, or null if the user cancelled / denied permission.
  */
@@ -42,19 +42,21 @@ export function useImageSource() {
     }
   }, []);
 
-  const pickPhoto = useCallback(async (): Promise<string | null> => {
+  // Library picker with multi-select — returns every chosen photo's URI.
+  const pickPhotos = useCallback(async (): Promise<string[]> => {
     const perm = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (!perm.granted) {
-      Alert.alert("Photo access needed", "Enable photo access to choose a label image.");
-      return null;
+      Alert.alert("Photo access needed", "Enable photo access to choose label images.");
+      return [];
     }
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ["images"],
+      allowsMultipleSelection: true,
       quality: 1,
     });
-    if (result.canceled || !result.assets?.length) return null;
-    return result.assets[0].uri;
+    if (result.canceled || !result.assets?.length) return [];
+    return result.assets.map((a) => a.uri);
   }, []);
 
-  return { takePhoto, pickPhoto };
+  return { takePhoto, pickPhotos };
 }
