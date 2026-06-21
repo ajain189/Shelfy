@@ -1,10 +1,12 @@
 import React, { useState, useCallback } from "react";
-import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator, Image, Pressable } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
+import { Feather } from "@expo/vector-icons";
 
-import { colors, space, type, fonts } from "../theme";
+import { colors, space, type, fonts, radius } from "../theme";
 import { CollapsingScreen } from "../components/CollapsingScreen";
 import { Button, Card, SafetyBadge } from "../components/ui";
+import { PressableScale } from "../components/PressableScale";
 import { IntakeResultCard } from "../components/IntakeResultCard";
 import { useImageSource } from "../image/useImageSource";
 import { downscaleToBase64 } from "../image/processImage";
@@ -15,15 +17,16 @@ import { loadApiKey } from "../ai/apiKeyStore";
 type Phase = "idle" | "processing" | "reading" | "result" | "error";
 
 /**
- * Volunteer intake: scan a donated item → Gemini reads the label → structured
- * result on screen → add to the pantry (cleared=0; a human clears it later from
- * the Inventory tab).
+ * Volunteer intake: collect one OR MORE photos of an item (front, ingredients,
+ * date — useful for big or curved labels) → Gemini reads across all of them →
+ * one structured record → add to the pantry.
  */
 export function IntakeScreen() {
-  const { takePhoto, pickPhoto } = useImageSource();
+  const { takePhoto, pickPhotos } = useImageSource();
 
   const [keyReady, setKeyReady] = useState<boolean | null>(null);
   const [phase, setPhase] = useState<Phase>("idle");
+  const [photos, setPhotos] = useState<string[]>([]); // captured/picked image URIs
   const [statusText, setStatusText] = useState("");
   const [result, setResult] = useState<IntakeResult | null>(null);
   const [error, setError] = useState("");
@@ -34,9 +37,6 @@ export function IntakeScreen() {
     loadApiKey().then((k) => setKeyReady(k.length > 0));
   }, []);
 
-  // Re-check the key (and item count) every time the tab regains focus — so a
-  // key entered on the Settings tab takes effect when you come back here,
-  // without needing to relaunch the app.
   useFocusEffect(
     useCallback(() => {
       refreshKey();
@@ -44,31 +44,40 @@ export function IntakeScreen() {
     }, [refreshKey]),
   );
 
-  const scan = useCallback(
-    async (source: "camera" | "library") => {
-      setResult(null);
-      setSavedId(null);
-      setError("");
-      try {
-        const uri = source === "camera" ? await takePhoto() : await pickPhoto();
-        if (!uri) return;
+  const addFromCamera = useCallback(async () => {
+    const uri = await takePhoto();
+    if (uri) setPhotos((p) => [...p, uri]);
+  }, [takePhoto]);
 
-        setPhase("processing");
-        setStatusText("Preparing image…");
-        const { base64 } = await downscaleToBase64(uri);
+  const addFromLibrary = useCallback(async () => {
+    const uris = await pickPhotos();
+    if (uris.length) setPhotos((p) => [...p, ...uris]);
+  }, [pickPhotos]);
 
-        setPhase("reading");
-        setStatusText("Reading the label…");
-        const intake = await runIntake(base64);
-        setResult(intake);
-        setPhase("result");
-      } catch (e: any) {
-        setError(e?.message ?? String(e));
-        setPhase("error");
-      }
-    },
-    [takePhoto, pickPhoto],
-  );
+  const removePhoto = useCallback((idx: number) => {
+    setPhotos((p) => p.filter((_, i) => i !== idx));
+  }, []);
+
+  const analyze = useCallback(async () => {
+    if (photos.length === 0) return;
+    setResult(null);
+    setSavedId(null);
+    setError("");
+    try {
+      setPhase("processing");
+      setStatusText(photos.length > 1 ? `Preparing ${photos.length} photos…` : "Preparing image…");
+      const images = await Promise.all(photos.map((uri) => downscaleToBase64(uri).then((r) => r.base64)));
+
+      setPhase("reading");
+      setStatusText("Reading the label…");
+      const intake = await runIntake(images);
+      setResult(intake);
+      setPhase("result");
+    } catch (e: any) {
+      setError(e?.message ?? String(e));
+      setPhase("error");
+    }
+  }, [photos]);
 
   const save = useCallback(async () => {
     if (!result) return;
@@ -87,6 +96,7 @@ export function IntakeScreen() {
 
   const reset = useCallback(() => {
     setPhase("idle");
+    setPhotos([]);
     setResult(null);
     setError("");
     setSavedId(null);
@@ -113,16 +123,43 @@ export function IntakeScreen() {
         <Card style={{ gap: space.md }}>
           <Text style={type.heading}>Scan a donation</Text>
           <Text style={[type.body, { color: colors.inkSoft }]}>
-            Point the camera at a donated item. ShelfSight reads the label and builds a structured
-            record for the shelf.
+            Add a photo of the label. For big or curved labels, add a few — front, ingredients, and
+            the date — and ShelfSight reads across all of them.
           </Text>
-          <Button label="Scan a label" onPress={() => scan("camera")} disabled={noKey} />
-          <Button
-            label="Choose a photo"
-            tone="ghost"
-            onPress={() => scan("library")}
-            disabled={noKey}
-          />
+
+          {photos.length > 0 && (
+            <View style={styles.thumbRow}>
+              {photos.map((uri, i) => (
+                <View key={`${uri}-${i}`} style={styles.thumbWrap}>
+                  <Image source={{ uri }} style={styles.thumb} />
+                  <Pressable style={styles.thumbX} onPress={() => removePhoto(i)} hitSlop={8}>
+                    <Feather name="x" size={13} color="#FFFFFF" />
+                  </Pressable>
+                </View>
+              ))}
+            </View>
+          )}
+
+          <View style={styles.addRow}>
+            <PressableScale style={styles.addBtn} onPress={addFromCamera} disabled={noKey}>
+              <Feather name="camera" size={16} color={colors.clay} />
+              <Text style={[type.label, { color: colors.clay }]}>
+                {photos.length ? "Add photo" : "Scan a label"}
+              </Text>
+            </PressableScale>
+            <PressableScale style={styles.addBtn} onPress={addFromLibrary} disabled={noKey}>
+              <Feather name="image" size={16} color={colors.clay} />
+              <Text style={[type.label, { color: colors.clay }]}>Choose photos</Text>
+            </PressableScale>
+          </View>
+
+          {photos.length > 0 && (
+            <Button
+              label={`Analyze item (${photos.length} photo${photos.length === 1 ? "" : "s"})`}
+              onPress={analyze}
+              disabled={noKey}
+            />
+          )}
         </Card>
       )}
 
@@ -170,8 +207,36 @@ export function IntakeScreen() {
   );
 }
 
+const THUMB = 64;
+
 const styles = StyleSheet.create({
   center: { alignItems: "center", justifyContent: "center" },
+  thumbRow: { flexDirection: "row", flexWrap: "wrap", gap: space.sm },
+  thumbWrap: { width: THUMB, height: THUMB },
+  thumb: { width: THUMB, height: THUMB, borderRadius: radius.sm, backgroundColor: colors.paperDeep },
+  thumbX: {
+    position: "absolute",
+    top: -6,
+    right: -6,
+    width: 22,
+    height: 22,
+    borderRadius: 11,
+    backgroundColor: colors.ink,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  addRow: { flexDirection: "row", gap: space.sm },
+  addBtn: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: space.xs + 1,
+    paddingVertical: space.md,
+    borderRadius: radius.md,
+    borderWidth: 1.5,
+    borderColor: colors.lineStrong,
+  },
   footer: {
     marginTop: space.sm,
     paddingTop: space.md,
