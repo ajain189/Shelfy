@@ -25,7 +25,33 @@ import { loadApiKey } from "./apiKeyStore";
  * The model's text is the JSON string; we parse + normalize it.
  */
 
-export const MODEL = "gemini-2.5-pro";
+// gemini-2.5-flash has a real free tier (10 RPM / ~250 RPD); gemini-2.5-pro's
+// free tier is now 0, so a free key returns 429 RESOURCE_EXHAUSTED on Pro.
+// Flash is plenty for label OCR + structured extraction.
+export const MODEL = "gemini-2.5-flash";
+
+/** Turn a raw Gemini API error into a short, human-readable message. */
+function friendlyApiError(e: any): string {
+  const msg = String(e?.message ?? e ?? "");
+  // Pull a retry-after hint if present ("Please retry in 39.5s").
+  const retry = msg.match(/retry in ([\d.]+)s/i)?.[1];
+
+  if (/RESOURCE_EXHAUSTED|"?code"?:\s*429|quota/i.test(msg)) {
+    const wait = retry ? ` Try again in about ${Math.ceil(Number(retry))} seconds.` : "";
+    return `Gemini's free limit was hit for now.${wait} The free tier allows a few scans per minute — wait a moment and try again.`;
+  }
+  if (/API key not valid|API_KEY_INVALID|"?code"?:\s*400.*key/i.test(msg)) {
+    return "That Gemini API key isn't valid. Check it in the Settings tab (get a free key at aistudio.google.com/apikey).";
+  }
+  if (/PERMISSION_DENIED|"?code"?:\s*403/i.test(msg)) {
+    return "Gemini denied the request. Make sure the Generative Language API is enabled for your key's project.";
+  }
+  if (/fetch|network|timeout|ENOTFOUND|Failed to fetch/i.test(msg)) {
+    return "Couldn't reach Gemini. Check your internet connection and try again.";
+  }
+  // Fallback: a trimmed version, not the giant raw JSON blob.
+  return `Couldn't read the label: ${msg.slice(0, 140)}`;
+}
 
 const SYSTEM_PROMPT = `You are ShelfSight's intake reader for a food bank. A volunteer photographs a donated food item; you read the label and return a single structured record.
 
@@ -70,12 +96,20 @@ const normalize = (obj: Record<string, unknown>): IntakeExtraction => ({
 });
 
 /**
- * CALL 1 — vision intake. Sends a downscaled JPEG (base64) and gets back a
- * schema-validated extraction object plus token usage.
+ * CALL 1 — vision intake. Sends one or more downscaled JPEGs (base64) of the
+ * SAME item and gets back a single schema-validated record. Multiple photos let
+ * the volunteer capture different faces (front, ingredients panel, date/lot
+ * code) — useful for big or curved labels that won't fit one shot. Gemini reads
+ * across all of them to build one combined reading.
  *
- * @param base64Jpeg base64-encoded JPEG bytes (no data: prefix)
+ * @param base64Jpegs one or more base64-encoded JPEGs (no data: prefix)
  */
-export async function runIntake(base64Jpeg: string): Promise<IntakeResult> {
+export async function runIntake(base64Jpegs: string | string[]): Promise<IntakeResult> {
+  const images = Array.isArray(base64Jpegs) ? base64Jpegs : [base64Jpegs];
+  if (images.length === 0) {
+    throw new Error("No photo to analyze. Take or choose at least one photo of the item.");
+  }
+
   const apiKey = await loadApiKey();
   if (!apiKey) {
     throw new Error(
@@ -83,24 +117,34 @@ export async function runIntake(base64Jpeg: string): Promise<IntakeResult> {
     );
   }
 
+  const userText =
+    images.length > 1
+      ? `${USER_PROMPT}\n\nThese ${images.length} photos are all of the SAME item (e.g. different sides, or sections of a large or curved label). Combine what you can read across ALL of them into one record.`
+      : USER_PROMPT;
+
   const ai = new GoogleGenAI({ apiKey });
-  const response = await ai.models.generateContent({
-    model: MODEL,
-    contents: [
-      {
-        role: "user",
-        parts: [
-          { inlineData: { mimeType: "image/jpeg", data: base64Jpeg } },
-          { text: USER_PROMPT },
-        ],
+  let response;
+  try {
+    response = await ai.models.generateContent({
+      model: MODEL,
+      contents: [
+        {
+          role: "user",
+          parts: [
+            ...images.map((data) => ({ inlineData: { mimeType: "image/jpeg", data } })),
+            { text: userText },
+          ],
+        },
+      ],
+      config: {
+        systemInstruction: SYSTEM_PROMPT,
+        responseMimeType: "application/json",
+        responseSchema: INTAKE_SCHEMA,
       },
-    ],
-    config: {
-      systemInstruction: SYSTEM_PROMPT,
-      responseMimeType: "application/json",
-      responseSchema: INTAKE_SCHEMA,
-    },
-  });
+    });
+  } catch (e: any) {
+    throw new Error(friendlyApiError(e));
+  }
 
   const raw = response.text ?? "";
 
