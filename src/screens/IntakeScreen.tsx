@@ -9,13 +9,15 @@ import { Button, Card, SafetyBadge } from "../components/ui";
 import { BrandMark } from "../components/BrandMark";
 import { PressableScale } from "../components/PressableScale";
 import { IntakeResultCard } from "../components/IntakeResultCard";
+import { RecallNotice } from "../components/RecallNotice";
 import { useImageSource } from "../image/useImageSource";
 import { downscaleToBase64 } from "../image/processImage";
 import { runIntake, type IntakeResult } from "../ai/geminiClient";
 import { addIntake, countItems } from "../db/inventory";
 import { loadApiKey } from "../ai/apiKeyStore";
+import { checkRecall, routingFor, type RecallResult } from "../recall/recallService";
 
-type Phase = "idle" | "processing" | "reading" | "result" | "error";
+type Phase = "idle" | "processing" | "reading" | "checking" | "result" | "error";
 
 /**
  * Volunteer intake: collect one OR MORE photos of an item (front, ingredients,
@@ -30,6 +32,7 @@ export function IntakeScreen() {
   const [photos, setPhotos] = useState<string[]>([]); // captured/picked image URIs
   const [statusText, setStatusText] = useState("");
   const [result, setResult] = useState<IntakeResult | null>(null);
+  const [recall, setRecall] = useState<RecallResult | null>(null);
   const [error, setError] = useState("");
   const [count, setCount] = useState(0);
   const [savedId, setSavedId] = useState<number | null>(null);
@@ -62,6 +65,7 @@ export function IntakeScreen() {
   const analyze = useCallback(async () => {
     if (photos.length === 0) return;
     setResult(null);
+    setRecall(null);
     setSavedId(null);
     setError("");
     try {
@@ -73,6 +77,14 @@ export function IntakeScreen() {
       setStatusText("Reading the label…");
       const intake = await runIntake(images);
       setResult(intake);
+
+      // Live recall retrieval — the agentic external-tool step. Never throws; the
+      // worst case escalates. Runs after the read so it can query by brand/product.
+      setPhase("checking");
+      setStatusText("Checking FDA recalls…");
+      const rec = await checkRecall(intake.extraction.brand, intake.extraction.product_name);
+      setRecall(rec);
+
       setPhase("result");
     } catch (e: any) {
       setError(e?.message ?? String(e));
@@ -83,9 +95,24 @@ export function IntakeScreen() {
   const save = useCallback(async () => {
     if (!result) return;
     try {
+      // Fold the recall verdict into raw_json so the detail sheet shows the
+      // citation, class, and explanation — and into the queryable columns so the
+      // shelf/clearance guards see the recall state.
+      const recall_state = recall?.recall_state ?? "unknown";
+      const raw = {
+        ...result.extraction,
+        recall_state,
+        recall_class: recall?.recall_class ?? "",
+        recall_explanation: recall?.recall_explanation ?? "",
+        recall_citations: recall?.citations ?? [],
+        recall_path: recall?.path ?? "none",
+        routing: routingFor(recall_state),
+      };
       const id = await addIntake({
         extraction: result.extraction,
-        raw_json: JSON.stringify(result.extraction),
+        recall_state,
+        routing: routingFor(recall_state),
+        raw_json: JSON.stringify(raw),
         image_uris: photos, // keep the photos so the card/detail can show them
       });
       setSavedId(id);
@@ -94,18 +121,19 @@ export function IntakeScreen() {
       setError(`Save failed: ${e?.message ?? String(e)}`);
       setPhase("error");
     }
-  }, [result, photos]);
+  }, [result, recall, photos]);
 
   const reset = useCallback(() => {
     setPhase("idle");
     setPhotos([]);
     setResult(null);
+    setRecall(null);
     setError("");
     setSavedId(null);
     refreshKey();
   }, [refreshKey]);
 
-  const busy = phase === "processing" || phase === "reading";
+  const busy = phase === "processing" || phase === "reading" || phase === "checking";
   const noKey = keyReady === false;
 
   return (
@@ -171,14 +199,17 @@ export function IntakeScreen() {
           <ActivityIndicator color={colors.clay} size="large" />
           <Text style={[type.heading, { color: colors.ink }]}>{statusText}</Text>
           <Text style={[type.caption, { color: colors.inkFaint }]}>
-            Gemini is reading the label.
+            {phase === "checking"
+              ? "Querying live FDA recall records."
+              : "Gemini is reading the label."}
           </Text>
         </Card>
       )}
 
       {phase === "result" && result && (
         <View style={{ gap: space.lg }}>
-          <IntakeResultCard extraction={result.extraction} usage={result.usage} />
+          <IntakeResultCard extraction={result.extraction} usage={result.usage} recall={recall} />
+          {recall && <RecallNotice recall={recall} />}
           {savedId === null ? (
             <Button label="Add to pantry" onPress={save} />
           ) : (

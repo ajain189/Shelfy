@@ -9,38 +9,55 @@ import { Disclosure } from "./InfoBits";
 import { prettyTag, allergenLine } from "../db/itemView";
 import type { Recommendation } from "../db/recommendation";
 import type { IntakeExtraction } from "../ai/intakeSchema";
+import type { RecallResult } from "../recall/recallService";
 
 /**
- * Derive the recommendation + the agentic-pipeline trace from a fresh scan.
- * At intake there's no live recall lookup yet, so recall is reported as
- * "no match in our data" and the verdict turns on date + read confidence —
- * always erring toward REVIEW when the AI is unsure, never a guess.
+ * Derive the recommendation + the agentic-pipeline trace from a fresh scan,
+ * including the LIVE recall verdict. A possible recall match always escalates
+ * (discard); otherwise the verdict turns on date + read confidence — always
+ * erring toward REVIEW when the AI is unsure, never a guess.
  */
-function deriveIntake(e: IntakeExtraction): { rec: Recommendation; steps: TraceStep[] } {
+function deriveIntake(
+  e: IntakeExtraction,
+  recall?: RecallResult | null,
+): { rec: Recommendation; steps: TraceStep[] } {
   const lowConfidence = e.confidence < 0.7;
   const illegible = e.legibility_notes.trim().length > 0;
+  const recallFlagged = recall?.recall_state === "possible_match" || recall?.recall_state === "confirmed_match";
   const needsReview = lowConfidence || illegible;
   const conf = Math.round(e.confidence * 100);
 
-  const rec: Recommendation = needsReview
+  const rec: Recommendation = recallFlagged
     ? {
-        verdict: "review",
-        label: "Review",
-        reason: "The AI wasn't sure — a volunteer should check before shelving.",
+        verdict: "discard",
+        label: "Discard",
+        reason: "Matches an active FDA recall — escalated, do not shelve.",
         factors: [
-          illegible ? `Label hard to read: ${e.legibility_notes}` : "",
-          lowConfidence ? `Read confidence ${conf}% is below 70%.` : "",
-        ].filter(Boolean),
+          recall?.citations[0]
+            ? `Matched ${recall.citations[0].source} record ${recall.citations[0].record_id}.`
+            : "Matched an active recall record.",
+          "A volunteer must verify the lot code against the official notice.",
+        ],
       }
-    : {
-        verdict: "keep",
-        label: "Keep",
-        reason:
-          e.allergens.length > 0
-            ? "Label read clearly, no date issue. Note the allergens below."
-            : "Label read clearly and no date issue found.",
-        factors: [],
-      };
+    : needsReview
+      ? {
+          verdict: "review",
+          label: "Review",
+          reason: "The AI wasn't sure — a volunteer should check before shelving.",
+          factors: [
+            illegible ? `Label hard to read: ${e.legibility_notes}` : "",
+            lowConfidence ? `Read confidence ${conf}% is below 70%.` : "",
+          ].filter(Boolean),
+        }
+      : {
+          verdict: "keep",
+          label: "Keep",
+          reason:
+            e.allergens.length > 0
+              ? "No recall, label read clearly. Note the allergens below."
+              : "No recall found and the label read clearly.",
+          factors: [],
+        };
 
   const steps: TraceStep[] = [
     { icon: "camera", label: "Scanned the label", detail: "Photo sent to the vision model." },
@@ -63,14 +80,20 @@ function deriveIntake(e: IntakeExtraction): { rec: Recommendation; steps: TraceS
     {
       icon: "shield",
       label: "Checked recalls",
-      detail: "No match found in the FDA/USDA data we have.",
+      detail: recallFlagged
+        ? `Matched an active FDA recall (${recall?.citations[0]?.record_id ?? "record"}).`
+        : recall
+          ? `${recall.path === "cached" ? "Offline — checked cached snapshot" : "Queried live FDA records"}; no match (${recall.candidates_checked} compared).`
+          : "Querying live FDA recall records…",
     },
     {
-      icon: needsReview ? "help-circle" : "check-circle",
+      icon: recallFlagged ? "x-octagon" : needsReview ? "help-circle" : "check-circle",
       label: "Reached a verdict",
-      detail: needsReview
-        ? `Unsure (confidence ${conf}%) — routed to a human.`
-        : `Read clearly (confidence ${conf}%) — recommends keeping.`,
+      detail: recallFlagged
+        ? "Recall match — escalated to a human, not shelved."
+        : needsReview
+          ? `Unsure (confidence ${conf}%) — routed to a human.`
+          : `Read clearly (confidence ${conf}%) — recommends keeping.`,
     },
   ];
 
@@ -78,20 +101,28 @@ function deriveIntake(e: IntakeExtraction): { rec: Recommendation; steps: TraceS
 }
 
 /**
- * Renders the real Call-1 structured output. No recall verdict yet at intake,
- * so confidence + legibility drive a calm "needs review" status — never an
- * automatic clear. Uses the same uniform chips/labels as the rest of the app.
+ * Renders the real Call-1 structured output plus the live recall verdict. The
+ * agentic-pipeline trace (scan → read → classify → recall-check → verdict)
+ * reflects this scan's actual outcome. Confidence + legibility + the recall
+ * match drive the status — never an automatic clear.
  */
 export function IntakeResultCard({
   extraction,
   usage,
+  recall,
 }: {
   extraction: IntakeExtraction;
   usage?: { input_tokens: number; output_tokens: number };
+  recall?: RecallResult | null;
 }) {
+  const recallFlagged =
+    recall?.recall_state === "possible_match" || recall?.recall_state === "confirmed_match";
   const lowConfidence = extraction.confidence < 0.7;
   const needsReview = lowConfidence || extraction.legibility_notes.trim().length > 0;
-  const { rec, steps } = deriveIntake(extraction);
+  const { rec, steps } = deriveIntake(extraction, recall);
+
+  const dotState = recallFlagged ? "danger" : needsReview ? "caution" : "safe";
+  const dotPhrase = recallFlagged ? "Recall match" : needsReview ? "Needs review" : "Read clearly";
 
   return (
     <Card style={{ gap: space.md }}>
@@ -104,11 +135,7 @@ export function IntakeResultCard({
 
       {/* One state, big — then the AI's plain reason */}
       <View style={styles.recRow}>
-        <StatusDot
-          state={needsReview ? "caution" : "safe"}
-          phrase={needsReview ? "Needs review" : "Read clearly"}
-          large
-        />
+        <StatusDot state={dotState} phrase={dotPhrase} large />
         <Text style={[type.body, { color: colors.inkSoft }]}>{rec.reason}</Text>
       </View>
 
