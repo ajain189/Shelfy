@@ -65,6 +65,21 @@ export function isExpired(row: InventoryRow, today: Date = new Date()): boolean 
   return date < t;
 }
 
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+/**
+ * Turn an ISO date ("2028-01-01") into a friendly "Jan 1, 2028". Anything that
+ * isn't a clean ISO date (e.g. raw label text) is returned unchanged, so we
+ * never show a normal person a techy "2028-01-01".
+ */
+export function formatDate(iso: string): string {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec((iso || "").trim());
+  if (!m) return iso;
+  const monthIndex = parseInt(m[2], 10) - 1;
+  if (monthIndex < 0 || monthIndex > 11) return iso;
+  return `${MONTHS[monthIndex]} ${parseInt(m[3], 10)}, ${m[1]}`;
+}
+
 /** Human label for an allergen/dietary enum value. */
 export const prettyTag = (s: string): string =>
   s.replace(/_claim$/, "").replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
@@ -82,14 +97,14 @@ export const prettyTag = (s: string): string =>
 export type ItemState = "danger" | "caution" | "safe";
 
 export function itemState(row: InventoryRow): { state: ItemState; phrase: string } {
-  if (isRecalled(row)) return { state: "danger", phrase: "Recalled: remove" };
+  if (isRecalled(row)) return { state: "danger", phrase: "Recalled, remove" };
   // Past-date items never read green, even if a volunteer already shelved one.
   // This keeps the card's state in step with the AI's "discard (expired)" call.
-  if (isExpired(row)) return { state: "danger", phrase: "Past date: remove" };
+  if (isExpired(row)) return { state: "danger", phrase: "Past date, remove" };
   if (row.cleared === 1) return { state: "safe", phrase: "On the shelf" };
   const needsReview = row.routing === "flag" || row.routing === "escalate";
-  if (needsReview) return { state: "caution", phrase: "Needs review" };
-  return { state: "safe", phrase: "Ready to shelf" };
+  if (needsReview) return { state: "caution", phrase: "Needs a check" };
+  return { state: "safe", phrase: "Ready for the shelf" };
 }
 
 /**

@@ -12,35 +12,35 @@ import { Card } from "./ui";
 const STEPS: { icon: keyof typeof Feather.glyphMap; title: string; body: string }[] = [
   {
     icon: "camera",
-    title: "1 · Scan a donation",
-    body: "On the Intake tab, point the camera at a food label. ShelfSight reads the brand, ingredients, allergens, date, and checks for recalls.",
+    title: "1 · Take a photo of the label",
+    body: "On the Scan tab, point the camera at a food label. Shelfy reads the brand, ingredients, allergens, and date, and checks for recalls.",
   },
   {
     icon: "layers",
-    title: "2 · Review what it found",
-    body: "New items land in Inventory. Items the app wasn't sure about are marked for review and show Clear and Remove buttons right on the card.",
+    title: "2 · See what it found",
+    body: "New foods show up on the Sort tab. Anything the app wasn't sure about is marked “Needs a check,” with buttons right on the card.",
   },
   {
     icon: "check-circle",
-    title: "3 · Clear it to the shelf",
-    body: "If the item looks right, tap “Clear to shelf.” Only cleared items become available to families. Tap any card to see the full details first.",
+    title: "3 · Put it on the shelf",
+    body: "If the food looks right, tap “Put on the shelf.” Only foods you put out can reach a family. Tap any card to see the full details first.",
   },
   {
     icon: "alert-octagon",
-    title: "Watch for federal recalls",
-    body: "If an item matches an FDA recall, you'll see a big red FEDERAL RECALL notice with its class and reason. Never shelve a recalled item, remove it.",
+    title: "Watch for recalls",
+    body: "If a food matches a federal recall, you'll see a clear red recall notice with the reason. Never shelve a recalled food, remove it.",
   },
   {
     icon: "grid",
-    title: "Families browse the Shelf",
-    body: "The Shelf tab shows only cleared items. Use Filter to narrow by diet (vegan, halal, kosher…) or to hide common allergens (no peanuts, no milk…). Tap an item to see its ingredients.",
+    title: "Families find food on the shelf",
+    body: "The Find food tab shows only foods a volunteer has put out. Use Filter to narrow by diet (vegan, halal, kosher…) or to skip allergens (no peanuts, no milk…). Tap a food to see what's inside.",
   },
 ];
 
 export function UserGuide() {
   return (
     <Card style={{ gap: space.md }}>
-      <Text style={type.heading}>How to use ShelfSight</Text>
+      <Text style={type.heading}>How to use Shelfy</Text>
       {STEPS.map((s) => (
         <View key={s.title} style={styles.row}>
           <View style={styles.iconWrap}>

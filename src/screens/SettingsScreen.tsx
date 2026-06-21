@@ -6,7 +6,7 @@ import { CollapsingScreen } from "../components/CollapsingScreen";
 import { Card, Button, SafetyBadge } from "../components/ui";
 import { BrandMark } from "../components/BrandMark";
 import { UserGuide } from "../components/UserGuide";
-import { loadApiKey, setApiKey, hasBundledKey, maskKey } from "../ai/apiKeyStore";
+import { loadApiKey, setApiKey, hasBundledKey } from "../ai/apiKeyStore";
 import { clearAll, countItems } from "../db/inventory";
 import { seedAll } from "../db/seed";
 
@@ -35,23 +35,23 @@ export function SettingsScreen() {
     setKeyInput("");
     await loadApiKey().then(setActiveKey);
     setSaving(false);
-    Alert.alert("Saved", "Your Gemini key is set. The Intake tab can now scan labels.");
+    Alert.alert("Done", "Label reading is on. Head to the Scan tab to add a donation.");
   }, [keyInput]);
 
   const onResetData = useCallback(() => {
     Alert.alert(
-      "Reset demo data",
-      "This wipes the pantry and reloads the seeded sample items. Continue?",
+      "Start over with sample food?",
+      "This empties the pantry and loads the sample foods again. Continue?",
       [
         { text: "Cancel", style: "cancel" },
         {
-          text: "Reset",
+          text: "Start over",
           style: "destructive",
           onPress: async () => {
             await clearAll();
             await seedAll();
             setCount(await countItems());
-            Alert.alert("Done", "Sample inventory reloaded.");
+            Alert.alert("Done", "The sample pantry is back.");
           },
         },
       ],
@@ -65,14 +65,15 @@ export function SettingsScreen() {
       <UserGuide />
 
       <Card style={{ gap: space.md }}>
-        <Text style={type.heading}>Gemini API key</Text>
+        <Text style={type.heading}>Turn on label reading</Text>
         {activeKey ? (
-          <SafetyBadge tone="safe" label={`Key set · ${maskKey(activeKey)}`} />
+          <SafetyBadge tone="safe" label="Reading is on" />
         ) : (
-          <SafetyBadge tone="caution" label="No key set" />
+          <SafetyBadge tone="caution" label="Reading is off" />
         )}
         <Text style={[type.body, { color: colors.inkSoft }]}>
-          Paste a Gemini key to enable label scanning. Get a free one at{" "}
+          Shelfy uses Google's free Gemini to read labels. Paste a key here once to switch it
+          on, you can get one in about a minute at{" "}
           <Text style={{ fontFamily: fonts.bodyBold }}>aistudio.google.com/apikey</Text>.
         </Text>
         <TextInput
@@ -86,37 +87,36 @@ export function SettingsScreen() {
           style={styles.input}
         />
         <Button
-          label={saving ? "Saving…" : "Save key"}
+          label={saving ? "Turning on…" : "Turn on reading"}
           onPress={onSaveKey}
           disabled={saving || keyInput.trim().length === 0}
         />
         {hasBundledKey && (
           <Text style={[type.caption, { color: colors.inkFaint }]}>
-            A key was also bundled at build time; a key you set here overrides it.
+            A key already came with the app; the one you paste here is used instead.
           </Text>
         )}
       </Card>
 
       <Card style={{ gap: space.md }}>
-        <Text style={type.heading}>Demo data</Text>
+        <Text style={type.heading}>Sample pantry</Text>
         <Text style={[type.body, { color: colors.inkSoft }]}>
-          The pantry currently holds {count} item{count === 1 ? "" : "s"}. Reset to reload the
-          seeded sample inventory (canned goods, pasta, baby food, and a couple of items that
-          demonstrate the recall and allergen flags).
+          The pantry holds {count} food{count === 1 ? "" : "s"} right now. Start over to load the
+          sample foods again, canned goods, pasta, baby food, and a few that show the recall and
+          allergen warnings.
         </Text>
-        <Button label="Reset demo data" tone="ghost" onPress={onResetData} />
+        <Button label="Start over with sample food" tone="ghost" onPress={onResetData} />
       </Card>
 
       <Card style={{ gap: space.sm }}>
         <Text style={type.heading}>About</Text>
         <Text style={[type.body, { color: colors.inkSoft }]}>
-          ShelfSight reads donated food labels, flags allergens and recalls, and builds a pantry a
-          family can search in plain language. A volunteer clears every item before it reaches the
-          shelf.
+          Shelfy reads donated food labels, warns about allergens and recalls, and builds a
+          pantry a family can search in plain words. A volunteer checks every item before it reaches
+          the shelf.
         </Text>
         <Text style={[type.caption, { color: colors.inkFaint }]}>
-          Demo key handling: the key is used on-device only. A production build would route model
-          calls through a backend proxy so the key never ships to a phone.
+          Your key stays on this phone and is only used to read labels.
         </Text>
       </Card>
     </CollapsingScreen>

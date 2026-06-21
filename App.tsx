@@ -10,6 +10,7 @@ import { useAppFonts } from "./src/theme/fonts";
 import { GlassTabBar } from "./src/components/GlassTabBar";
 import { initDb } from "./src/db/inventory";
 import { seedIfEmpty } from "./src/db/seed";
+import { HomeScreen } from "./src/screens/HomeScreen";
 import { IntakeScreen } from "./src/screens/IntakeScreen";
 import { InventoryScreen } from "./src/screens/InventoryScreen";
 import { ShelfScreen } from "./src/screens/ShelfScreen";
@@ -50,8 +51,9 @@ export default function App() {
             tabBar={(props) => <GlassTabBar {...props} />}
             screenOptions={{ headerShown: false, sceneStyle: { backgroundColor: colors.paper } }}
           >
-            <Tab.Screen name="Intake" component={IntakeScreen} />
-            <Tab.Screen name="Inventory" component={InventoryScreen} />
+            <Tab.Screen name="Home" component={HomeScreen} />
+            <Tab.Screen name="Scan" component={IntakeScreen} />
+            <Tab.Screen name="Sort" component={InventoryScreen} />
             <Tab.Screen name="Shelf" component={ShelfScreen} />
             <Tab.Screen name="Settings" component={SettingsScreen} />
           </Tab.Navigator>

@@ -21,7 +21,7 @@ import type { ExpoConfig, ConfigContext } from "expo/config";
  */
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
-  name: "ShelfSight",
+  name: "Shelfy",
   slug: "shelfsight",
   version: "1.0.0",
   orientation: "portrait",
@@ -33,9 +33,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     bundleIdentifier: "com.ajain189.shelfsight",
     infoPlist: {
       NSCameraUsageDescription:
-        "ShelfSight uses the camera to read food-donation labels during intake.",
+        "Shelfy uses the camera to read food-donation labels during intake.",
       NSPhotoLibraryUsageDescription:
-        "ShelfSight can read a label from a photo you select.",
+        "Shelfy can read a label from a photo you select.",
     },
   },
   android: {

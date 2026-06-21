@@ -9,18 +9,19 @@ import { ItemDetailSheet } from "../components/ItemDetailSheet";
 import { getAllItems, clearItem, rejectItem, type InventoryRow } from "../db/inventory";
 import { unwrapTags } from "../db/itemView";
 
-type Filter = "all" | "review" | "shelf" | "recall";
+type Filter = "all" | "review" | "recall";
 
 const FILTERS: { key: Filter; label: string }[] = [
   { key: "all", label: "All" },
-  { key: "review", label: "Needs review" },
-  { key: "shelf", label: "On shelf" },
-  { key: "recall", label: "Recall" },
+  { key: "review", label: "Needs a check" },
+  { key: "recall", label: "Recalled" },
 ];
 
 /**
- * Inventory, the volunteer workspace. Every item, searchable + filterable, with
- * inline Clear/Remove on the items the AI flagged for review.
+ * Sort, the volunteer workspace. Shows ONLY items that aren't on the shelf yet,
+ * the pile still to be sorted. The moment a volunteer puts an item on the shelf
+ * it leaves this screen and lives on the Shelf tab. Tap a card to review it and
+ * put it on the shelf or remove it.
  */
 export function InventoryScreen() {
   const [items, setItems] = useState<InventoryRow[]>([]);
@@ -37,9 +38,7 @@ export function InventoryScreen() {
   const matchesFilter = (r: InventoryRow): boolean => {
     switch (filter) {
       case "review":
-        return r.cleared === 0 && (r.routing === "flag" || r.routing === "escalate");
-      case "shelf":
-        return r.cleared === 1;
+        return r.routing === "flag" || r.routing === "escalate";
       case "recall":
         return r.recall_state === "possible_match" || r.recall_state === "confirmed_match";
       default:
@@ -57,9 +56,12 @@ export function InventoryScreen() {
     );
   };
 
-  const visible = items.filter((r) => matchesFilter(r) && matchesQuery(r));
-  const reviewCount = items.filter(
-    (r) => r.cleared === 0 && (r.routing === "flag" || r.routing === "escalate"),
+  // Sort only shows items that aren't on the shelf yet. Once an item is put on
+  // the shelf (cleared === 1) it disappears from here and lives on the Shelf tab.
+  const pending = items.filter((r) => r.cleared === 0);
+  const visible = pending.filter((r) => matchesFilter(r) && matchesQuery(r));
+  const reviewCount = pending.filter(
+    (r) => r.routing === "flag" || r.routing === "escalate",
   ).length;
 
   const onClear = useCallback(
@@ -69,8 +71,8 @@ export function InventoryScreen() {
       load();
       if (!ok) {
         Alert.alert(
-          "Can't clear this item",
-          "This item is under an active federal recall and cannot be put on the shelf. Remove it instead.",
+          "This one can't go on the shelf",
+          "It's under an active federal recall, so it can't be put out for families. Remove it instead.",
         );
       }
     },
@@ -91,7 +93,7 @@ export function InventoryScreen() {
       <TextInput
         value={query}
         onChangeText={setQuery}
-        placeholder="Search product, brand, or allergen…"
+        placeholder="Search food, brand, or allergen…"
         placeholderTextColor={colors.inkFaint}
         style={styles.search}
       />
@@ -117,20 +119,23 @@ export function InventoryScreen() {
   return (
     <>
       <CollapsingList
-        title="Inventory"
-        subtitle={`${items.length} items · ${reviewCount > 0 ? `${reviewCount} need review` : "all reviewed"}`}
+        title="Sort donations"
+        subtitle={
+          pending.length === 0
+            ? "All sorted, nothing waiting"
+            : `${pending.length} to sort${reviewCount > 0 ? ` · ${reviewCount} need a check` : ""}`
+        }
         data={visible}
         keyExtractor={(r) => String(r.id)}
         controls={controls}
-        renderItem={(item) => (
-          <ItemCard
-            row={item}
-            onPress={() => setSelected(item)}
-            onClear={onClear}
-            onReject={onReject}
-          />
-        )}
-        ListEmptyComponent={<Text style={styles.empty}>No items match.</Text>}
+        renderItem={(item) => <ItemCard row={item} onPress={() => setSelected(item)} />}
+        ListEmptyComponent={
+          <Text style={styles.empty}>
+            {pending.length === 0
+              ? "Everything has been sorted. New donations show up here after you scan them."
+              : "Nothing matches that."}
+          </Text>
+        }
       />
 
       <ItemDetailSheet

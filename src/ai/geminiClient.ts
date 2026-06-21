@@ -53,7 +53,7 @@ function friendlyApiError(e: any): string {
   return `Couldn't read the label: ${msg.slice(0, 140)}`;
 }
 
-const SYSTEM_PROMPT = `You are ShelfSight's intake reader for a food bank. A volunteer photographs a donated food item; you read the label and return a single structured record.
+const SYSTEM_PROMPT = `You are Shelfy's intake reader for a food bank. A volunteer photographs a donated food item; you read the label and return a single structured record.
 
 Rules:
 - Transcribe what the label actually shows. Do not infer, complete, or invent text that is not visible.
@@ -192,5 +192,97 @@ export async function runIntake(base64Jpegs: string | string[]): Promise<IntakeR
       output_tokens: response.usageMetadata?.candidatesTokenCount ?? 0,
     },
     raw,
+  };
+}
+
+// --- Smart filter: plain-language "who is this food for" -> pantry filters ---
+
+const DIET_FILTER_KEYS = [
+  "vegan_claim",
+  "vegetarian_claim",
+  "gluten_free_claim",
+  "halal_claim",
+  "kosher_claim",
+] as const;
+
+const ALLERGEN_FILTER_KEYS = [
+  "peanuts",
+  "tree_nuts",
+  "milk",
+  "egg",
+  "wheat",
+  "soybeans",
+  "fish",
+  "shellfish",
+  "sesame",
+] as const;
+
+const FOOD_NEEDS_SCHEMA = {
+  type: "OBJECT",
+  properties: {
+    dietary: { type: "ARRAY", items: { type: "STRING", enum: [...DIET_FILTER_KEYS] } },
+    avoid_allergens: { type: "ARRAY", items: { type: "STRING", enum: [...ALLERGEN_FILTER_KEYS] } },
+    note: { type: "STRING" },
+  },
+  required: ["dietary", "avoid_allergens", "note"],
+} as const;
+
+const FOOD_NEEDS_PROMPT = `You help a food-pantry visitor narrow the shelf by describing who the food is for. Convert their plain words into pantry filters.
+- dietary: diets the food MUST match, ONLY from the allowed list.
+- avoid_allergens: allergens the food must NOT contain, ONLY from the allowed list.
+- note: ONE short, warm sentence saying what you filtered for. If they mention something you cannot filter (e.g. diabetic, low sugar, low sodium, calories), say plainly that you can't filter by that yet and that they should check the label. Never invent a filter that isn't in the lists.
+Allowed diets: vegan_claim, vegetarian_claim, gluten_free_claim, halal_claim, kosher_claim.
+Allowed allergens: peanuts, tree_nuts, milk, egg, wheat, soybeans, fish, shellfish, sesame.
+Examples: "allergic to peanuts and dairy" -> avoid ["peanuts","milk"]. "he's Muslim and vegetarian" -> dietary ["halal_claim","vegetarian_claim"]. "the person is diabetic" -> empty filters, note that you can't filter by sugar yet.`;
+
+export interface FoodNeeds {
+  dietary: string[];
+  avoidAllergens: string[];
+  note: string;
+}
+
+/**
+ * Read a plain-language (typed or dictated) description of who needs food and
+ * return the pantry filters to apply. Honest by design: anything outside the
+ * allowed lists (e.g. "diabetic") is NOT guessed, it's explained in `note`.
+ */
+export async function parseFoodNeeds(text: string): Promise<FoodNeeds> {
+  const trimmed = text.trim();
+  if (!trimmed) return { dietary: [], avoidAllergens: [], note: "" };
+
+  const apiKey = await loadApiKey();
+  if (!apiKey) {
+    throw new Error(
+      "Turn on label reading in the Settings tab first (free key at aistudio.google.com/apikey).",
+    );
+  }
+
+  const ai = new GoogleGenAI({ apiKey });
+  let response;
+  try {
+    response = await ai.models.generateContent({
+      model: MODEL,
+      contents: [{ role: "user", parts: [{ text: `Who the food is for: ${trimmed}` }] }],
+      config: {
+        systemInstruction: FOOD_NEEDS_PROMPT,
+        responseMimeType: "application/json",
+        responseSchema: FOOD_NEEDS_SCHEMA,
+      },
+    });
+  } catch (e: any) {
+    throw new Error(friendlyApiError(e));
+  }
+
+  let parsed: Record<string, unknown>;
+  try {
+    parsed = JSON.parse(response.text ?? "{}");
+  } catch {
+    throw new Error("Couldn't understand that. Try describing the person again in a few words.");
+  }
+
+  return {
+    dietary: filterEnum<string>(parsed.dietary, DIET_FILTER_KEYS),
+    avoidAllergens: filterEnum<string>(parsed.avoid_allergens, ALLERGEN_FILTER_KEYS),
+    note: cleanText(parsed.note),
   };
 }

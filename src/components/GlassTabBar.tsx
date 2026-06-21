@@ -14,8 +14,9 @@ import type { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { colors, type, motion, shadow, radius, space } from "../theme";
 
 const ICONS: Record<string, keyof typeof Feather.glyphMap> = {
-  Intake: "camera",
-  Inventory: "layers",
+  Home: "home",
+  Scan: "camera",
+  Sort: "layers",
   Shelf: "grid",
   Settings: "sliders",
 };

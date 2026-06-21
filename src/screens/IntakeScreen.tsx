@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ActivityIndicator, Image, Pressable } from "rea
 import { useFocusEffect } from "@react-navigation/native";
 import { Feather } from "@expo/vector-icons";
 
-import { colors, space, type, fonts, radius } from "../theme";
+import { colors, space, type, fonts, radius, shadow } from "../theme";
 import { CollapsingScreen } from "../components/CollapsingScreen";
 import { Button, Card, SafetyBadge } from "../components/ui";
 import { BrandMark } from "../components/BrandMark";
@@ -137,14 +137,14 @@ export function IntakeScreen() {
   const noKey = keyReady === false;
 
   return (
-    <CollapsingScreen title="Intake" subtitle="The pantry shelf is the document. Let's read it.">
+    <CollapsingScreen title="Add a donation" subtitle="Take a photo of the label, Shelfy reads it for you.">
       {noKey && (
         <Card style={{ gap: space.sm }}>
-          <SafetyBadge tone="caution" label="No API key" />
+          <SafetyBadge tone="caution" label="Scanning is off" />
           <Text style={[type.body, { color: colors.inkSoft }]}>
-            Add your Gemini key in the{" "}
-            <Text style={{ fontFamily: fonts.bodyBold }}>Settings</Text> tab to scan labels. A free
-            key takes a minute at aistudio.google.com/apikey.
+            Turn on label reading in the{" "}
+            <Text style={{ fontFamily: fonts.bodyBold }}>Settings</Text> tab, it takes a minute.
+            Until then, you can't add photos.
           </Text>
         </Card>
       )}
@@ -152,13 +152,12 @@ export function IntakeScreen() {
       {phase === "idle" && (
         <Card style={{ gap: space.md }}>
           <BrandMark size={48} />
-          <Text style={type.heading}>Scan a donation</Text>
-          <Text style={[type.body, { color: colors.inkSoft }]}>
-            Add a photo of the label. For big or curved labels, add a few, front, ingredients, and
-            the date, and ShelfSight reads across all of them.
-          </Text>
-
-          {photos.length > 0 && (
+          {photos.length === 0 ? (
+            <Text style={[type.body, { color: colors.inkSoft }]}>
+              Point the camera at the food label. If it's big or curved, add a few photos, the
+              front, the ingredients, and the date, and Shelfy reads across all of them.
+            </Text>
+          ) : (
             <View style={styles.thumbRow}>
               {photos.map((uri, i) => (
                 <View key={`${uri}-${i}`} style={styles.thumbWrap}>
@@ -171,25 +170,31 @@ export function IntakeScreen() {
             </View>
           )}
 
-          <View style={styles.addRow}>
-            <PressableScale style={styles.addBtn} onPress={addFromCamera} disabled={noKey}>
-              <Feather name="camera" size={16} color={colors.clay} />
-              <Text style={[type.label, { color: colors.clay }]}>
-                {photos.length ? "Add photo" : "Scan a label"}
-              </Text>
-            </PressableScale>
-            <PressableScale style={styles.addBtn} onPress={addFromLibrary} disabled={noKey}>
-              <Feather name="image" size={16} color={colors.clay} />
-              <Text style={[type.label, { color: colors.clay }]}>Choose photos</Text>
-            </PressableScale>
-          </View>
-
-          {photos.length > 0 && (
-            <Button
-              label={`Analyze item (${photos.length} photo${photos.length === 1 ? "" : "s"})`}
-              onPress={analyze}
-              disabled={noKey}
-            />
+          {/* ONE primary action. With no photos it's "Take a photo"; once a photo
+              is added it becomes "Read this label". Everything else (choose from
+              library, add more) is smaller and secondary. */}
+          {photos.length === 0 ? (
+            <>
+              <PrimaryAction icon="camera" label="Take a photo" onPress={addFromCamera} disabled={noKey} />
+              <PressableScale style={styles.secondary} onPress={addFromLibrary} disabled={noKey}>
+                <Feather name="image" size={16} color={colors.clay} />
+                <Text style={[type.label, { color: colors.clay }]}>Choose from my photos</Text>
+              </PressableScale>
+            </>
+          ) : (
+            <>
+              <PrimaryAction icon="check" label="Read this label" onPress={analyze} disabled={noKey} />
+              <View style={styles.addRow}>
+                <PressableScale style={styles.secondary} onPress={addFromCamera} disabled={noKey}>
+                  <Feather name="camera" size={16} color={colors.clay} />
+                  <Text style={[type.label, { color: colors.clay }]}>Add another</Text>
+                </PressableScale>
+                <PressableScale style={styles.secondary} onPress={addFromLibrary} disabled={noKey}>
+                  <Feather name="image" size={16} color={colors.clay} />
+                  <Text style={[type.label, { color: colors.clay }]}>Choose more</Text>
+                </PressableScale>
+              </View>
+            </>
           )}
         </Card>
       )}
@@ -200,8 +205,8 @@ export function IntakeScreen() {
           <Text style={[type.heading, { color: colors.ink }]}>{statusText}</Text>
           <Text style={[type.caption, { color: colors.inkFaint }]}>
             {phase === "checking"
-              ? "Querying live FDA recall records."
-              : "Gemini is reading the label."}
+              ? "Checking official recall records."
+              : "This takes a few seconds."}
           </Text>
         </Card>
       )}
@@ -211,16 +216,17 @@ export function IntakeScreen() {
           <IntakeResultCard extraction={result.extraction} usage={result.usage} recall={recall} />
           {recall && <RecallNotice recall={recall} />}
           {savedId === null ? (
-            <Button label="Add to pantry" onPress={save} />
+            <Button label="Add it to the pantry" onPress={save} />
           ) : (
             <Card style={[styles.center, { gap: space.sm }]}>
-              <SafetyBadge tone="safe" label={`Saved to pantry (#${savedId})`} />
+              <SafetyBadge tone="safe" label="Added to the pantry" />
               <Text style={[type.caption, { color: colors.inkFaint, textAlign: "center" }]}>
-                Find it in the Inventory tab. A volunteer must clear it before it reaches a family.
+                Next: open the Sort tab and decide if it goes on the shelf. Nothing reaches a family
+                until a volunteer checks it.
               </Text>
             </Card>
           )}
-          <Button label="Scan another" tone="ghost" onPress={reset} />
+          <Button label="Add another" tone="ghost" onPress={reset} />
         </View>
       )}
 
@@ -234,10 +240,34 @@ export function IntakeScreen() {
 
       <View style={styles.footer}>
         <Text style={[type.caption, { color: colors.inkFaint }]}>
-          {count} item{count === 1 ? "" : "s"} in the pantry
+          {count} food{count === 1 ? "" : "s"} in the pantry so far
         </Text>
       </View>
     </CollapsingScreen>
+  );
+}
+
+/** The single big, finger-obvious action on the screen, with a leading icon. */
+function PrimaryAction({
+  icon,
+  label,
+  onPress,
+  disabled,
+}: {
+  icon: keyof typeof Feather.glyphMap;
+  label: string;
+  onPress: () => void;
+  disabled?: boolean;
+}) {
+  return (
+    <PressableScale
+      onPress={onPress}
+      disabled={disabled}
+      style={[styles.primary, disabled ? { opacity: 0.4 } : null]}
+    >
+      <Feather name={icon} size={20} color="#FFFFFF" />
+      <Text style={[type.bodyMedium, { color: "#FFFFFF" }]}>{label}</Text>
+    </PressableScale>
   );
 }
 
@@ -260,16 +290,27 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   addRow: { flexDirection: "row", gap: space.sm },
-  addBtn: {
+  primary: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: space.sm,
+    minHeight: 56,
+    paddingVertical: space.md + 3,
+    paddingHorizontal: space.lg,
+    borderRadius: radius.md,
+    backgroundColor: colors.clay,
+    ...shadow.card,
+  },
+  secondary: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     gap: space.xs + 1,
-    paddingVertical: space.md,
+    minHeight: 48,
+    paddingVertical: space.sm + 2,
     borderRadius: radius.md,
-    borderWidth: 1.5,
-    borderColor: colors.lineStrong,
   },
   footer: {
     marginTop: space.sm,

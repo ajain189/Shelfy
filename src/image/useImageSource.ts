@@ -19,7 +19,7 @@ export function useImageSource() {
         "Camera access is off",
         perm.canAskAgain
           ? "Enable camera access to scan a label."
-          : "Camera access was denied. Turn it on in your phone's Settings → ShelfSight → Camera, then try again. (Or use “Choose a photo”.)",
+          : "Camera access was denied. Turn it on in your phone's Settings → Shelfy → Camera, then try again. (Or use “Choose a photo”.)",
         [{ text: "OK" }],
       );
       return null;
