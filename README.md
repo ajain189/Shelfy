@@ -35,7 +35,7 @@ The brief asks for a tool that translates a **scattered, technical, English-only
 | Layer | Tool | Free / Paid |
 |---|---|---|
 | **Vision + extraction + classification (AI)** | **Google Gemini 2.5 Flash** via `@google/genai` | **Free tier** |
-| **Recall data (retrieval)** | openFDA Food Enforcement API · USDA FSIS recall feed *(public government data; live retrieval is the documented next step — see [Honest status](#honest-status))* | **Free, public** |
+| **Recall data (retrieval)** | **openFDA Food Enforcement API** — queried live at intake (no key needed) · USDA FSIS recall feed | **Free, public** |
 | **App framework** | Expo (React Native), TypeScript | Free / open source |
 | **On-device inventory** | `expo-sqlite` (family pickup *is* a SQL filter) | Free / open source |
 | **Camera & images** | `expo-camera`, `expo-image-picker`, `expo-image-manipulator` | Free / open source |
@@ -68,9 +68,11 @@ ShelfSight is not one model call. It is an **agentic workflow** that perceives, 
  └──────────────────────────────────────────────────────────┘
       ▼
  ┌──────────────────────────────────────────────────────────┐
- │ ③ RETRIEVAL — recall check                                │
- │   match lot/product against FDA + USDA recall records     │
- │   → clear · possible_match · confirmed_match · unknown    │
+ │ ③ RETRIEVAL — LIVE recall check (external tool)           │
+ │   queries the openFDA Food Enforcement API by brand/      │
+ │   product, brand-anchored match against ACTIVE recalls,   │
+ │   3s timeout → cached snapshot fallback (path is surfaced)│
+ │   → clear · possible_match · unknown (never auto-confirmed)│
  └──────────────────────────────────────────────────────────┘
       ▼
  ┌──────────────────────────────────────────────────────────┐
@@ -189,6 +191,7 @@ The app seeds a realistic demo pantry on first launch (including a recall match,
 ```
 src/
   ai/            Gemini client, structured-output schema, API-key handling
+  recall/        Live openFDA recall service + safe three-state matcher + cached fallback
   db/            SQLite inventory, the item view-model, the keep/discard recommendation engine
   components/    Cards, detail sheet, status signal, pipeline trace, the brand mark
   screens/       Intake · Inventory · Shelf · Settings
@@ -200,7 +203,14 @@ assets/          Logo, app icon, splash
 <a name="honest-status"></a>
 ### Honest status
 
-This is a hackathon MVP. The vision → extraction → classification → structured-inventory → family-search pipeline runs end-to-end on real photos with **real Gemini output on screen**. The recall capability is demonstrated with **realistic seeded FDA/FSIS records** driving the full three-state verdict, citation, red-banner, and escalation flow; **live API retrieval against openFDA/FSIS is the documented next step.** The brief states a prototype needn't be production-ready and that a walkthrough showing real AI output is sufficient — we've been transparent about exactly what runs live versus what's seeded, because that honesty is itself part of the Responsible-AI story.
+This is a hackathon MVP, and we're precise about what runs live:
+
+- **Vision → extraction → classification** runs end-to-end on real photos with **real Gemini output on screen**.
+- **Recall retrieval is live.** Each scan queries the real, public **openFDA Food Enforcement API** by brand/product and runs a conservative, **brand-anchored** match against *active* recalls — verified to catch a real ongoing recall while clearing common pantry staples with zero false positives. On a slow or absent network it falls back to a bundled snapshot within 3 seconds and **tells you which path ran**. A match is only ever `possible_match` (escalates to a human), never an auto-confirmed recall and never an auto-clear.
+- **USDA FSIS** is included as a documented secondary source; the live integration currently uses openFDA.
+- **Demo data** seeds a realistic pantry so every screen is populated on first launch.
+
+The brief states a prototype needn't be production-ready and that a walkthrough showing real AI output is sufficient. We've been transparent about exactly what runs live, because that honesty is itself part of the Responsible-AI story.
 
 ---
 
