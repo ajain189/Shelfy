@@ -39,7 +39,26 @@ As a volunteer sorts donations, they hold each item up to the phone camera. Shel
 3. **Checks live federal recalls** by querying the openFDA enforcement database in real time.
 4. **Gives a clear recommendation** of keep, discard, or send to review, with the reason in plain language.
 
-A volunteer confirms every item before it reaches the shelf. Cleared items become a searchable inventory, so when a family asks "what is here with no peanuts?" the answer is a filtered list with the ingredients spelled out, not a guess.
+A volunteer confirms every item before it reaches the shelf. Cleared items become a searchable inventory, so a family can describe what they need in plain words, by typing or by voice, like "allergic to peanuts and vegetarian," and get a filtered list with the ingredients spelled out, not a guess.
+
+## Screens
+
+<table>
+<tr>
+<td align="center" width="20%"><img src="assets/screenshots/01-home.png" alt="Home" /></td>
+<td align="center" width="20%"><img src="assets/screenshots/02-scan.png" alt="Scan a donation" /></td>
+<td align="center" width="20%"><img src="assets/screenshots/03-sort.png" alt="Sort and review" /></td>
+<td align="center" width="20%"><img src="assets/screenshots/04-shelf.png" alt="Find food" /></td>
+<td align="center" width="20%"><img src="assets/screenshots/05-settings.png" alt="How to use" /></td>
+</tr>
+<tr>
+<td align="center"><b>Home</b><br />Pick a task</td>
+<td align="center"><b>Scan</b><br />Photograph a label</td>
+<td align="center"><b>Sort</b><br />Review and clear items</td>
+<td align="center"><b>Find food</b><br />Search the shelf in plain words</td>
+<td align="center"><b>Guide</b><br />How it works</td>
+</tr>
+</table>
 
 ## Why it matters: time and safety
 
@@ -185,7 +204,7 @@ src/
   recall/         Live openFDA recall service, safe matcher, cached fallback
   db/             SQLite inventory, item view-model, keep/discard logic
   components/     Cards, detail sheet, status signal, pipeline trace, brand mark
-  screens/        Intake, Inventory, Shelf, Settings
+  screens/        Home, Scan, Sort, Shelf, Settings
   theme/          Design tokens
 docs/evaluation/  Synthetic benchmark, evaluation harness, charts
 assets/           Logo, app icon, splash
